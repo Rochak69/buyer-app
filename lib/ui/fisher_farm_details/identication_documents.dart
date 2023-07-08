@@ -22,7 +22,7 @@ class IdentificationDocuments extends StatefulWidget {
 
   final String phoneNumber;
   final String comapnyName;
-  final String farmersName;
+  final String buyerName;
   final String district;
   final String nagarpalika;
   final String woda;
@@ -31,7 +31,7 @@ class IdentificationDocuments extends StatefulWidget {
   const IdentificationDocuments(
       {super.key,
       required this.userId,
-      required this.farmersName,
+      required this.buyerName,
       required this.district,
       required this.nagarpalika,
       required this.woda,
@@ -47,11 +47,13 @@ class IdentificationDocuments extends StatefulWidget {
 class _IdentificationDocumentsState extends State<IdentificationDocuments> {
   String selectedUnit = 'm';
   String? profilePicturePath;
-  String? selectedDistrict;
+  String? selectedDistrictId;
   String? citizenshipPicturePath;
   String? palikaPicturePath;
   String? othersPath;
   TextEditingController pondSize = TextEditingController();
+  TextEditingController citizeName = TextEditingController();
+  TextEditingController citizenNumber = TextEditingController();
 
   @override
   void initState() {
@@ -59,6 +61,8 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
         .add(GetDistrict(provinceId: null));
     super.initState();
   }
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -94,372 +98,377 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
               //   ),
               // ),
               body: SingleChildScrollView(
-                  child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 24.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          translation(context).citizenship_form_detials1,
-                          style: TextStyle(
-                              color: AppColors.textColor,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 17.sp),
-                        ),
-                        Text(
-                          translation(context).citizenship_form_detials2,
-                          style: TextStyle(
-                              color: AppColors.textColor,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 17.sp),
-                        ),
-                        Text(
-                          translation(context).citizenship_form_detials3,
-                          style: TextStyle(
-                              color: AppColors.textRedColor,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 14.sp),
-                        ),
-                        UiHelper.verticalSpacing(15.h),
-                      ],
-                    ),
-                  ],
-                ),
-                UiHelper.verticalSpacing(12.h),
-                RichText(
-                  text: TextSpan(
-                      text: translation(context).citizenship_name,
-                      // 'Citizenship\'s name',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 12.sp),
-                      children: [
-                        TextSpan(
-                            text: ' *',
-                            style:
-                                TextStyle(color: Colors.red, fontSize: 16.sp))
-                      ]),
-                ),
-                UiHelper.verticalSpacing(8.h),
-                FishTextField(
-                    validator: (value) => Validators.validateEmpty(value),
-                    label: ''),
-                UiHelper.verticalSpacing(12.h),
-                RichText(
-                  text: TextSpan(
-                      text: translation(context).citizenship_number,
-                      //'Citizenship\'s Number',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 12.sp),
-                      children: [
-                        TextSpan(
-                            text: ' *',
-                            style:
-                                TextStyle(color: Colors.red, fontSize: 16.sp))
-                      ]),
-                ),
-                UiHelper.verticalSpacing(8.h),
-                FishTextField(
-                    validator: (value) => Validators.validateEmpty(value),
-                    label: ''),
-                UiHelper.verticalSpacing(12.h),
-                RichText(
-                  text: TextSpan(
-                      text: translation(context).citizenship_place,
-                      //'Citizenship\'s Location',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 12.sp),
-                      children: [
-                        TextSpan(
-                            text: ' *',
-                            style:
-                                TextStyle(color: Colors.red, fontSize: 16.sp))
-                      ]),
-                ),
-                UiHelper.verticalSpacing(8.h),
-                AppDropDown<String>(
-                  value: selectedDistrict,
-                  isExpanded: true,
-                  items: state.allDistrictResponse
-                          ?.map((e) => DropdownMenuItem(
-                              value: e.id, child: Text(e.englishName!)))
-                          .toList() ??
-                      [],
-                  onChanged: (value) {
-                    selectedDistrict = value;
-                    setState(() {});
-                  },
-                ),
-                UiHelper.verticalSpacing(12.h),
-                RichText(
-                  text: TextSpan(
-                      text: translation(context).upload_document,
-                      //'Please upload your picture',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 13.sp),
-                      children: [
-                        TextSpan(
-                            text: ' *',
-                            style:
-                                TextStyle(color: Colors.red, fontSize: 16.sp))
-                      ]),
-                ),
-                UiHelper.verticalSpacing(8.h),
-                FishTextField(
-                    isReadOnly: true,
-                    label: path.basename(profilePicturePath ?? ''),
-                    prefixIcon: ElevatedButton(
-                      onPressed: () async {
-                        FilePickerResult? result =
-                            await FilePicker.platform.pickFiles();
-
-                        if (result != null) {
-                          File file = File(result.files.single.path ?? '');
-                          if (file.path.isEmpty) {
-                            displayToastMessage('Invalid file path',
-                                backgroundColor: AppColors.textRedColor);
-                            return;
-                          }
-                          profilePicturePath = file.path;
-                          setState(() {});
-                        } else {
-                          // User canceled the picker
-                        }
-                      },
-                      style: ButtonStyle(
-                        elevation: MaterialStateProperty.all<double>(
-                            0), // Set elevation to 0
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                10), // Change border radius to desired value
+                  child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 24.w),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            translation(context).citizenship_form_detials1,
+                            style: TextStyle(
+                                color: AppColors.textColor,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 17.sp),
                           ),
-                        ),
-                      ),
-                      child: const Text('Choose'),
-                    )),
-                UiHelper.verticalSpacing(12.h),
-                RichText(
-                  text: TextSpan(
-                      text: translation(context).citizenship_upload,
-                      //'Please upload your citizenship\'s picture',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 13.sp),
-                      children: [
-                        TextSpan(
-                            text: ' *',
-                            style:
-                                TextStyle(color: Colors.red, fontSize: 16.sp))
-                      ]),
-                ),
-                UiHelper.verticalSpacing(8.h),
-                FishTextField(
-                    isReadOnly: true,
-                    label: path.basename(citizenshipPicturePath ?? ''),
-                    prefixIcon: ElevatedButton(
-                      onPressed: () async {
-                        FilePickerResult? result =
-                            await FilePicker.platform.pickFiles();
-
-                        if (result != null) {
-                          File file = File(result.files.single.path ?? '');
-                          if (file.path.isEmpty) {
-                            displayToastMessage('Invalid file path',
-                                backgroundColor: AppColors.textRedColor);
-                            return;
-                          }
-                          citizenshipPicturePath = file.path;
-                          setState(() {});
-                        } else {
-                          // User canceled the picker
-                        }
-                      },
-                      style: ButtonStyle(
-                        elevation: MaterialStateProperty.all<double>(
-                            0), // Set elevation to 0
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                10), // Change border radius to desired value
+                          Text(
+                            translation(context).citizenship_form_detials2,
+                            style: TextStyle(
+                                color: AppColors.textColor,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 17.sp),
                           ),
-                        ),
-                      ),
-                      child: const Text('Choose'),
-                    )),
-                UiHelper.verticalSpacing(12.h),
-                Text(
-                  translation(context).no_citizenship,
-                  style: TextStyle(
-                      color: AppColors.textColor,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 17.sp),
-                ),
-                UiHelper.verticalSpacing(8.h),
-                RichText(
-                  text: TextSpan(
-                      text: translation(context).ask_necessary_document,
-                      // 'Please upload your picture',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 12.sp),
-                      children: [
-                        TextSpan(
-                            text: ' *',
-                            style:
-                                TextStyle(color: Colors.red, fontSize: 16.sp))
-                      ]),
-                ),
-                UiHelper.verticalSpacing(8.h),
-                FishTextField(
-                    isReadOnly: true,
-                    label: path.basename(palikaPicturePath ?? ''),
-                    prefixIcon: ElevatedButton(
-                      onPressed: () async {
-                        FilePickerResult? result =
-                            await FilePicker.platform.pickFiles();
-
-                        if (result != null) {
-                          File file = File(result.files.single.path ?? '');
-                          if (file.path.isEmpty) {
-                            displayToastMessage('Invalid file path',
-                                backgroundColor: AppColors.textRedColor);
-                            return;
-                          }
-                          palikaPicturePath = file.path;
-                          setState(() {});
-                        } else {
-                          // User canceled the picker
-                        }
-                      },
-                      style: ButtonStyle(
-                        elevation: MaterialStateProperty.all<double>(
-                            0), // Set elevation to 0
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                10), // Change border radius to desired value
+                          Text(
+                            translation(context).citizenship_form_detials3,
+                            style: TextStyle(
+                                color: AppColors.textRedColor,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 14.sp),
                           ),
-                        ),
+                          UiHelper.verticalSpacing(15.h),
+                        ],
                       ),
-                      child: const Text('Choose'),
-                    )),
-                UiHelper.verticalSpacing(12.h),
-                Text(
-                  translation(context).commpany_details,
-                  style: TextStyle(
-                      color: AppColors.textColor,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 17.sp),
-                ),
-                RichText(
-                  text: TextSpan(
-                      text: translation(context).conpany_form_statement,
-                      // 'Please upload your picture',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 12.sp),
-                      children: [
-                        TextSpan(
-                            text: ' *',
-                            style:
-                                TextStyle(color: Colors.red, fontSize: 16.sp))
-                      ]),
-                ),
-                UiHelper.verticalSpacing(8.h),
-                FishTextField(
-                    isReadOnly: true,
-                    label: path.basename(othersPath ?? ''),
-                    prefixIcon: ElevatedButton(
-                      onPressed: () async {
-                        FilePickerResult? result =
-                            await FilePicker.platform.pickFiles();
-
-                        if (result != null) {
-                          File file = File(result.files.single.path ?? '');
-                          if (file.path.isEmpty) {
-                            displayToastMessage('Invalid file path',
-                                backgroundColor: AppColors.textRedColor);
-                            return;
-                          }
-                          othersPath = file.path;
-                          setState(() {});
-                        } else {
-                          // User canceled the picker
-                        }
-                      },
-                      style: ButtonStyle(
-                        elevation: MaterialStateProperty.all<double>(
-                            0), // Set elevation to 0
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                10), // Change border radius to desired value
-                          ),
-                        ),
-                      ),
-                      child: const Text('Choose'),
-                    )),
-                UiHelper.verticalSpacing(20.h),
-                SizedBox(
-                  width: 330.w,
-                  height: 48.h,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return const HomeListing();
-                        },
-                      ));
-                      // showLoaderDialog(context);
-                      // BlocProvider.of<FishFarmerDetailBloc>(context).add(
-                      //     PostBuyerDetailsEvent(
-                      //         organizationName: widget.comapnyName,
-                      //         profilePicture: profilePicturePath,
-                      //         identification: citizenshipPicturePath,
-                      //         registerPic: palikaPicturePath,
-                      //         userId: widget.userId,
-                      //         farmersName: widget.farmersName,
-                      //         phoneNumber: widget.phoneNumber,
-                      //         pradesh: widget.pradesh,
-                      //         district: widget.district,
-                      //         nagarpalika: widget.nagarpalika,
-                      //         woda: int.tryParse(widget.woda) ?? 0));
-                    },
-                    style: ButtonStyle(
-                      elevation: MaterialStateProperty.all<double>(
-                          0), // Set elevation to 0
-                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              10.r), // Change border radius to desired value
-                        ),
-                      ),
-                    ),
-                    child: const Text('Save'),
+                    ],
                   ),
-                ),
-                UiHelper.verticalSpacing(20.h),
-              ],
+                  UiHelper.verticalSpacing(12.h),
+                  RichText(
+                    text: TextSpan(
+                        text: translation(context).citizenship_name,
+                        // 'Citizenship\'s name',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 12.sp),
+                        children: [
+                          TextSpan(
+                              text: ' *',
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 16.sp))
+                        ]),
+                  ),
+                  UiHelper.verticalSpacing(8.h),
+                  FishTextField(
+                      textEditingController: citizeName,
+                      validator: (value) => Validators.validateEmpty(value),
+                      label: ''),
+                  UiHelper.verticalSpacing(12.h),
+                  RichText(
+                    text: TextSpan(
+                        text: translation(context).citizenship_number,
+                        //'Citizenship\'s Number',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 12.sp),
+                        children: [
+                          TextSpan(
+                              text: ' *',
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 16.sp))
+                        ]),
+                  ),
+                  UiHelper.verticalSpacing(8.h),
+                  FishTextField(
+                      textEditingController: citizenNumber,
+                      validator: (value) => Validators.validateEmpty(value),
+                      label: ''),
+                  UiHelper.verticalSpacing(12.h),
+                  RichText(
+                    text: TextSpan(
+                        text: translation(context).citizenship_place,
+                        //'Citizenship\'s Location',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 12.sp),
+                        children: [
+                          TextSpan(
+                              text: ' *',
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 16.sp))
+                        ]),
+                  ),
+                  UiHelper.verticalSpacing(8.h),
+                  AppDropDown<String>(
+                    value: selectedDistrictId,
+                    isExpanded: true,
+                    items: state.allDistrictResponse
+                            ?.map((e) => DropdownMenuItem(
+                                value: e.id, child: Text(e.englishName!)))
+                            .toList() ??
+                        [],
+                    onChanged: (value) {
+                      selectedDistrictId = value;
+                      setState(() {});
+                    },
+                  ),
+                  UiHelper.verticalSpacing(12.h),
+                  RichText(
+                    text: TextSpan(
+                        text: translation(context).upload_document,
+                        //'Please upload your picture',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 13.sp),
+                        children: [
+                          TextSpan(
+                              text: ' *',
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 16.sp))
+                        ]),
+                  ),
+                  UiHelper.verticalSpacing(8.h),
+                  FishTextField(
+                      isReadOnly: true,
+                      label: path.basename(profilePicturePath ?? ''),
+                      prefixIcon: ElevatedButton(
+                        onPressed: () async {
+                          FilePickerResult? result =
+                              await FilePicker.platform.pickFiles();
+
+                          if (result != null) {
+                            File file = File(result.files.single.path ?? '');
+                            if (file.path.isEmpty) {
+                              displayToastMessage('Invalid file path',
+                                  backgroundColor: AppColors.textRedColor);
+                              return;
+                            }
+                            profilePicturePath = file.path;
+                            setState(() {});
+                          } else {
+                            // User canceled the picker
+                          }
+                        },
+                        style: ButtonStyle(
+                          elevation: MaterialStateProperty.all<double>(
+                              0), // Set elevation to 0
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  10), // Change border radius to desired value
+                            ),
+                          ),
+                        ),
+                        child: const Text('Choose'),
+                      )),
+                  UiHelper.verticalSpacing(12.h),
+                  RichText(
+                    text: TextSpan(
+                        text: translation(context).citizenship_upload,
+                        //'Please upload your citizenship\'s picture',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 13.sp),
+                        children: [
+                          TextSpan(
+                              text: ' *',
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 16.sp))
+                        ]),
+                  ),
+                  UiHelper.verticalSpacing(8.h),
+                  FishTextField(
+                      isReadOnly: true,
+                      label: path.basename(citizenshipPicturePath ?? ''),
+                      prefixIcon: ElevatedButton(
+                        onPressed: () async {
+                          FilePickerResult? result =
+                              await FilePicker.platform.pickFiles();
+
+                          if (result != null) {
+                            File file = File(result.files.single.path ?? '');
+                            if (file.path.isEmpty) {
+                              displayToastMessage('Invalid file path',
+                                  backgroundColor: AppColors.textRedColor);
+                              return;
+                            }
+                            citizenshipPicturePath = file.path;
+                            setState(() {});
+                          } else {
+                            // User canceled the picker
+                          }
+                        },
+                        style: ButtonStyle(
+                          elevation: MaterialStateProperty.all<double>(
+                              0), // Set elevation to 0
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  10), // Change border radius to desired value
+                            ),
+                          ),
+                        ),
+                        child: const Text('Choose'),
+                      )),
+                  UiHelper.verticalSpacing(12.h),
+                  Text(
+                    translation(context).no_citizenship,
+                    style: TextStyle(
+                        color: AppColors.textColor,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 17.sp),
+                  ),
+                  UiHelper.verticalSpacing(8.h),
+                  RichText(
+                    text: TextSpan(
+                        text: translation(context).ask_necessary_document,
+                        // 'Please upload your picture',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 12.sp),
+                        children: [
+                          TextSpan(
+                              text: ' *',
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 16.sp))
+                        ]),
+                  ),
+                  UiHelper.verticalSpacing(8.h),
+                  FishTextField(
+                      isReadOnly: true,
+                      label: path.basename(palikaPicturePath ?? ''),
+                      prefixIcon: ElevatedButton(
+                        onPressed: () async {
+                          FilePickerResult? result =
+                              await FilePicker.platform.pickFiles();
+
+                          if (result != null) {
+                            File file = File(result.files.single.path ?? '');
+                            if (file.path.isEmpty) {
+                              displayToastMessage('Invalid file path',
+                                  backgroundColor: AppColors.textRedColor);
+                              return;
+                            }
+                            palikaPicturePath = file.path;
+                            setState(() {});
+                          } else {
+                            // User canceled the picker
+                          }
+                        },
+                        style: ButtonStyle(
+                          elevation: MaterialStateProperty.all<double>(
+                              0), // Set elevation to 0
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  10), // Change border radius to desired value
+                            ),
+                          ),
+                        ),
+                        child: const Text('Choose'),
+                      )),
+                  UiHelper.verticalSpacing(12.h),
+                  Text(
+                    translation(context).commpany_details,
+                    style: TextStyle(
+                        color: AppColors.textColor,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 17.sp),
+                  ),
+                  RichText(
+                    text: TextSpan(
+                        text: translation(context).conpany_form_statement,
+                        // 'Please upload your picture',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 12.sp),
+                        children: [
+                          TextSpan(
+                              text: ' *',
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 16.sp))
+                        ]),
+                  ),
+                  UiHelper.verticalSpacing(8.h),
+                  FishTextField(
+                      isReadOnly: true,
+                      label: path.basename(othersPath ?? ''),
+                      prefixIcon: ElevatedButton(
+                        onPressed: () async {
+                          FilePickerResult? result =
+                              await FilePicker.platform.pickFiles();
+
+                          if (result != null) {
+                            File file = File(result.files.single.path ?? '');
+                            if (file.path.isEmpty) {
+                              displayToastMessage('Invalid file path',
+                                  backgroundColor: AppColors.textRedColor);
+                              return;
+                            }
+                            othersPath = file.path;
+                            setState(() {});
+                          } else {
+                            // User canceled the picker
+                          }
+                        },
+                        style: ButtonStyle(
+                          elevation: MaterialStateProperty.all<double>(
+                              0), // Set elevation to 0
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(
+                                  10), // Change border radius to desired value
+                            ),
+                          ),
+                        ),
+                        child: const Text('Choose'),
+                      )),
+                  UiHelper.verticalSpacing(20.h),
+                  SizedBox(
+                    width: 330.w,
+                    height: 48.h,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        showLoaderDialog(context);
+                        BlocProvider.of<FishFarmerDetailBloc>(context).add(
+                            PostBuyerDetailsEvent(
+                                citizenshipIssueDistrict:
+                                    selectedDistrictId ?? '1',
+                                organizationName: widget.comapnyName,
+                                profilePicture: profilePicturePath,
+                                identification: citizenshipPicturePath,
+                                registerPic: palikaPicturePath,
+                                citizenName: citizeName.text,
+                                citizenNumber: citizenNumber.text,
+                                userId: widget.userId,
+                                farmersName: widget.buyerName,
+                                phoneNumber: widget.phoneNumber,
+                                pradesh: widget.pradesh,
+                                district: widget.district,
+                                nagarpalika: widget.nagarpalika,
+                                woda: int.tryParse(widget.woda) ?? 0));
+                      },
+                      style: ButtonStyle(
+                        elevation: MaterialStateProperty.all<double>(
+                            0), // Set elevation to 0
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                10.r), // Change border radius to desired value
+                          ),
+                        ),
+                      ),
+                      child: const Text('Save'),
+                    ),
+                  ),
+                  UiHelper.verticalSpacing(20.h),
+                ],
+              ),
             ),
           ))),
         );

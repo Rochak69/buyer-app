@@ -7,6 +7,7 @@ class PostBuyerDetailsEvent extends FishFarmerDetailEvent {
   String? registerPic;
   String? identification;
   String organizationName;
+  String citizenshipIssueDistrict;
 
   String farmersName;
   String phoneNumber;
@@ -14,6 +15,8 @@ class PostBuyerDetailsEvent extends FishFarmerDetailEvent {
   String pradesh;
   String district;
   String nagarpalika;
+  String citizenNumber;
+  String citizenName;
 
   int woda;
   String? tole;
@@ -26,12 +29,15 @@ class PostBuyerDetailsEvent extends FishFarmerDetailEvent {
     required this.registerPic,
     required this.identification,
     required this.organizationName,
+    required this.citizenshipIssueDistrict,
     required this.farmersName,
     required this.phoneNumber,
     this.pondSize,
     required this.pradesh,
     required this.district,
     required this.nagarpalika,
+    required this.citizenNumber,
+    required this.citizenName,
     required this.woda,
     this.tole,
     this.email,
