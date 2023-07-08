@@ -49,7 +49,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return BlocListener<LoginBloc, LoginState>(
       listener: (context, state) {
-        Navigator.pop(context);
         if (state is LoginSuccess) {
           if (state.result.data?.isBuyer ?? false) {
             Navigator.pushReplacement(context, MaterialPageRoute(
@@ -65,6 +64,7 @@ class _LoginPageState extends State<LoginPage> {
             ));
           }
         } else if (state is LoginFailed) {
+          Navigator.pop(context);
           displayToastMessage(state.errorMessage);
         }
       },
