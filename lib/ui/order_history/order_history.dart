@@ -375,12 +375,23 @@ class _OrderHistoryState extends State<OrderHistory> {
               InkWell(
                 onTap: () {
                   if (isComplete) {
+                    if (state.orders.data?[index].completed ?? false) {
+                      Navigator.pop(context);
+
+                      displayToastMessage('Already Completed');
+                      return;
+                    }
                     BlocProvider.of<OrderHistoryBloc>(context)
                         .add(CompleteOfferEvent(state.orders.data?[index].id ??
                             ''
                                 ''));
                     Navigator.pop(context);
                   } else {
+                    if (state.orders.data?[index].cancelled ?? false) {
+                      Navigator.pop(context);
+                      displayToastMessage('Already Canceled');
+                      return;
+                    }
                     BlocProvider.of<OrderHistoryBloc>(context).add(RejectOffer(
                         state.orders.data?[index].farmerSupply?.fishTypeId ??
                             ''));
