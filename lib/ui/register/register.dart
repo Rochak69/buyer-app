@@ -43,7 +43,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
     return BlocListener<RegisterBloc, RegisterState>(
       listener: (context, state) {
         if (state is RegisterSuccess) {
-          Navigator.pop(context);
           displayToastMessage('Succesfully Registerd');
           Navigator.push(context, MaterialPageRoute(
             builder: (context) {
@@ -51,7 +50,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
             },
           ));
         } else if (state is RegisterFailed) {
-          Navigator.pop(context);
           displayToastMessage(state.errorMessage);
         }
       },
