@@ -97,6 +97,7 @@ class _YieldFormState extends State<YieldForm> {
                     builder: (context, state) {
                       if (state is HomeListingsSuccess) {
                         return AppDropDown<String>(
+                            value: fishId,
                             isExpanded: true,
                             onChanged: (p0) {
                               fishId = p0;

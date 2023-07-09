@@ -34,6 +34,8 @@ class LoginApiClient {
         data: LoginResponse.fromJson(apiResponse));
 
     await preferences.saveString(Preference.userID, apiResponse['id']);
+    await preferences.saveString(
+        Preference.accessToken, registerResponse.data?.sessionToken);
 
     return registerResponse;
   }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:buyer_shop/common/api_response.dart';
+import 'package:buyer_shop/res/colors.dart';
 import 'package:buyer_shop/ui/fisher_farm_details/bloc/fish_farmer_detail_event.dart';
 import 'package:buyer_shop/ui/fisher_farm_details/bloc/fish_farmer_detail_state.dart';
 import 'package:buyer_shop/ui/fisher_farm_details/model/district_response.dart';
@@ -40,9 +41,9 @@ class FishFarmerDetailBloc
           pondSize: event.pondSize,
           woda: event.woda,
           organizationName: event.organizationName,
-          profilePic: event.profilePicture!,
-          identification: event.identification!,
-          registerPic: event.registerPic!,
+          profilePic: event.profilePicture,
+          identification: event.identification,
+          registerPic: event.registerPic,
           municiplaity: event.nagarpalika);
       result as ApiResponse;
       emit(state.copyWith(theStates: TheStates.success, isPosted: true));
@@ -51,7 +52,7 @@ class FishFarmerDetailBloc
         e as ApiErrorResponse;
         displayToastMessage(e.details?[0].msg ?? 'Error getting data');
       } catch (e) {
-        displayToastMessage(e.toString());
+        displayToastMessage('Error', backgroundColor: AppColors.textRedColor);
       }
     }
   }
@@ -68,7 +69,7 @@ class FishFarmerDetailBloc
         e as ApiErrorResponse;
         displayToastMessage(e.details?[0].msg ?? 'Error getting data');
       } catch (e) {
-        displayToastMessage(e.toString());
+        displayToastMessage('Error', backgroundColor: AppColors.textRedColor);
       }
     }
   }
@@ -90,7 +91,7 @@ class FishFarmerDetailBloc
         e as ApiErrorResponse;
         displayToastMessage(e.details?[0].msg ?? 'Error getting data');
       } catch (e) {
-        displayToastMessage(e.toString());
+        displayToastMessage('Error', backgroundColor: AppColors.textRedColor);
       }
     }
   }
@@ -109,7 +110,7 @@ class FishFarmerDetailBloc
         e as ApiErrorResponse;
         displayToastMessage(e.details?[0].msg ?? 'Error getting data');
       } catch (e) {
-        displayToastMessage(e.toString());
+        displayToastMessage('Error', backgroundColor: AppColors.textRedColor);
       }
     }
   }
@@ -128,7 +129,7 @@ class FishFarmerDetailBloc
         e as ApiErrorResponse;
         displayToastMessage(e.details?[0].msg ?? 'Error getting data');
       } catch (e) {
-        displayToastMessage(e.toString());
+        displayToastMessage('Error', backgroundColor: AppColors.textRedColor);
       }
     }
   }

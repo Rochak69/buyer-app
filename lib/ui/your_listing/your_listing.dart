@@ -145,9 +145,10 @@ class _YourListingsState extends State<YourListings> {
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.textColor),
-                            child: Text('Go Home'),
+                            child: Text('Refresh'),
                             onPressed: () {
-                              HomeListing();
+                              BlocProvider.of<YourListingBloc>(context)
+                                  .add(GetMyListings());
                             },
                           )),
                     ),

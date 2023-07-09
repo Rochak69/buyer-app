@@ -95,8 +95,13 @@ class _ListingsState extends State<Listings> {
               ),
             ),
           );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(
+              color: AppColors.textColor,
+            ),
+          );
         }
-        return Container();
       },
     );
   }

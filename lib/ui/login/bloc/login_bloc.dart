@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:buyer_shop/common/api_response.dart';
+import 'package:buyer_shop/ui/home_listing/repository/home_listings_api_client.dart';
 import 'package:buyer_shop/ui/login/bloc/login_event.dart';
 import 'package:buyer_shop/ui/login/bloc/login_state.dart';
 import 'package:buyer_shop/ui/login/model/login_response.dart';
@@ -12,7 +13,8 @@ import 'package:injectable/injectable.dart';
 @injectable
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginApiClient apiClient;
-  LoginBloc(this.apiClient) : super(LoginInitial()) {
+  HomeListingApiClient homeListingApiClient;
+  LoginBloc(this.apiClient, this.homeListingApiClient) : super(LoginInitial()) {
     on<LoginWithPhone>(_login);
   }
 
@@ -27,6 +29,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
           Preference.accessToken, result.data?.sessionToken ?? '');
       await preferences.saveString(
           Preference.phoneNumber, result.data?.phoneNumber ?? '');
+      final details = await homeListingApiClient.getUserDetails();
       emit(LoginSuccess(result: result));
     } catch (e) {
       try {

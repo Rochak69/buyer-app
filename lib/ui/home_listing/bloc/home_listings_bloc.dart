@@ -19,13 +19,14 @@ class HomeListingsBloc extends Bloc<HomeListingsEvent, HomeListingsState> {
   HomeListingsBloc(
     this.apiClient,
   ) : super(HomeListingsInitial()) {
-    on<HomeListingsEvent>(_getAllHomeListings);
+    on<GetHomeListings>(_getAllHomeListings);
     on<SendOffer>(_sendOffer);
   }
 
   FutureOr<void> _getAllHomeListings(
-      HomeListingsEvent event, Emitter<HomeListingsState> emit) async {
+      GetHomeListings event, Emitter<HomeListingsState> emit) async {
     try {
+      emit(HomeListingsInitial());
       final userDetails = await apiClient.getUserDetails();
       Preferences preferences = Preferences();
       await preferences.saveString(Preference.buyerId, userDetails.data?.id);

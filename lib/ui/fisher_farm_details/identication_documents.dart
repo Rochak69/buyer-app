@@ -145,18 +145,10 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
                             fontSize: 12.sp),
-                        children: [
-                          TextSpan(
-                              text: ' *',
-                              style:
-                                  TextStyle(color: Colors.red, fontSize: 16.sp))
-                        ]),
+                        children: []),
                   ),
                   UiHelper.verticalSpacing(8.h),
-                  FishTextField(
-                      textEditingController: citizeName,
-                      validator: (value) => Validators.validateEmpty(value),
-                      label: ''),
+                  FishTextField(textEditingController: citizeName, label: ''),
                   UiHelper.verticalSpacing(12.h),
                   RichText(
                     text: TextSpan(
@@ -166,18 +158,11 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
                             fontSize: 12.sp),
-                        children: [
-                          TextSpan(
-                              text: ' *',
-                              style:
-                                  TextStyle(color: Colors.red, fontSize: 16.sp))
-                        ]),
+                        children: []),
                   ),
                   UiHelper.verticalSpacing(8.h),
                   FishTextField(
-                      textEditingController: citizenNumber,
-                      validator: (value) => Validators.validateEmpty(value),
-                      label: ''),
+                      textEditingController: citizenNumber, label: ''),
                   UiHelper.verticalSpacing(12.h),
                   RichText(
                     text: TextSpan(
@@ -187,12 +172,7 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
                             fontSize: 12.sp),
-                        children: [
-                          TextSpan(
-                              text: ' *',
-                              style:
-                                  TextStyle(color: Colors.red, fontSize: 16.sp))
-                        ]),
+                        children: []),
                   ),
                   UiHelper.verticalSpacing(8.h),
                   AppDropDown<String>(
@@ -268,12 +248,7 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
                             fontSize: 13.sp),
-                        children: [
-                          TextSpan(
-                              text: ' *',
-                              style:
-                                  TextStyle(color: Colors.red, fontSize: 16.sp))
-                        ]),
+                        children: []),
                   ),
                   UiHelper.verticalSpacing(8.h),
                   FishTextField(
@@ -327,12 +302,7 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
                             fontSize: 12.sp),
-                        children: [
-                          TextSpan(
-                              text: ' *',
-                              style:
-                                  TextStyle(color: Colors.red, fontSize: 16.sp))
-                        ]),
+                        children: []),
                   ),
                   UiHelper.verticalSpacing(8.h),
                   FishTextField(
@@ -385,12 +355,7 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
                             fontSize: 12.sp),
-                        children: [
-                          TextSpan(
-                              text: ' *',
-                              style:
-                                  TextStyle(color: Colors.red, fontSize: 16.sp))
-                        ]),
+                        children: []),
                   ),
                   UiHelper.verticalSpacing(8.h),
                   FishTextField(
@@ -433,6 +398,11 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                     height: 48.h,
                     child: ElevatedButton(
                       onPressed: () {
+                        if (profilePicturePath == null) {
+                          displayToastMessage('Please upload profile picture',
+                              backgroundColor: AppColors.textRedColor);
+                          return;
+                        }
                         showLoaderDialog(context);
                         BlocProvider.of<FishFarmerDetailBloc>(context).add(
                             PostBuyerDetailsEvent(

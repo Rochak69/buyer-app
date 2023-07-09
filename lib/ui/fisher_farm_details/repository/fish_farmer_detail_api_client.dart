@@ -20,9 +20,9 @@ class FishFarmerDetailApiClient {
 
   Future<ApiResponse?> postdetails({
     required String userId,
-    required String identification,
-    required String profilePic,
-    required String registerPic,
+    required String? identification,
+    required String? profilePic,
+    required String? registerPic,
     required String organizationName,
     required String fullName,
     required String phone,
@@ -56,13 +56,19 @@ class FishFarmerDetailApiClient {
       "citizenshipNumber": citizenshipNumber,
       "citizenshipName": citizenshipName,
       "bussinessName": organizationName,
+      "profilePicture":
+          profilePic != null ? await MultipartFile.fromFile(profilePic) : null,
+      "identificationImage": identification != null
+          ? await MultipartFile.fromFile(identification)
+          : null,
+      "registrationImage": registerPic != null
+          ? await MultipartFile.fromFile(registerPic)
+          : null,
       "municipalityId": municiplaity,
-      "profilePicture": await MultipartFile.fromFile(identification),
-      "identificationImage": await MultipartFile.fromFile(profilePic),
-      "registrationImage": await MultipartFile.fromFile(registerPic),
       "bussinessEmail": bussinessEmail,
       "bussinessPhone": bussinessPhone
     });
+
     var apiResponse =
         await _apiClient?.httpPost(Endpoints.buyerRequest, formData);
 
