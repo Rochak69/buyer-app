@@ -19,6 +19,7 @@ class CardListing extends StatefulWidget {
   final int totalWeight;
   final String location;
   final String date;
+  final bool isDisabled;
   final String farmerSuppyId;
   const CardListing({
     Key? key,
@@ -30,6 +31,7 @@ class CardListing extends StatefulWidget {
     required this.location,
     required this.date,
     required this.farmerSuppyId,
+    required this.isDisabled,
   }) : super(key: key);
 
   @override
@@ -158,20 +160,29 @@ class _CardListingState extends State<CardListing> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 6.w),
                 decoration: BoxDecoration(
+                    color:
+                        widget.isDisabled ? Colors.white : AppColors.textColor,
                     border:
                         Border.all(color: AppColors.textColor, width: 1.5.w),
                     borderRadius: const BorderRadius.all(Radius.circular(20))),
                 child: TextButton(
                     onPressed: () {
-                      _showAlertDialog(
-                        context: context,
-                      );
+                      if (widget.isDisabled) {
+                        return;
+                      } else {
+                        _showAlertDialog(
+                          context: context,
+                        );
+                      }
                     },
-                    child: const Text(
+                    child: Text(
                       'Send Offer',
                       style: TextStyle(
-                          color: AppColors.textColor,
-                          fontWeight: FontWeight.w500),
+                        fontWeight: FontWeight.w500,
+                        color: widget.isDisabled
+                            ? AppColors.textColor
+                            : Colors.white,
+                      ),
                     )),
               ),
             ],

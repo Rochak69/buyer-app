@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:buyer_shop/ui/home_listing/home_listing.dart';
+import 'package:buyer_shop/ui/my_language/bloc/my_language_bloc.dart';
+import 'package:buyer_shop/ui/my_language/bloc/my_language_state.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:buyer_shop/common/validator.dart';
 import 'package:buyer_shop/res/colors.dart';
@@ -19,7 +21,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class IdentificationDocuments extends StatefulWidget {
   final String userId;
-
   final String phoneNumber;
   final String comapnyName;
   final String buyerName;
@@ -27,6 +28,10 @@ class IdentificationDocuments extends StatefulWidget {
   final String nagarpalika;
   final String woda;
   final String pradesh;
+  final String? buisnessEmail;
+  final String? buisnessName;
+  final String? buisnessNumber;
+  final String? number;
 
   const IdentificationDocuments(
       {super.key,
@@ -37,7 +42,11 @@ class IdentificationDocuments extends StatefulWidget {
       required this.woda,
       required this.pradesh,
       required this.phoneNumber,
-      required this.comapnyName});
+      required this.comapnyName,
+      this.buisnessEmail,
+      this.buisnessName,
+      this.buisnessNumber,
+      this.number});
 
   @override
   State<IdentificationDocuments> createState() =>
@@ -179,17 +188,24 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                         children: []),
                   ),
                   UiHelper.verticalSpacing(8.h),
-                  AppDropDown<String>(
-                    value: selectedDistrictId,
-                    isExpanded: true,
-                    items: state.allDistrictResponse
-                            ?.map((e) => DropdownMenuItem(
-                                value: e.id, child: Text(e.englishName!)))
-                            .toList() ??
-                        [],
-                    onChanged: (value) {
-                      selectedDistrictId = value;
-                      setState(() {});
+                  BlocBuilder<MyLanguageBloc, MyLanguageState>(
+                    builder: (context, languageState) {
+                      return AppDropDown<String>(
+                        value: selectedDistrictId,
+                        isExpanded: true,
+                        items: state.allDistrictResponse
+                                ?.map((e) => DropdownMenuItem(
+                                    value: e.id,
+                                    child: Text(state is EnglishState
+                                        ? e.englishName ?? ''
+                                        : e.nepaliName ?? '')))
+                                .toList() ??
+                            [],
+                        onChanged: (value) {
+                          selectedDistrictId = value;
+                          setState(() {});
+                        },
+                      );
                     },
                   ),
                   UiHelper.verticalSpacing(12.h),
@@ -410,11 +426,16 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                         showLoaderDialog(context);
                         BlocProvider.of<FishFarmerDetailBloc>(context).add(
                             PostBuyerDetailsEvent(
+                                buisnessEmail: widget.buisnessEmail,
+                                buisnessName: widget.buisnessName,
+                                buisnessNumber: widget.buisnessNumber,
+                                number: widget.number,
                                 citizenshipIssueDistrict:
                                     selectedDistrictId ?? '1',
                                 organizationName: widget.comapnyName,
                                 profilePicture: profilePicturePath,
-                                identification: citizenshipPicturePath,
+                                identification: othersPath,
+                                citizenshipPhoto: citizenshipPicturePath,
                                 registerPic: palikaPicturePath,
                                 citizenName: citizeName.text,
                                 citizenNumber: citizenNumber.text,

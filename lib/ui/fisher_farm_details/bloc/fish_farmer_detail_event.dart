@@ -6,6 +6,7 @@ class PostBuyerDetailsEvent extends FishFarmerDetailEvent {
   String? profilePicture;
   String? registerPic;
   String? identification;
+  String? citizenshipPhoto;
   String organizationName;
   String citizenshipIssueDistrict;
 
@@ -23,11 +24,17 @@ class PostBuyerDetailsEvent extends FishFarmerDetailEvent {
   String? email;
   String? facebook;
 
+  String? buisnessEmail;
+  String? buisnessName;
+  String? buisnessNumber;
+  String? number;
+
   PostBuyerDetailsEvent({
     required this.userId,
     required this.profilePicture,
     required this.registerPic,
     required this.identification,
+    this.citizenshipPhoto,
     required this.organizationName,
     required this.citizenshipIssueDistrict,
     required this.farmersName,
@@ -42,6 +49,10 @@ class PostBuyerDetailsEvent extends FishFarmerDetailEvent {
     this.tole,
     this.email,
     this.facebook,
+    this.buisnessEmail,
+    this.buisnessName,
+    this.buisnessNumber,
+    this.number,
   });
 }
 
