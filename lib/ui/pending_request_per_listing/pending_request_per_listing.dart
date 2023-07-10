@@ -3,6 +3,7 @@ import 'package:buyer_shop/ui/pending_request_per_listing/bloc/pending_request_p
 import 'package:buyer_shop/ui/pending_request_per_listing/bloc/pending_request_per_listing_event.dart';
 import 'package:buyer_shop/ui/pending_request_per_listing/bloc/pending_request_per_listing_state.dart';
 import 'package:buyer_shop/ui/utils/uihelper.dart';
+import 'package:buyer_shop/ui/utils/utils.dart';
 import 'package:buyer_shop/ui/your_listing/model/your_listing_model.dart';
 import 'package:buyer_shop/ui/your_listing/your_listing.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class _BuyerRequestsScreenState extends State<BuyerRequestsScreen> {
           elevation: 0,
           backgroundColor: Colors.white,
           title: Text(
-            '${widget.fishType} (${widget.avgWeight} kg)',
+            '${widget.fishType} (${widget.avgWeight} के.जी)',
             style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w900,
@@ -96,14 +97,15 @@ class _BuyerRequestsScreenState extends State<BuyerRequestsScreen> {
                     child: Row(
                       children: [
                         Text(
-                          'Fish weight : ',
+                          translation(context).fish_weight,
+                          // 'Fish weight : ',
                           style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w700,
                               color: Colors.black),
                         ),
                         Text(
-                          '${widget.avgWeight} kg',
+                          '${widget.avgWeight} के.जी',
                           style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w700,
@@ -117,14 +119,15 @@ class _BuyerRequestsScreenState extends State<BuyerRequestsScreen> {
                     child: Row(
                       children: [
                         Text(
-                          'Total weight : ',
+                          // translation(context).total_weight,
+                          'माछाको परिमाण के.जी: ',
                           style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w700,
                               color: Colors.black),
                         ),
                         Text(
-                          '${widget.totalWeight} kg',
+                          '${widget.totalWeight} के.जी',
                           style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w700,
@@ -138,7 +141,8 @@ class _BuyerRequestsScreenState extends State<BuyerRequestsScreen> {
                     child: Row(
                       children: [
                         Text(
-                          'Yeild Date : ',
+                          'खरिद गर्न मिति: ',
+                          //   'Yeild Date : ',
                           style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w700,
@@ -154,28 +158,29 @@ class _BuyerRequestsScreenState extends State<BuyerRequestsScreen> {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 12.w),
-                    child: Row(
-                      children: [
-                        Text(
-                          'Expiration Date : ',
-                          style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.black),
-                        ),
-                        Text(
-                          formarDate(widget.yeildDate),
-                          style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w700,
-                              color: AppColors.AppCardColor),
-                        ),
-                      ],
-                    ),
-                  ),
-                  UiHelper.verticalSpacing(12.h),
+                  UiHelper.verticalSpacing(10.h),
+                  // Padding(
+                  //   padding: EdgeInsets.only(left: 12.w),
+                  //   child: Row(
+                  //     children: [
+                  //       Text(
+                  //         'Expiration Date : ',
+                  //         style: TextStyle(
+                  //             fontSize: 12.sp,
+                  //             fontWeight: FontWeight.w700,
+                  //             color: Colors.black),
+                  //       ),
+                  //       Text(
+                  //         formarDate(widget.yeildDate),
+                  //         style: TextStyle(
+                  //             fontSize: 12.sp,
+                  //             fontWeight: FontWeight.w700,
+                  //             color: AppColors.AppCardColor),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // UiHelper.verticalSpacing(12.h),
                   Expanded(
                     child: ListView.separated(
                         padding: EdgeInsets.only(bottom: 40.h),
@@ -218,14 +223,15 @@ class _BuyerRequestsScreenState extends State<BuyerRequestsScreen> {
               Row(
                 children: [
                   Text(
-                    'Average weight : ',
+                    translation(context).fish_weight,
+                    // 'Average weight : ',
                     style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w700,
                         color: Colors.black),
                   ),
                   Text(
-                    '${widget.avgWeight} Kg',
+                    '${widget.avgWeight} के.जी',
                     style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w700,
@@ -236,14 +242,14 @@ class _BuyerRequestsScreenState extends State<BuyerRequestsScreen> {
               Row(
                 children: [
                   Text(
-                    'Total weight : ',
+                    'माछाको परिमाण के.जी: ',
                     style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w700,
                         color: Colors.black),
                   ),
                   Text(
-                    '${widget.totalWeight} Kg',
+                    '${widget.totalWeight} के.जी',
                     style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w700,
@@ -254,7 +260,7 @@ class _BuyerRequestsScreenState extends State<BuyerRequestsScreen> {
               Row(
                 children: [
                   Text(
-                    'Yeild Date : ',
+                    'माछा मारको मिति: ',
                     style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w700,
@@ -288,7 +294,7 @@ class _BuyerRequestsScreenState extends State<BuyerRequestsScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      'Accept',
+                      'स्वीकार ',
                       style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
@@ -313,7 +319,7 @@ class _BuyerRequestsScreenState extends State<BuyerRequestsScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      'Reject',
+                      ' अस्वीकार',
                       style: TextStyle(
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w500,
@@ -342,34 +348,47 @@ class _BuyerRequestsScreenState extends State<BuyerRequestsScreen> {
             actionsPadding: EdgeInsets.symmetric(vertical: 12.h),
             title: Center(
               child: Text(
-                isAccept ? 'Accept Offer' : 'Reject Offer',
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w700),
+                isAccept
+                    ? 'के तपाईं यो व्यक्तिको बिक्री आदेश स्वीकार गर्न              चाहनुहुन्छ ?'
+                    : 'के तपाईं यो व्यक्तिको बिक्री आदेश अस्वीकार गर्न चाहनुहुन्छ ?',
+                style: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.textColor,
+                ),
               ),
             ),
             content: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                // Text(
+                //   isAccept
+                //       ? 'Are you sure, you want to  Accept?'
+                //       : 'Are you sure, you want to  Reject?',
+                //   style: TextStyle(fontSize: 12.sp),
+                // ),
                 Text(
-                  isAccept
-                      ? 'Are you sure, you want to  Accept?'
-                      : 'Are you sure, you want to  Reject?',
-                  style: TextStyle(fontSize: 12.sp),
+                  'माछाको प्रजाती : ${widget.fishType}',
+                  style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.textColor,
+                  ),
                 ),
                 Text(
-                  'Fish Type : ${widget.fishType}',
-                  style: TextStyle(fontSize: 12.sp),
+                  'माछाको आकार : ${widget.avgWeight} के.जी',
+                  style:
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  'Fish Weight : ${widget.avgWeight}',
-                  style: TextStyle(fontSize: 12.sp),
+                  'माछाको परिमाण के.जी : ${widget.totalWeight} के.जी',
+                  style:
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w700),
                 ),
                 Text(
-                  'Total Weight : ${widget.totalWeight}',
-                  style: TextStyle(fontSize: 12.sp),
-                ),
-                Text(
-                  'Bought Date : ${formarDate(DateTime.now().toString())}',
-                  style: TextStyle(fontSize: 12.sp),
+                  'माछा मारको मिति : ${formarDate(DateTime.now().toString())}',
+                  style:
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w700),
                 )
               ],
             ),
@@ -398,7 +417,7 @@ class _BuyerRequestsScreenState extends State<BuyerRequestsScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      'Sure',
+                      'Yes',
                       style: TextStyle(
                           fontSize: 16.sp, color: AppColors.textColor),
                     ),
@@ -422,7 +441,7 @@ class _BuyerRequestsScreenState extends State<BuyerRequestsScreen> {
                   ),
                   child: Center(
                     child: Text(
-                      'Cancel',
+                      'No',
                       style: TextStyle(fontSize: 16.sp, color: Colors.white),
                     ),
                   ),

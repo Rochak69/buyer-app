@@ -341,26 +341,6 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
                           Container(
                             padding: EdgeInsets.only(left: 5.w),
                             child: Text(
-                              translation(context).company_name,
-                              // 'Company Name',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 12.sp),
-                            ),
-                          ),
-                          UiHelper.verticalSpacing(10.h),
-                          FishTextField(
-                            textEditingController: companyNameController,
-                            label: translation(context).company_name,
-                            //'Company name',
-                            contentPadding: EdgeInsets.only(left: 5.w),
-                            width: double.infinity,
-                          ),
-                          UiHelper.verticalSpacing(10.h),
-                          Container(
-                            padding: EdgeInsets.only(left: 5.w),
-                            child: Text(
                               translation(context).website,
                               //  'Website',
                               style: TextStyle(
