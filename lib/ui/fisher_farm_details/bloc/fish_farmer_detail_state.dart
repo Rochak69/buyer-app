@@ -55,7 +55,7 @@ class FishFarmerDetailState extends Equatable {
         municipalityResponse: municipalityResponse ?? this.municipalityResponse,
         wodaResponse: wodaResponse ?? this.wodaResponse,
         allDistrictResponse: allDistrictResponse ?? this.allDistrictResponse,
-        isPosted: isPosted ?? this.isPosted);
+        isPosted: isPosted ?? false);
   }
 }
 
