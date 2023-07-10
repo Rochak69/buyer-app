@@ -398,11 +398,11 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                     height: 48.h,
                     child: ElevatedButton(
                       onPressed: () {
-                        if (profilePicturePath == null) {
-                          displayToastMessage('Please upload profile picture',
-                              backgroundColor: AppColors.textRedColor);
-                          return;
-                        }
+                        // if (profilePicturePath == null) {
+                        //   displayToastMessage('Please upload profile picture',
+                        //       backgroundColor: AppColors.textRedColor);
+                        //   return;
+                        // }
                         showLoaderDialog(context);
                         BlocProvider.of<FishFarmerDetailBloc>(context).add(
                             PostBuyerDetailsEvent(
