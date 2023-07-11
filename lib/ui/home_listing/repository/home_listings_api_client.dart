@@ -1,10 +1,12 @@
 import 'package:buyer_shop/common/api_response.dart';
 import 'package:buyer_shop/common/status.dart';
 import 'package:buyer_shop/providers/api_client.dart';
+import 'package:buyer_shop/res/colors.dart';
 import 'package:buyer_shop/ui/home_listing/model/home_listings_response.dart';
 import 'package:buyer_shop/ui/login/model/user_details_Response.dart';
 import 'package:buyer_shop/ui/utils/endpoints.dart';
 import 'package:buyer_shop/ui/utils/preferences.dart';
+import 'package:buyer_shop/ui/utils/utils.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton
@@ -17,10 +19,17 @@ class HomeListingApiClient {
 
   Future<ApiResponseForList?> getHomeListings() async {
     Preferences preferences = Preferences();
+    String? token = await preferences.getString(Preference.accessToken);
+    if (token == null) {
+      displayToastMessage('Token is null',
+          backgroundColor: AppColors.textRedColor);
+      throw Exception();
+    }
 
     ///or pass object directly to the http post
 
-    var apiResponse = await _apiClient?.httpGet(Endpoints.getAllFarmerSupply);
+    var apiResponse =
+        await _apiClient?.httpGetUrl(Endpoints.getAllFarmerSupply, token);
 
     ///converting to response
     var response = ApiResponseForList(

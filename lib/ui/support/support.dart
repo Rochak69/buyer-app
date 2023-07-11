@@ -87,19 +87,19 @@ class _SupportState extends State<Support> {
           UiHelper.verticalSpacing(16),
           Row(
             children: [
-              _buildCards('App Crash'),
+              _buildCards('App Crash', 1),
               UiHelper.horizontalSpacing(15.w),
-              _buildCards('Data Not Visible'),
+              _buildCards('Data Not Visible', 2),
               UiHelper.horizontalSpacing(15.w),
-              _buildCards('App Slow')
+              _buildCards('App Slow', 3)
             ],
           ),
           UiHelper.verticalSpacing(16.h),
           Row(
             children: [
-              _buildCards('App Flow Issue'),
+              _buildCards('App Flow Issue', 4),
               UiHelper.horizontalSpacing(15.w),
-              _buildCards('Others'),
+              _buildCards('Others', 0),
             ],
           ),
           UiHelper.verticalSpacing(25),
@@ -123,11 +123,21 @@ class _SupportState extends State<Support> {
     );
   }
 
-  InkWell _buildCards(String label) {
+  List<bool> showBorder = List.generate(5, (index) => false);
+  InkWell _buildCards(String label, int index) {
     return InkWell(
+      onTap: () {
+        showBorder[index] = !showBorder[index];
+        setState(() {});
+      },
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(18.r),
+            border: Border.all(
+                width: 2.w,
+                color: showBorder[index]
+                    ? AppColors.textColor
+                    : Colors.transparent),
             color: Colors.lightBlue[50]),
         child: Padding(
           padding: const EdgeInsets.all(8.0),

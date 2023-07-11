@@ -3,7 +3,10 @@ import 'package:buyer_shop/ui/pending_request_per_listing/bloc/pending_request_p
 import 'package:buyer_shop/ui/pending_request_per_listing/bloc/pending_request_per_listing_event.dart';
 import 'package:buyer_shop/ui/pending_request_per_listing/bloc/pending_request_per_listing_state.dart';
 import 'package:buyer_shop/ui/utils/uihelper.dart';
+import 'package:buyer_shop/ui/your_listing/bloc/your_listing_bloc.dart';
+import 'package:buyer_shop/ui/your_listing/bloc/your_listing_event.dart';
 import 'package:buyer_shop/ui/your_listing/model/your_listing_model.dart';
+import 'package:buyer_shop/ui/your_listing/repository/your_listing_api_client.dart';
 import 'package:buyer_shop/ui/your_listing/your_listing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -77,6 +80,7 @@ class _BuyerRequestsScreenState extends State<BuyerRequestsScreen> {
           if (changeableRequest.isNotEmpty) {
             changeableRequest.removeAt(state.index);
             setState(() {});
+            BlocProvider.of<YourListingBloc>(context).add(GetMyListings());
           }
         }
       },
