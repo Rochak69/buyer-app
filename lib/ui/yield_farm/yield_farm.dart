@@ -52,20 +52,25 @@ class _YieldFormState extends State<YieldForm> {
         appBar: AppBar(
           automaticallyImplyLeading: true,
           centerTitle: true,
-          leading: Padding(
-              padding: EdgeInsets.only(left: 20.w),
-              child: const Icon(
-                Icons.arrow_back_ios,
-                color: AppColors.textColor,
-              )),
+          leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Padding(
+                padding: EdgeInsets.only(left: 20.w),
+                child: const Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors.textColor,
+                )),
+          ),
           elevation: 0,
           backgroundColor: Colors.white,
           title: Text(
-            'Create your demands',
+            'खरिद गर्न चाहेको माछाको प्रजातीहरु',
             style: TextStyle(
                 color: AppColors.textColor,
                 fontWeight: FontWeight.w700,
-                fontSize: 22.sp),
+                fontSize: 17.sp),
           ),
         ),
         body: SingleChildScrollView(
@@ -80,7 +85,7 @@ class _YieldFormState extends State<YieldForm> {
                   UiHelper.verticalSpacing(10.h),
                   RichText(
                     text: TextSpan(
-                        text: 'Type of fish',
+                        text: 'खरिद गार्न चाहेको माछा को प्रजाति',
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
@@ -115,7 +120,7 @@ class _YieldFormState extends State<YieldForm> {
                   UiHelper.verticalSpacing(15),
                   RichText(
                     text: TextSpan(
-                        text: 'Weight per fish',
+                        text: 'एक माछा को आकार (Per size)',
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
@@ -155,11 +160,9 @@ class _YieldFormState extends State<YieldForm> {
                   UiHelper.verticalSpacing(15.h),
                   RichText(
                     text: TextSpan(
-                        text: 'Total weight',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16.sp),
+                        text:
+                            'यो प्रजातीका कुल माछा खरिद गर्न चाहेको परिमाण के.जी. लाख्नुहोस्‌',
+                        style: TextStyle(color: Colors.black, fontWeight: FontWeight.w700, fontSize: 16.sp),
                         children: [
                           TextSpan(
                               text: ' *',
@@ -195,7 +198,7 @@ class _YieldFormState extends State<YieldForm> {
                   UiHelper.verticalSpacing(15.h),
                   RichText(
                     text: TextSpan(
-                        text: 'Deadline',
+                        text: 'खरिद गार्न चाहको मिती',
                         style: TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w700,

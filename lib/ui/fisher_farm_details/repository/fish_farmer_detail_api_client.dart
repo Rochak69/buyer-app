@@ -26,6 +26,7 @@ class FishFarmerDetailApiClient {
     required String organizationName,
     required String fullName,
     required String phone,
+    required String? citizenshipPhoto,
     required String citizenshipIssueDistrictId,
     required String citizenshipNumber,
     required String citizenshipName,
@@ -63,6 +64,9 @@ class FishFarmerDetailApiClient {
           : null,
       "registrationImage": registerPic != null
           ? await MultipartFile.fromFile(registerPic)
+          : null,
+      "citizenship": citizenshipPhoto != null
+          ? await MultipartFile.fromFile(citizenshipPhoto)
           : null,
       "municipalityId": municiplaity,
       "bussinessEmail": bussinessEmail,

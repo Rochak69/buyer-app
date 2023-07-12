@@ -30,7 +30,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       await preferences.saveString(
           Preference.phoneNumber, result.data?.phoneNumber ?? '');
       final details = await homeListingApiClient.getUserDetails();
-      emit(LoginSuccess(result: result));
+
+      emit(LoginSuccess(result: result, details: details));
     } catch (e) {
       try {
         ApiErrorResponse apiErrorResponse = e as ApiErrorResponse;

@@ -131,7 +131,7 @@ class _ChangePasswordState extends State<ChangePassword> {
                   child: ElevatedButton(
                     onPressed: () async {
                       if (_createPassword.text != _confirmPassword.text) {
-                        displayToastMessage('Your password does not app');
+                        displayToastMessage('Your password does not match');
                         return;
                       }
                       Preferences preferences = Preferences();

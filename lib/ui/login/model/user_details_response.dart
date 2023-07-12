@@ -3,7 +3,7 @@ class UserDetailsResponse {
   String? userId;
   String? profilePicture;
   String? farmName;
-  int? pondSize;
+  num? pondSize;
   String? fiscalYear;
   bool? active;
   bool? approved;
@@ -33,8 +33,9 @@ class UserDetailsResponse {
     approved = json['approved'];
     location =
         json['location'] != null ? Location.fromJson(json['location']) : null;
-    document =
-        json['Document'] != null ? Document.fromJson(json['Document']) : null;
+    document = json['Document'] != null
+        ? new Document.fromJson(json['Document'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -50,8 +51,8 @@ class UserDetailsResponse {
     if (location != null) {
       data['location'] = location!.toJson();
     }
-    if (document != null) {
-      data['Document'] = document!.toJson();
+    if (this.document != null) {
+      data['Document'] = this.document!.toJson();
     }
     return data;
   }
@@ -99,20 +100,30 @@ class Location {
 }
 
 class Document {
-  List<String>? idenfication;
-  List<String>? registration;
+  String? idenfication;
+  String? registration;
+  String? citizenship;
+  String? profilePicture;
 
-  Document({this.idenfication, this.registration});
+  Document(
+      {this.idenfication,
+      this.registration,
+      this.citizenship,
+      this.profilePicture});
 
   Document.fromJson(Map<String, dynamic> json) {
-    idenfication = json['idenfication'].cast<String>();
-    registration = json['registration'].cast<String>();
+    idenfication = json['idenfication'];
+    registration = json['registration'];
+    citizenship = json['citizenship'];
+    profilePicture = json['profilePicture'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['idenfication'] = idenfication;
-    data['registration'] = registration;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['idenfication'] = this.idenfication;
+    data['registration'] = this.registration;
+    data['citizenship'] = this.citizenship;
+    data['profilePicture'] = this.profilePicture;
     return data;
   }
 }

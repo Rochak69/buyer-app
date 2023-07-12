@@ -6,6 +6,8 @@ import 'package:buyer_shop/ui/fisher_farm_details/bloc/fish_farmer_detail_bloc.d
 import 'package:buyer_shop/ui/fisher_farm_details/bloc/fish_farmer_detail_event.dart';
 import 'package:buyer_shop/ui/fisher_farm_details/bloc/fish_farmer_detail_state.dart';
 import 'package:buyer_shop/ui/fisher_farm_details/identication_documents.dart';
+import 'package:buyer_shop/ui/my_language/bloc/my_language_bloc.dart';
+import 'package:buyer_shop/ui/my_language/bloc/my_language_state.dart';
 import 'package:buyer_shop/ui/utils/preferences.dart';
 import 'package:buyer_shop/ui/utils/uihelper.dart';
 import 'package:buyer_shop/ui/utils/utils.dart';
@@ -22,13 +24,16 @@ class FishFarmDetails extends StatefulWidget {
 
 class _FishFarmDetailsState extends State<FishFarmDetails> {
   final buyerNameController = TextEditingController();
+
   final toleNameController = TextEditingController();
-  final emailController = TextEditingController();
+
   final facebookPageController = TextEditingController();
-  final companyNumberController = TextEditingController();
-  final companyNameController = TextEditingController();
   final websiteController = TextEditingController();
   final phoneNumberController = TextEditingController();
+  final buisnessEmailController = TextEditingController();
+  final buisnessNameController = TextEditingController();
+  final buisnessNumberController = TextEditingController();
+  final numberController = TextEditingController();
   String? selectedPradesh;
   String? selectedDistrict;
   String? selectedNagarpalika;
@@ -131,22 +136,28 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
                             ),
                           ),
                           UiHelper.verticalSpacing(8.h),
-                          AppDropDown<String>(
-                            value: selectedPradesh,
-                            isExpanded: true,
-                            items: state.provinceResponse
-                                    ?.map((e) => DropdownMenuItem(
-                                        value: e.id,
-                                        child: Text(e.englishName!)))
-                                    .toList() ??
-                                [],
-                            onChanged: (value) {
-                              selectedPradesh = value;
-                              setState(() {});
+                          BlocBuilder<MyLanguageBloc, MyLanguageState>(
+                            builder: (context, languageState) {
+                              return AppDropDown<String>(
+                                value: selectedPradesh,
+                                isExpanded: true,
+                                items: state.provinceResponse
+                                        ?.map((e) => DropdownMenuItem(
+                                            value: e.id,
+                                            child: Text(state is EnglishState
+                                                ? e.englishName ?? ''
+                                                : e.nepaliName ?? '')))
+                                        .toList() ??
+                                    [],
+                                onChanged: (value) {
+                                  selectedPradesh = value;
+                                  setState(() {});
 
-                              BlocProvider.of<FishFarmerDetailBloc>(context)
-                                  .add(GetDistrict(
-                                      provinceId: selectedPradesh ?? '1'));
+                                  BlocProvider.of<FishFarmerDetailBloc>(context)
+                                      .add(GetDistrict(
+                                          provinceId: selectedPradesh ?? '1'));
+                                },
+                              );
                             },
                           ),
                           UiHelper.verticalSpacing(8.h),
@@ -169,21 +180,27 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
                             ),
                           ),
                           UiHelper.verticalSpacing(8.h),
-                          AppDropDown<String>(
-                            value: selectedDistrict,
-                            isExpanded: true,
-                            items: state.districtResponse
-                                    ?.map((e) => DropdownMenuItem(
-                                        value: e.id,
-                                        child: Text(e.englishName!)))
-                                    .toList() ??
-                                [],
-                            onChanged: (value) {
-                              selectedDistrict = value;
-                              setState(() {});
-                              BlocProvider.of<FishFarmerDetailBloc>(context)
-                                  .add(GetMunicipality(
-                                      districtId: selectedDistrict ?? '1'));
+                          BlocBuilder<MyLanguageBloc, MyLanguageState>(
+                            builder: (context, languageState) {
+                              return AppDropDown<String>(
+                                value: selectedDistrict,
+                                isExpanded: true,
+                                items: state.districtResponse
+                                        ?.map((e) => DropdownMenuItem(
+                                            value: e.id,
+                                            child: Text(state is EnglishState
+                                                ? e.englishName ?? ''
+                                                : e.nepaliName ?? '')))
+                                        .toList() ??
+                                    [],
+                                onChanged: (value) {
+                                  selectedDistrict = value;
+                                  setState(() {});
+                                  BlocProvider.of<FishFarmerDetailBloc>(context)
+                                      .add(GetMunicipality(
+                                          districtId: selectedDistrict ?? '1'));
+                                },
+                              );
                             },
                           ),
                           UiHelper.verticalSpacing(10.h),
@@ -206,22 +223,28 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
                             ),
                           ),
                           UiHelper.verticalSpacing(8.h),
-                          AppDropDown<String>(
-                            value: selectedNagarpalika,
-                            isExpanded: true,
-                            items: state.municipalityResponse
-                                    ?.map((e) => DropdownMenuItem(
-                                        value: e.id,
-                                        child: Text(e.englishName!)))
-                                    .toList() ??
-                                [],
-                            onChanged: (value) {
-                              selectedNagarpalika = value;
-                              setState(() {});
-                              BlocProvider.of<FishFarmerDetailBloc>(context)
-                                  .add(GetWoda(
-                                      municipalityId:
-                                          selectedNagarpalika ?? '1'));
+                          BlocBuilder<MyLanguageBloc, MyLanguageState>(
+                            builder: (context, languageState) {
+                              return AppDropDown<String>(
+                                value: selectedNagarpalika,
+                                isExpanded: true,
+                                items: state.municipalityResponse
+                                        ?.map((e) => DropdownMenuItem(
+                                            value: e.id,
+                                            child: Text(state is EnglishState
+                                                ? e.englishName ?? ''
+                                                : e.nepaliName ?? '')))
+                                        .toList() ??
+                                    [],
+                                onChanged: (value) {
+                                  selectedNagarpalika = value;
+                                  setState(() {});
+                                  BlocProvider.of<FishFarmerDetailBloc>(context)
+                                      .add(GetWoda(
+                                          municipalityId:
+                                              selectedNagarpalika ?? '1'));
+                                },
+                              );
                             },
                           ),
                           UiHelper.verticalSpacing(16.h),
@@ -244,18 +267,24 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
                             ),
                           ),
                           UiHelper.verticalSpacing(8.h),
-                          AppDropDown<String>(
-                            value: selectedWoda,
-                            isExpanded: true,
-                            items: state.wodaResponse
-                                    ?.map((e) => DropdownMenuItem(
-                                        value: e.id,
-                                        child: Text(e.englishNumber!)))
-                                    .toList() ??
-                                [],
-                            onChanged: (value) {
-                              selectedWoda = value;
-                              setState(() {});
+                          BlocBuilder<MyLanguageBloc, MyLanguageState>(
+                            builder: (context, languageState) {
+                              return AppDropDown<String>(
+                                value: selectedWoda,
+                                isExpanded: true,
+                                items: state.wodaResponse
+                                        ?.map((e) => DropdownMenuItem(
+                                            value: e.id,
+                                            child: Text(state is EnglishState
+                                                ? e.englishNumber ?? ''
+                                                : e.nepaliNumber ?? '')))
+                                        .toList() ??
+                                    [],
+                                onChanged: (value) {
+                                  selectedWoda = value;
+                                  setState(() {});
+                                },
+                              );
                             },
                           ),
                           UiHelper.verticalSpacing(16.h),
@@ -292,7 +321,7 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
                           ),
                           UiHelper.verticalSpacing(8.h),
                           FishTextField(
-                            textEditingController: emailController,
+                            textEditingController: buisnessNameController,
                             label: translation(context).business_company_name,
                             //'Email',
                             contentPadding: EdgeInsets.only(left: 5.w),
@@ -331,12 +360,13 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
                           ),
                           UiHelper.verticalSpacing(10.h),
                           FishTextField(
-                            textEditingController: companyNumberController,
+                            textEditingController: buisnessNumberController,
                             label: translation(context).company_contact_details,
                             //'Company number',
                             contentPadding: EdgeInsets.only(left: 5.w),
                             width: double.infinity,
                           ),
+                          UiHelper.verticalSpacing(10.h),
                           UiHelper.verticalSpacing(10.h),
                           Container(
                             padding: EdgeInsets.only(left: 5.w),
@@ -391,8 +421,15 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
 
                                               // )
                                               IdentificationDocuments(
+                                            buisnessEmail:
+                                                buisnessEmailController.text,
+                                            buisnessName:
+                                                buisnessNameController.text,
+                                            buisnessNumber:
+                                                buisnessNumberController.text,
+                                            number: numberController.text,
                                             comapnyName:
-                                                companyNameController.text,
+                                                buisnessNameController.text,
                                             userId: userId,
                                             buyerName: buyerNameController.text,
                                             phoneNumber:

@@ -176,6 +176,10 @@ class _RegistrationPageState extends State<RegistrationPage> {
                                 backgroundColor: AppColors.textRedColor);
                             return;
                           }
+                          if (_confirmPassword.text != _password.text) {
+                            displayToastMessage('Your password doesn\'t match');
+                            return;
+                          }
                           showLoaderDialog(context);
                           BlocProvider.of<RegisterBloc>(context).add(
                               RegisterEventWithPhone(
