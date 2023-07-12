@@ -151,41 +151,56 @@ class _OrderHistoryState extends State<OrderHistory> {
                   Row(
                     children: [
                       Text(
-                        translation(context).yield_date,
+                        'माछा बेच्ने व्यक्तिको नाम: ',
+
+                        //  translation(context).yield_date,
                         //   'Yeild Date : ',
                         style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w700,
                             color: Colors.black),
                       ),
-                      Text(
-                        ' : ${formarDate(state.orders.data?[index].farmerSupply?.yieldDate)}',
-                        style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.AppCardColor),
-                      ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        'Expire Date : ',
-                        // 'Buyer\'s name : ',
-                        style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.black),
-                      ),
-                      Text(
-                        ' : ${formarDate(state.orders.data?[index].farmerSupply?.yieldDate)}',
-                        style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w700,
-                            color: AppColors.AppCardColor),
-                      ),
-                    ],
+                  Text(
+                    'माछा बेच्ने व्यक्ति व्यक्तिको ठेगाना: ',
+
+                    //  translation(context).yield_date,
+                    //   'Yeild Date : ',
+                    style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black),
                   ),
+                  Text(
+                    'सम्पर्क नम्बर:  ',
+
+                    //  translation(context).yield_date,
+                    //   'Yeild Date : ',
+                    style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black),
+                  ),
+                  // Row(
+                  //   children: [
+                  //     Text(
+                  //       'Expire Date : ',
+                  //       // 'Buyer\'s name : ',
+                  //       style: TextStyle(
+                  //           fontSize: 12.sp,
+                  //           fontWeight: FontWeight.w700,
+                  //           color: Colors.black),
+                  //     ),
+                  //     Text(
+                  //       ' : ${formarDate(state.orders.data?[index].farmerSupply?.yieldDate)}',
+                  //       style: TextStyle(
+                  //           fontSize: 12.sp,
+                  //           fontWeight: FontWeight.w700,
+                  //           color: AppColors.AppCardColor),
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
               Column(

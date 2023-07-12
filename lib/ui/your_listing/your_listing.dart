@@ -180,7 +180,8 @@ class _YourListingsState extends State<YourListings> {
                 alignment: WrapAlignment.start,
                 children: [
                   Text(
-                    'Fish Type : ',
+                    translation(context).fish_type,
+                    // 'Fish Type : ',
                     style: TextStyle(
                         fontSize: 18.sp,
                         fontWeight: FontWeight.w700,
@@ -214,14 +215,15 @@ class _YourListingsState extends State<YourListings> {
               Row(
                 children: [
                   Text(
-                    'Fish weight : ',
+                    translation(context).fish_weight,
+                    // 'Fish weight : ',
                     style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w700,
                         color: Colors.black),
                   ),
                   Text(
-                    '${state.result.data?[index].avgFishWeight} Kg',
+                    '${state.result.data?[index].avgFishWeight} के.जी',
                     style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w700,
@@ -232,14 +234,14 @@ class _YourListingsState extends State<YourListings> {
               Row(
                 children: [
                   Text(
-                    'Total weight : ',
+                    'माछाको परिमाण के.जी: ',
                     style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w700,
                         color: Colors.black),
                   ),
                   Text(
-                    '${state.result.data?[index].totalWeight} Kg',
+                    '${state.result.data?[index].totalWeight} के.जी',
                     style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w700,
@@ -250,25 +252,7 @@ class _YourListingsState extends State<YourListings> {
               Row(
                 children: [
                   Text(
-                    'Yeild Date : ',
-                    style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black),
-                  ),
-                  Text(
-                    formarDate(state.result.data?[index].yieldDate),
-                    style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.AppCardColor),
-                  ),
-                ],
-              ),
-              Row(
-                children: [
-                  Text(
-                    'Expiration Date : ',
+                    'खरिद गर्न मिति :',
                     style: TextStyle(
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w700,
@@ -383,7 +367,7 @@ class _YourListingsState extends State<YourListings> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(25.r)),
           title: Center(
               child: Text(
-            'Delete Yield',
+            'के तपाइँ यो जानकारी मेटाउन चाहानुहुन्छ',
             style: GoogleFonts.inter(
               fontWeight: FontWeight.w900,
               color: Colors.black,
@@ -393,37 +377,36 @@ class _YourListingsState extends State<YourListings> {
           content: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    Text(
-                      'Fish Type : ',
-                      style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.textColor),
-                    ),
-                    Text(
-                      fistType,
-                      style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black),
-                    ),
-                  ],
+                Text(
+                  translation(context).fish_type,
+                  //  'Fish Type : ',
+                  style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.textColor),
+                ),
+                Text(
+                  fistType,
+                  style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.w700,
+                      color: Colors.black),
                 ),
                 UiHelper.verticalSpacing(4.h),
                 Row(
                   children: [
                     Text(
-                      'Fish weight : ',
+                      translation(context).fish_weight,
+                      // 'Fish weight : ',
                       style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w700,
                           color: Colors.black),
                     ),
                     Text(
-                      '$avgWeight Kg',
+                      '$avgWeight के.जी',
                       style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w700,
@@ -434,14 +417,14 @@ class _YourListingsState extends State<YourListings> {
                 Row(
                   children: [
                     Text(
-                      'Qunatity : ',
+                      'माछाको परिमाण के.जी: ',
                       style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w700,
                           color: Colors.black),
                     ),
                     Text(
-                      totalWeight.toString(),
+                      totalWeight.toString() + ' के.जी',
                       style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w800,
@@ -449,28 +432,28 @@ class _YourListingsState extends State<YourListings> {
                     ),
                   ],
                 ),
+                // Row(
+                //   children: [
+                //     Text(
+                //       'खरिद गर्न मिति: ',
+                //       style: TextStyle(
+                //           fontSize: 12.sp,
+                //           fontWeight: FontWeight.w700,
+                //           color: Colors.black),
+                //     ),
+                //     Text(
+                //       formarDate(yeildDate),
+                //       style: TextStyle(
+                //           fontSize: 12.sp,
+                //           fontWeight: FontWeight.w700,
+                //           color: AppColors.AppCardColor),
+                //     ),
+                //   ],
+                // ),
                 Row(
                   children: [
                     Text(
-                      'Yeild Date : ',
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black),
-                    ),
-                    Text(
-                      formarDate(yeildDate),
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.AppCardColor),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'Expiry Date : ',
+                      'खरिद गर्न चाहेको मिति:  ',
                       style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w700,

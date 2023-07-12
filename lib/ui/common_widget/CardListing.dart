@@ -121,7 +121,7 @@ class _CardListingState extends State<CardListing> {
                           color: Colors.black),
                     ),
                     Text(
-                      widget.totalWeight.toString(),
+                      widget.totalWeight.toString() + ' के.जी',
                       style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w800,
@@ -132,7 +132,8 @@ class _CardListingState extends State<CardListing> {
                 Row(
                   children: [
                     Text(
-                      translation(context).buy_date,
+                      'माछा मारको मिति: ',
+                      // translation(context).buy_date,
                       //   'Yeild Date : ',
                       style: TextStyle(
                           fontSize: 12.sp,
@@ -141,6 +142,27 @@ class _CardListingState extends State<CardListing> {
                     ),
                     Text(
                       formarDate(widget.date),
+                      style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.AppCardColor),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'विज्ञापन सकिने दिन: ',
+                      // translation(context).buy_date,
+                      //   'Yeild Date : ',
+                      style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black),
+                    ),
+                    Text(
+                      '७ दिन बाँकी छ ',
+                      // formarDate(widget.date),
                       style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w700,
@@ -265,7 +287,7 @@ class _CardListingState extends State<CardListing> {
                           color: Colors.black),
                     ),
                     Text(
-                      widget.totalWeight.toString(),
+                      widget.totalWeight.toString() + ' के.जी',
                       style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w800,
@@ -295,14 +317,15 @@ class _CardListingState extends State<CardListing> {
                 Row(
                   children: [
                     Text(
-                      'Expiry Date : ',
+                      'विज्ञापन सकिने दिन: ',
                       style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w700,
                           color: Colors.black),
                     ),
                     Text(
-                      formarDate(widget.date),
+                      '७ दिन बाँकी छ ',
+                      //  formarDate(widget.date),
                       style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w700,
