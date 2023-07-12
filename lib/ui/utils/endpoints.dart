@@ -9,6 +9,7 @@ class Endpoints {
   static const String fishType = '/fishtype';
   static const String buyerRequest = '/buyer/request';
   static const String baseFile = 'http://64.227.154.34:8080';
+  static const String contact = '/appinfo';
 
   static const String createSupplyRequest = '/buyerRequest';
   static const String getAllFarmersSupply = '/farmerSupply';

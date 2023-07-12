@@ -31,6 +31,7 @@ class YeildFormApiClient {
       "totalWeight": totalWeight,
       "deadline": yieldDate
     };
+    print(data);
     var apiResponse =
         await _apiClient?.httpPost(Endpoints.createBuyerDemand, data);
 
