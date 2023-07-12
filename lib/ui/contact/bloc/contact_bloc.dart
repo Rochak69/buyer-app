@@ -17,6 +17,7 @@ class ContactBloc extends Bloc<ContactEvent, ContactState> {
   FutureOr<void> _Contact(GetContact event, Emitter<ContactState> emit) async {
     try {
       emit(ContactInitial());
+
       final result = await apiClient.getContact();
 
       emit(ContactSuccess(contact: result?.data));

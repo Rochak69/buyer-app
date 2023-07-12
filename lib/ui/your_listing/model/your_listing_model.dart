@@ -4,8 +4,8 @@ class YourListingsResponse {
   String? id;
   String? buyerId;
   FishType? fishType;
-  int? avgFishWeight;
-  int? totalWeight;
+  num? avgFishWeight;
+  num? totalWeight;
   String? deadline;
   String? yieldDate;
   String? fishTypeId;
@@ -38,9 +38,8 @@ class YourListingsResponse {
       });
     }
 
-    fishType = json['FishType'] != null
-        ? FishType.fromJson(json['FishType'])
-        : null;
+    fishType =
+        json['FishType'] != null ? FishType.fromJson(json['FishType']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -53,8 +52,7 @@ class YourListingsResponse {
     data['yieldDate'] = yieldDate;
     data['fishTypeId'] = fishTypeId;
     if (farmerRequest != null) {
-      data['FarmerRequest'] =
-          farmerRequest!.map((v) => v.toJson()).toList();
+      data['FarmerRequest'] = farmerRequest!.map((v) => v.toJson()).toList();
     }
 
     if (fishType != null) {
