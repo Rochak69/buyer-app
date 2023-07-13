@@ -7,6 +7,7 @@ class YourListingsResponse {
   num? avgFishWeight;
   num? totalWeight;
   String? deadline;
+  bool? expired;
   String? yieldDate;
   String? fishTypeId;
   List<FarmerRequest>? farmerRequest;
@@ -30,6 +31,7 @@ class YourListingsResponse {
     totalWeight = json['totalWeight'];
     deadline = json['deadline'];
     yieldDate = json['yieldDate'];
+    expired = json['expired'];
 
     if (json['FarmerRequest'] != null) {
       farmerRequest = <FarmerRequest>[];
@@ -50,6 +52,7 @@ class YourListingsResponse {
     data['totalWeight'] = totalWeight;
     data['deadline'] = deadline;
     data['yieldDate'] = yieldDate;
+    data['expired'] = expired;
     data['fishTypeId'] = fishTypeId;
     if (farmerRequest != null) {
       data['FarmerRequest'] = farmerRequest!.map((v) => v.toJson()).toList();

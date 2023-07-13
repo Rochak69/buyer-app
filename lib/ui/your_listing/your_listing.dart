@@ -267,6 +267,38 @@ class _YourListingsState extends State<YourListings> {
                   ),
                 ],
               ),
+              Row(
+                children: [
+                  Text(
+                    'विज्ञापन सकिने दिन: ',
+                    // translation(context).buy_date,
+                    //   'Yeild Date : ',
+                    style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black),
+                  ),
+                  state.result.data?[index].expired ?? false
+                      ? Text(
+                          'Expired',
+
+                          // formarDate(widget.date),
+                          style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.textRedColor),
+                        )
+                      : Text(
+                          formarDate(state.result.data?[index].deadline),
+
+                          // formarDate(widget.date),
+                          style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.AppCardColor),
+                        )
+                ],
+              ),
               UiHelper.verticalSpacing(3.h),
               state.result.data?[index].farmerRequest?.isEmpty ?? true
                   ? Text(
