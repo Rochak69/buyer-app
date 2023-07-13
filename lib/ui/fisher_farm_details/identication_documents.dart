@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:buyer_shop/ui/contact/contact_screen.dart';
 import 'package:buyer_shop/ui/home_listing/home_listing.dart';
 import 'package:buyer_shop/ui/my_language/bloc/my_language_bloc.dart';
 import 'package:buyer_shop/ui/my_language/bloc/my_language_state.dart';
@@ -79,11 +80,12 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
       listener: (context, state) {
         if (state.theStates == TheStates.success && state.isPosted) {
           displayToastMessage('Buyer created successfully');
+
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
               builder: (context) {
-                return const LoginPage();
+                return const ContactScreen();
               },
             ),
             (route) => false,
