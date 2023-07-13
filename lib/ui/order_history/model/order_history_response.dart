@@ -2,7 +2,7 @@ class OrderHistoryResponse {
   String? id;
   String? farmerSupplyId;
   String? buyerId;
-  int? requestWeight;
+  num? requestWeight;
   bool? isApproved;
   String? phoneNumber;
   String? createdAt;
@@ -88,11 +88,9 @@ class FarmerSupply {
     fishTypeId = json['fishTypeId'];
     fulfill = json['fulfill'];
     createdAt = json['createdAt'];
-    fishType = json['FishType'] != null
-        ? FishType.fromJson(json['FishType'])
-        : null;
-    farmer =
-        json['farmer'] != null ? Farmer.fromJson(json['farmer']) : null;
+    fishType =
+        json['FishType'] != null ? FishType.fromJson(json['FishType']) : null;
+    farmer = json['farmer'] != null ? Farmer.fromJson(json['farmer']) : null;
   }
 
   Map<String, dynamic> toJson() {

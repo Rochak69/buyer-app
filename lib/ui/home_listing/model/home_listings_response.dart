@@ -4,8 +4,8 @@ class HomeListingsResponse {
   String? id;
   String? farmerId;
   FishType? fishType;
-  int? avgFishWeight;
-  int? totalWeight;
+  num? avgFishWeight;
+  num? totalWeight;
   String? yieldDate;
   bool? isDisabled;
   String? fishTypeId;
