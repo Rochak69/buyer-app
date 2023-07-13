@@ -58,8 +58,8 @@ class OrderHistoryResponse {
 class FarmerSupply {
   String? id;
   String? farmerId;
-  int? avgFishWeight;
-  int? totalWeight;
+  num? avgFishWeight;
+  num? totalWeight;
   String? yieldDate;
   String? fishTypeId;
   bool? fulfill;

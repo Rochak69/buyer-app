@@ -12,7 +12,7 @@ class PostBuyerDetailsEvent extends FishFarmerDetailEvent {
 
   String farmersName;
   String phoneNumber;
-  int? pondSize;
+  num? pondSize;
   String pradesh;
   String district;
   String nagarpalika;

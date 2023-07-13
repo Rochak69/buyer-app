@@ -33,7 +33,7 @@ class FishFarmerDetailApiClient {
     required String bussinessName,
     required String bussinessEmail,
     required String bussinessPhone,
-    int? pondSize,
+    num? pondSize,
     String? pradesh,
     String? district,
     String? municiplaity,
