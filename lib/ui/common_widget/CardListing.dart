@@ -157,7 +157,7 @@ class _CardListingState extends State<CardListing> {
                         style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w700,
-                            color: AppColors.AppCardColor),
+                            color: AppColors.textRedColor),
                       )
                     : SizedBox.fromSize(),
 
