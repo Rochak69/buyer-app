@@ -107,6 +107,7 @@ class _ListingsState extends State<Listings> {
                             farmerSuppyId: state.result.data?[index].id ?? '',
                             isDisabled:
                                 state.result.data?[index].isDisabled ?? false,
+                            expired: state.result.data?[index].expired ?? false,
                           );
                         },
                         separatorBuilder: (context, index) =>

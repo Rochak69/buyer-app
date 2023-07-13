@@ -19,6 +19,7 @@ class CardListing extends StatefulWidget {
   final num totalWeight;
   final String location;
   final String date;
+  final bool expired;
   final bool isDisabled;
   final String farmerSuppyId;
   const CardListing({
@@ -32,6 +33,7 @@ class CardListing extends StatefulWidget {
     required this.date,
     required this.farmerSuppyId,
     required this.isDisabled,
+    required this.expired,
   }) : super(key: key);
 
   @override
@@ -149,6 +151,15 @@ class _CardListingState extends State<CardListing> {
                     ),
                   ],
                 ),
+                widget.expired
+                    ? Text(
+                        'Expired',
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.AppCardColor),
+                      )
+                    : SizedBox.fromSize(),
 
                 // Text(
                 //   'Location : ${widget.location}',
