@@ -111,7 +111,7 @@ class MyApp extends StatelessWidget {
                             // state is EnglishState
                             // ? const Locale('en')
                             Locale('ne'),
-                        home: const HomeListing(),
+                        home: const LoginPage(),
                         localizationsDelegates:
                             AppLocalizations.localizationsDelegates,
                         supportedLocales: AppLocalizations.supportedLocales);
