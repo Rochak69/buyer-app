@@ -78,7 +78,7 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
     return BlocConsumer<FishFarmerDetailBloc, FishFarmerDetailState>(
       listener: (context, state) {
         if (state.theStates == TheStates.success && state.isPosted) {
-          displayToastMessage('Farmer created successfully');
+          displayToastMessage('Buyer created successfully');
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(

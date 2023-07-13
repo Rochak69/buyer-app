@@ -3,6 +3,7 @@ import 'package:buyer_shop/ui/contact/bloc/contact_bloc.dart';
 import 'package:buyer_shop/ui/contact/bloc/contact_state.dart';
 import 'package:buyer_shop/ui/utils/endpoints.dart';
 import 'package:buyer_shop/ui/utils/uihelper.dart';
+import 'package:buyer_shop/ui/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -68,6 +69,7 @@ class ContactScreen extends StatelessWidget {
                   ],
                 ),
                 UiHelper.verticalSpacing(50.h),
+                _buildBottomText(),
               ],
             );
           }
@@ -78,6 +80,101 @@ class ContactScreen extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  _buildBottomText() {
+    return Column(
+      children: [
+        Text(
+          // translation(context).agriculture,
+          'लुम्बिनी प्रदेश सरकार',
+          // '  Ministry of Agriculture and Land Management ',
+          style: const TextStyle(
+            color: AppColors.textColor,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        Text(
+          'कृषि तथा भूमि व्यवस्था मन्त्रालय',
+          //      'Directorate of Livestock and Fisheries',
+          style: const TextStyle(
+            color: AppColors.textColor,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(right: 20.w),
+          child: Text(
+            // translation(context).butwal,
+            'पशुपन्छी तथा मत्स्य बिकास निर्देशनालय ',
+            //  '  Development',
+            style: const TextStyle(
+              color: AppColors.textRedColor,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        Text(
+          'कृमुकाम, बुटवल',
+          //      'Directorate of Livestock and Fisheries',
+          style: const TextStyle(
+            color: AppColors.textRedColor,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'फोन नं.: ',
+              //      'Directorate of Livestock and Fisheries',
+              style: const TextStyle(
+                color: AppColors.textRedColor,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Text(
+              '०७१४२०४३४, ०७१४२०४३५, ',
+              //      'Directorate of Livestock and Fisheries',
+              style: const TextStyle(
+                color: AppColors.textColor,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+        Text(
+          ' ०७१४२०४३६ ',
+          //      'Directorate of Livestock and Fisheries',
+          style: const TextStyle(
+            color: AppColors.textColor,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'इमेल: ',
+              //      'Directorate of Livestock and Fisheries',
+              style: const TextStyle(
+                color: AppColors.textRedColor,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            Text(
+              '   dolfdp5@gmail.com ',
+              //      'Directorate of Livestock and Fisheries',
+              style: const TextStyle(
+                color: AppColors.textColor,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
+        // ०७१४२०४३६
+      ],
     );
   }
 }

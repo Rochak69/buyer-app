@@ -266,7 +266,7 @@ class _YieldFormState extends State<YieldForm> {
 
   _buildUpperText(context) {
     return Text(
-      'Fill the details for your yields',
+      'आजको मितिमा खरिद गर्न चाहेको विभिन्न प्रजातीका माछाको जात र आकार संग जानकारी अपलोड गर्नुहोस्',
       style: TextStyle(
         color: AppColors.secondaryTextColor,
         fontWeight: FontWeight.w400,
