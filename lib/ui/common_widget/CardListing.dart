@@ -149,27 +149,6 @@ class _CardListingState extends State<CardListing> {
                     ),
                   ],
                 ),
-                Row(
-                  children: [
-                    Text(
-                      'विज्ञापन सकिने दिन: ',
-                      // translation(context).buy_date,
-                      //   'Yeild Date : ',
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black),
-                    ),
-                    Text(
-                      '७ दिन बाँकी छ ',
-                      // formarDate(widget.date),
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.AppCardColor),
-                    ),
-                  ],
-                ),
 
                 // Text(
                 //   'Location : ${widget.location}',
