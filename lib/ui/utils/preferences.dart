@@ -15,39 +15,16 @@ class Preference {
   static const String phoneNumber = 'PHONE_NUMBER';
 
   // One-time question: user asked if they want to use a PIN for authentication
-  static const String loginMechanismPinAsk = 'LOGIN_MECHANISM_PIN_ASK';
 
   // Flag indicating if fingerprint authentication is supported
-  static const String credentialsFingerprintAvailable =
-      'CREDENTIALS_FINGERPRINT_AVAILABLE';
-
-  static const String credentialsFaceAvailable = 'CREDENTIALS_FACE_AVAILABLE';
-
-  static const String firstName = 'USERS_FIRST_NAME';
-
-  static const String isWelcomeScreenSeen = 'IS_WELCOME_SCREEN_SEEN';
-
-  static const String invalidPinCount = 'INVALID_PIN_COUNT';
-
-  static const String pin = 'PIN';
 
   static const String accessToken = 'ACCESS_TOKEN';
   static const String buyerId = 'BUYER_ID';
-  // static const String buyerId = 'BUYER_ID';
-
-  static const String refreshToken = 'REFRESH_TOKEN';
 
   static const String userID = 'USER_ID';
 
-  static const String userData = 'USER_DATA';
-  static const String userFirebaseID = 'userFirebaseID';
   static const String userFullName = 'USER_FULL_NAME';
-  static const String createdAt = 'CREATED_AT';
-  static const String upadatedAt = 'UPDATED_AT';
   static const String userEmail = 'USER_EMAIL';
-  static const String userStatus = 'USER_STATUS';
-  static const String userPhone = 'USER_PHONE';
-  static const String userQatarId = 'USER_QATAR_ID';
 }
 
 @injectable
