@@ -3,6 +3,7 @@ import 'package:buyer_shop/ui/contact/bloc/contact_bloc.dart';
 import 'package:buyer_shop/ui/contact/bloc/contact_state.dart';
 import 'package:buyer_shop/ui/login/login.dart';
 import 'package:buyer_shop/ui/utils/endpoints.dart';
+import 'package:buyer_shop/ui/utils/preferences.dart';
 import 'package:buyer_shop/ui/utils/uihelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -180,14 +181,16 @@ class ContactScreen extends StatelessWidget {
             ),
           ],
         ),
-        UiHelper.verticalSpacing(20.h),
+        UiHelper.verticalSpacing(30.h),
         SizedBox(
           width: 340.w,
           height: 48.h,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12.r),
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                Preferences preferences = Preferences();
+                await preferences.removeAll();
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
@@ -200,7 +203,7 @@ class ContactScreen extends StatelessWidget {
                 // )
               },
               child: Text(
-                'Next',
+                'Log Out',
                 style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w600,

@@ -151,6 +151,7 @@ class _CardListingState extends State<CardListing> {
                     ),
                   ],
                 ),
+
                 widget.expired
                     ? Text(
                         'Expired',

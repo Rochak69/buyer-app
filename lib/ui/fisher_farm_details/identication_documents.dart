@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:buyer_shop/ui/Contact/bloc/contact_event.dart';
+import 'package:buyer_shop/ui/contact/bloc/contact_bloc.dart';
 import 'package:buyer_shop/ui/contact/contact_screen.dart';
 import 'package:buyer_shop/ui/home_listing/home_listing.dart';
 import 'package:buyer_shop/ui/my_language/bloc/my_language_bloc.dart';
@@ -70,6 +72,7 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
     BlocProvider.of<FishFarmerDetailBloc>(context)
         .add(GetDistrict(provinceId: null));
     super.initState();
+    BlocProvider.of<ContactBloc>(context).add(GetContact());
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -81,18 +84,14 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
         if (state.theStates == TheStates.success && state.isPosted) {
           displayToastMessage('Buyer created successfully');
 
-          Navigator.pushAndRemoveUntil(
+          Navigator.push(
             context,
-            MaterialPageRoute(
-              builder: (context) {
-                return const ContactScreen();
-              },
-            ),
-            (route) => false,
+            MaterialPageRoute(builder: (context) => const ContactScreen()),
           );
         } else if (state.theStates == TheStates.failed) {
           displayToastMessage(state.errorMessage,
               backgroundColor: AppColors.textRedContainerColor);
+          Navigator.pop(context);
         }
       },
       builder: (context, state) {

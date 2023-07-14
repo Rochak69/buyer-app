@@ -114,9 +114,7 @@ class SettingsPage extends StatelessWidget {
               ),
               UiHelper.verticalSpacing(20),
               InkWell(
-                onTap: () async {
-                  Preferences preferences = Preferences();
-                  await preferences.removeAll();
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const Support()),
