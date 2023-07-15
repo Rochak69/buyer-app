@@ -7,6 +7,7 @@ import 'package:buyer_shop/ui/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OrderHistory extends StatefulWidget {
   const OrderHistory({super.key});
@@ -147,35 +148,77 @@ class _OrderHistoryState extends State<OrderHistory> {
                       ),
                     ],
                   ),
-                  Text(
-                    'माछा बेच्ने व्यक्तिको नाम: ${state.orders.data?[index].buyerName}',
+                  Row(
+                    children: [
+                      Text(
+                        'माछा बेच्ने व्यक्तिको नाम: ',
 
-                    //  translation(context).yield_date,
-                    //   'Yeild Date : ',
-                    style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black),
+                        //  translation(context).yield_date,
+                        //   'Yeild Date : ',
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black),
+                      ),
+                      Text(
+                        '${state.orders.data?[index].farmerName}',
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.AppCardColor),
+                      ),
+                    ],
                   ),
-                  Text(
-                    'माछा बेच्ने व्यक्ति व्यक्तिको ठेगाना: ${state.orders.data?[index].municipality} ',
+                  Row(
+                    children: [
+                      Text(
+                        'माछा बेच्ने व्यक्ति व्यक्तिको ठेगाना: ',
 
-                    //  translation(context).yield_date,
-                    //   'Yeild Date : ',
-                    style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black),
+                        //  translation(context).yield_date,
+                        //   'Yeild Date : ',
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black),
+                      ),
+                      Text(
+                        '${state.orders.data?[index].municipality}',
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.AppCardColor),
+                      ),
+                    ],
                   ),
-                  Text(
-                    'सम्पर्क नम्बर:  ${state.orders.data?[index].phoneNumber}',
+                  InkWell(
+                    onTap: () async {
+                      final Uri launchUri = Uri(
+                        scheme: 'tel',
+                        path: state.orders.data?[index].phoneNumber ?? '',
+                      );
+                      await launchUrl(launchUri);
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          'सम्पर्क नम्बर: ',
 
-                    //  translation(context).yield_date,
-                    //   'Yeild Date : ',
-                    style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.black),
+                          //  translation(context).yield_date,
+                          //   'Yeild Date : ',
+                          style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.black),
+                        ),
+                        Text(
+                          '${state.orders.data?[index].phoneNumber}',
+                          style: TextStyle(
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.AppCardColor),
+                        ),
+                      ],
+                    ),
                   ),
                   // Row(
                   //   children: [

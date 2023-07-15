@@ -1,13 +1,13 @@
 class OrderHistoryResponse {
-  double? avgFishWeight;
+  num? avgFishWeight;
   String? createdAt;
-  int? requestedWeight;
+  num? requestedWeight;
   String? yieldDate;
   String? fishType;
-  String? buyerName;
+  String? farmerName;
   String? phoneNumber;
-  Municipality? municipality;
-  Ward? ward;
+  String? municipality;
+  String? ward;
 
   OrderHistoryResponse(
       {this.avgFishWeight,
@@ -15,7 +15,7 @@ class OrderHistoryResponse {
       this.requestedWeight,
       this.yieldDate,
       this.fishType,
-      this.buyerName,
+      this.farmerName,
       this.phoneNumber,
       this.municipality,
       this.ward});
@@ -26,12 +26,10 @@ class OrderHistoryResponse {
     requestedWeight = json['requestedWeight'];
     yieldDate = json['yieldDate'];
     fishType = json['FishType'];
-    buyerName = json['buyerName'];
+    farmerName = json['farmerName'];
     phoneNumber = json['phoneNumber'];
-    municipality = json['municipality'] != null
-        ? new Municipality.fromJson(json['municipality'])
-        : null;
-    ward = json['Ward'] != null ? new Ward.fromJson(json['Ward']) : null;
+    municipality = json['municipality'];
+    ward = json['Ward'];
   }
 
   Map<String, dynamic> toJson() {
@@ -41,14 +39,10 @@ class OrderHistoryResponse {
     data['requestedWeight'] = this.requestedWeight;
     data['yieldDate'] = this.yieldDate;
     data['FishType'] = this.fishType;
-    data['buyerName'] = this.buyerName;
+    data['farmerName'] = this.farmerName;
     data['phoneNumber'] = this.phoneNumber;
-    if (this.municipality != null) {
-      data['municipality'] = this.municipality!.toJson();
-    }
-    if (this.ward != null) {
-      data['Ward'] = this.ward!.toJson();
-    }
+    data['municipality'] = this.municipality;
+    data['Ward'] = this.ward;
     return data;
   }
 }
@@ -177,7 +171,7 @@ class Farmer {
   String? streetName;
   String? email;
   String? facebookPage;
-  int? pondSize;
+  num? pondSize;
   bool? active;
   bool? approved;
   String? districtId;
