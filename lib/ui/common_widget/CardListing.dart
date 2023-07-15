@@ -156,7 +156,7 @@ class _CardListingState extends State<CardListing> {
                 Row(
                   children: [
                     Text(
-                      'ExpireDate : ',
+                      'विज्ञापन सकिने दिन : ',
                       // translation(context).buy_date,
                       //   'Yeild Date : ',
                       style: TextStyle(
