@@ -4,6 +4,7 @@ import 'package:buyer_shop/ui/Contact/bloc/contact_event.dart';
 import 'package:buyer_shop/ui/contact/bloc/contact_bloc.dart';
 import 'package:buyer_shop/ui/contact/contact_screen.dart';
 import 'package:buyer_shop/ui/home_listing/bloc/home_listings_bloc.dart';
+import 'package:buyer_shop/ui/home_listing/bloc/home_listings_event.dart';
 import 'package:buyer_shop/ui/home_listing/bloc/home_listings_state.dart';
 import 'package:buyer_shop/ui/home_listing/home_listing.dart';
 import 'package:buyer_shop/ui/my_language/bloc/my_language_bloc.dart';
@@ -105,7 +106,9 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
       listener: (context, state) {
         if (state.theStates == TheStates.success && state.isPosted) {
           if (widget.isEdit) {
+            BlocProvider.of<HomeListingsBloc>(context).add(GetHomeListings());
             displayToastMessage('Update Successful');
+
             Navigator.pushAndRemoveUntil(
               context,
               MaterialPageRoute(builder: (context) => const HomeListing()),
