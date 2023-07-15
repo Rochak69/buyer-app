@@ -75,7 +75,7 @@ class FishFarmerDetailApiClient {
     });
 
     var apiResponse = isEdit
-        ? await _apiClient?.httpPut('/api/me/update', formData)
+        ? await _apiClient?.httpPut('/me/update?type=buyer', formData)
         : await _apiClient?.httpPost(Endpoints.buyerRequest, formData);
 
     ///converting to response
