@@ -184,7 +184,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                       Text(
                         '${state.orders.data?[index].municipality}',
                         style: TextStyle(
-                            fontSize: 12.sp,
+                            fontSize: 11.sp,
                             fontWeight: FontWeight.w700,
                             color: AppColors.AppCardColor),
                       ),
