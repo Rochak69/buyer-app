@@ -58,21 +58,38 @@ class FishFarmerDetailApiClient {
       "citizenshipNumber": citizenshipNumber,
       "citizenshipName": citizenshipName,
       "bussinessName": organizationName,
-      "profilePicture":
-          profilePic != null ? await MultipartFile.fromFile(profilePic) : null,
-      "identificationImage": identification != null
-          ? await MultipartFile.fromFile(identification)
-          : null,
-      "registrationImage": registerPic != null
-          ? await MultipartFile.fromFile(registerPic)
-          : null,
-      "citizenship": citizenshipPhoto != null
-          ? await MultipartFile.fromFile(citizenshipPhoto)
-          : null,
       "municipalityId": municiplaity,
       "bussinessEmail": bussinessEmail,
       "bussinessPhone": bussinessPhone
     });
+
+    if (profilePic != null) {
+      formData.files.add(MapEntry(
+        "profilePicture",
+        await MultipartFile.fromFile(profilePic),
+      ));
+    }
+
+    if (identification != null) {
+      formData.files.add(MapEntry(
+        "identificationImage",
+        await MultipartFile.fromFile(identification),
+      ));
+    }
+
+    if (registerPic != null) {
+      formData.files.add(MapEntry(
+        "registrationImage",
+        await MultipartFile.fromFile(registerPic),
+      ));
+    }
+
+    if (citizenshipPhoto != null) {
+      formData.files.add(MapEntry(
+        "citizenship",
+        await MultipartFile.fromFile(citizenshipPhoto),
+      ));
+    }
 
     var apiResponse = isEdit
         ? await _apiClient?.httpPut('/me/update?type=buyer', formData)
