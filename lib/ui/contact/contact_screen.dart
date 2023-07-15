@@ -94,50 +94,50 @@ class ContactScreen extends StatelessWidget {
   _buildBottomText(BuildContext context) {
     return Column(
       children: [
-        Text(
+        const Text(
           // translation(context).agriculture,
           'लुम्बिनी प्रदेश सरकार',
           // '  Ministry of Agriculture and Land Management ',
-          style: const TextStyle(
+          style: TextStyle(
             color: AppColors.textColor,
             fontWeight: FontWeight.w600,
           ),
         ),
-        Text(
+        const Text(
           'कृषि तथा भूमि व्यवस्था मन्त्रालय',
           //      'Directorate of Livestock and Fisheries',
-          style: const TextStyle(
+          style: TextStyle(
             color: AppColors.textColor,
             fontWeight: FontWeight.w600,
           ),
         ),
         Padding(
           padding: EdgeInsets.only(right: 20.w),
-          child: Text(
+          child: const Text(
             // translation(context).butwal,
             'पशुपन्छी तथा मत्स्य बिकास निर्देशनालय ',
             //  '  Development',
-            style: const TextStyle(
+            style: TextStyle(
               color: AppColors.textRedColor,
               fontWeight: FontWeight.w600,
             ),
           ),
         ),
-        Text(
+        const Text(
           'कृमुकाम, बुटवल',
           //      'Directorate of Livestock and Fisheries',
-          style: const TextStyle(
+          style: TextStyle(
             color: AppColors.textRedColor,
             fontWeight: FontWeight.w600,
           ),
         ),
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'फोन नं.: ',
               //      'Directorate of Livestock and Fisheries',
-              style: const TextStyle(
+              style: TextStyle(
                 color: AppColors.textRedColor,
                 fontWeight: FontWeight.w600,
               ),
@@ -145,28 +145,28 @@ class ContactScreen extends StatelessWidget {
             Text(
               '०७१४२०४३४, ०७१४२०४३५, ',
               //      'Directorate of Livestock and Fisheries',
-              style: const TextStyle(
+              style: TextStyle(
                 color: AppColors.textColor,
                 fontWeight: FontWeight.w600,
               ),
             ),
           ],
         ),
-        Text(
+        const Text(
           ' ०७१४२०४३६ ',
           //      'Directorate of Livestock and Fisheries',
-          style: const TextStyle(
+          style: TextStyle(
             color: AppColors.textColor,
             fontWeight: FontWeight.w600,
           ),
         ),
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               'इमेल: ',
               //      'Directorate of Livestock and Fisheries',
-              style: const TextStyle(
+              style: TextStyle(
                 color: AppColors.textRedColor,
                 fontWeight: FontWeight.w600,
               ),
@@ -174,7 +174,7 @@ class ContactScreen extends StatelessWidget {
             Text(
               '   dolfdp5@gmail.com ',
               //      'Directorate of Livestock and Fisheries',
-              style: const TextStyle(
+              style: TextStyle(
                 color: AppColors.textColor,
                 fontWeight: FontWeight.w600,
               ),

@@ -7,9 +7,6 @@ import 'package:buyer_shop/ui/home_listing/bloc/home_listings_event.dart';
 import 'package:buyer_shop/ui/home_listing/bloc/home_listings_state.dart';
 import 'package:buyer_shop/ui/home_listing/listing.dart';
 import 'package:buyer_shop/ui/order_history/order_history.dart';
-import 'package:buyer_shop/ui/support/support.dart';
-import 'package:buyer_shop/ui/yield_farm/yield_farm.dart';
-import 'package:buyer_shop/ui/your_listing/your_listing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,10 +25,8 @@ class _HomeListingState extends State<HomeListing>
   int _selectedIndex = 0;
   List<Widget> screens = [
     const Listings(),
-    const YourListings(),
     const OrderHistory(),
     const ContactScreen(),
-    const YieldForm()
   ];
 
   @override
@@ -82,18 +77,18 @@ class _HomeListingState extends State<HomeListing>
                   children: screens,
                 ),
               ),
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(
-                    builder: (context) {
-                      return const YieldForm();
-                    },
-                  ));
-                },
-                child: const Icon(Icons.add),
-              ),
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerDocked,
+              // floatingActionButton: FloatingActionButton(
+              //   onPressed: () {
+              //     Navigator.push(context, MaterialPageRoute(
+              //       builder: (context) {
+              //         return const YieldForm();
+              //       },
+              //     ));
+              //   },
+              //   child: const Icon(Icons.add),
+              // ),
+              // floatingActionButtonLocation:
+              //     FloatingActionButtonLocation.centerDocked,
               bottomNavigationBar: Container(
                 padding: EdgeInsets.symmetric(vertical: 6.h),
                 height: 56.h,
@@ -109,22 +104,16 @@ class _HomeListingState extends State<HomeListing>
                       0,
                     ),
                     _buildBottomNavigationBarItem(
-                      'Requests',
-                      'assets/bottom_navigation_bar/requests.png',
-                      'assets/bottom_navigation_bar/requests.png',
-                      1,
-                    ),
-                    _buildBottomNavigationBarItem(
                       'Orders',
                       'assets/bottom_navigation_bar/tasks.png',
                       'assets/bottom_navigation_bar/tasks.png',
-                      2,
+                      1,
                     ),
                     _buildBottomNavigationBarItem(
                       'Contact',
                       'assets/bottom_navigation_bar/contact.png',
                       'assets/bottom_navigation_bar/contact.png',
-                      3,
+                      2,
                     ),
                   ],
                 ),

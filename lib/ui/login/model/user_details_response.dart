@@ -1,40 +1,90 @@
 class UserDetailsResponse {
   String? id;
   String? userId;
-  String? profilePicture;
-  String? farmName;
-  num? pondSize;
-  String? fiscalYear;
+  String? website;
+  String? bussinessEmail;
+  String? fullName;
+  String? mobileNumber;
+  String? citizenshipName;
+  String? citizenshipNumber;
+  String? citizenshipIssueDistrictId;
+  String? streetName;
+  String? facebookPage;
   bool? active;
   bool? approved;
-  Location? location;
+  String? districtId;
+  String? municipalityId;
+  String? wardId;
+  String? provinceId;
+  String? createdAt;
+  String? bussinessName;
+  String? bussinessPhone;
+  District? district;
+  District? province;
+  District? municipality;
+  Ward? ward;
   Document? document;
 
   UserDetailsResponse(
       {this.id,
       this.userId,
-      this.profilePicture,
-      this.farmName,
-      this.pondSize,
-      this.fiscalYear,
+      this.website,
+      this.bussinessEmail,
+      this.fullName,
+      this.mobileNumber,
+      this.citizenshipName,
+      this.citizenshipNumber,
+      this.citizenshipIssueDistrictId,
+      this.streetName,
+      this.facebookPage,
       this.active,
       this.approved,
-      this.location,
+      this.districtId,
+      this.municipalityId,
+      this.wardId,
+      this.provinceId,
+      this.createdAt,
+      this.bussinessName,
+      this.bussinessPhone,
+      this.district,
+      this.province,
+      this.municipality,
+      this.ward,
       this.document});
 
   UserDetailsResponse.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['userId'];
-    profilePicture = json['profilePicture'];
-    farmName = json['farmName'];
-    pondSize = json['pondSize'];
-    fiscalYear = json['fiscalYear'];
+    website = json['website'];
+    bussinessEmail = json['bussinessEmail'];
+    fullName = json['fullName'];
+    mobileNumber = json['mobileNumber'];
+    citizenshipName = json['citizenshipName'];
+    citizenshipNumber = json['citizenshipNumber'];
+    citizenshipIssueDistrictId = json['citizenshipIssueDistrictId'];
+    streetName = json['streetName'];
+    facebookPage = json['facebookPage'];
     active = json['active'];
     approved = json['approved'];
-    location =
-        json['location'] != null ? Location.fromJson(json['location']) : null;
+    districtId = json['districtId'];
+    municipalityId = json['municipalityId'];
+    wardId = json['wardId'];
+    provinceId = json['provinceId'];
+    createdAt = json['createdAt'];
+    bussinessName = json['bussinessName'];
+    bussinessPhone = json['bussinessPhone'];
+    district = json['district'] != null
+        ? District.fromJson(json['district'])
+        : null;
+    province = json['Province'] != null
+        ? District.fromJson(json['Province'])
+        : null;
+    municipality = json['municipality'] != null
+        ? District.fromJson(json['municipality'])
+        : null;
+    ward = json['Ward'] != null ? Ward.fromJson(json['Ward']) : null;
     document = json['Document'] != null
-        ? new Document.fromJson(json['Document'])
+        ? Document.fromJson(json['Document'])
         : null;
   }
 
@@ -42,59 +92,77 @@ class UserDetailsResponse {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['userId'] = userId;
-    data['profilePicture'] = profilePicture;
-    data['farmName'] = farmName;
-    data['pondSize'] = pondSize;
-    data['fiscalYear'] = fiscalYear;
+    data['website'] = website;
+    data['bussinessEmail'] = bussinessEmail;
+    data['fullName'] = fullName;
+    data['mobileNumber'] = mobileNumber;
+    data['citizenshipName'] = citizenshipName;
+    data['citizenshipNumber'] = citizenshipNumber;
+    data['citizenshipIssueDistrictId'] = citizenshipIssueDistrictId;
+    data['streetName'] = streetName;
+    data['facebookPage'] = facebookPage;
     data['active'] = active;
     data['approved'] = approved;
-    if (location != null) {
-      data['location'] = location!.toJson();
+    data['districtId'] = districtId;
+    data['municipalityId'] = municipalityId;
+    data['wardId'] = wardId;
+    data['provinceId'] = provinceId;
+    data['createdAt'] = createdAt;
+    data['bussinessName'] = bussinessName;
+    data['bussinessPhone'] = bussinessPhone;
+    if (district != null) {
+      data['district'] = district!.toJson();
     }
-    if (this.document != null) {
-      data['Document'] = this.document!.toJson();
+    if (province != null) {
+      data['Province'] = province!.toJson();
+    }
+    if (municipality != null) {
+      data['municipality'] = municipality!.toJson();
+    }
+    if (ward != null) {
+      data['Ward'] = ward!.toJson();
+    }
+    if (document != null) {
+      data['Document'] = document!.toJson();
     }
     return data;
   }
 }
 
-class Location {
-  String? pradesh;
-  String? district;
-  String? mahaNagarpalika;
-  String? upaMahaNagarpalika;
-  String? gaupalika;
-  String? nagarpalika;
-  int? woda;
+class District {
+  String? englishName;
+  String? nepaliName;
 
-  Location(
-      {this.pradesh,
-      this.district,
-      this.mahaNagarpalika,
-      this.upaMahaNagarpalika,
-      this.gaupalika,
-      this.nagarpalika,
-      this.woda});
+  District({this.englishName, this.nepaliName});
 
-  Location.fromJson(Map<String, dynamic> json) {
-    pradesh = json['pradesh'];
-    district = json['district'];
-    mahaNagarpalika = json['mahaNagarpalika'];
-    upaMahaNagarpalika = json['upaMahaNagarpalika'];
-    gaupalika = json['gaupalika'];
-    nagarpalika = json['nagarpalika'];
-    woda = json['Woda'];
+  District.fromJson(Map<String, dynamic> json) {
+    englishName = json['englishName'];
+    nepaliName = json['nepaliName'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['pradesh'] = pradesh;
-    data['district'] = district;
-    data['mahaNagarpalika'] = mahaNagarpalika;
-    data['upaMahaNagarpalika'] = upaMahaNagarpalika;
-    data['gaupalika'] = gaupalika;
-    data['nagarpalika'] = nagarpalika;
-    data['Woda'] = woda;
+    data['englishName'] = englishName;
+    data['nepaliName'] = nepaliName;
+    return data;
+  }
+}
+
+class Ward {
+  String? englishNumber;
+  String? nepaliNumber;
+
+  Ward({this.englishNumber, this.nepaliNumber});
+
+  Ward.fromJson(Map<String, dynamic> json) {
+    englishNumber = json['englishNumber'];
+    nepaliNumber = json['nepaliNumber'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['englishNumber'] = englishNumber;
+    data['nepaliNumber'] = nepaliNumber;
     return data;
   }
 }
@@ -102,28 +170,28 @@ class Location {
 class Document {
   String? idenfication;
   String? registration;
-  String? citizenship;
   String? profilePicture;
+  String? citizenship;
 
   Document(
       {this.idenfication,
       this.registration,
-      this.citizenship,
-      this.profilePicture});
+      this.profilePicture,
+      this.citizenship});
 
   Document.fromJson(Map<String, dynamic> json) {
     idenfication = json['idenfication'];
     registration = json['registration'];
-    citizenship = json['citizenship'];
     profilePicture = json['profilePicture'];
+    citizenship = json['citizenship'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['idenfication'] = this.idenfication;
-    data['registration'] = this.registration;
-    data['citizenship'] = this.citizenship;
-    data['profilePicture'] = this.profilePicture;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['idenfication'] = idenfication;
+    data['registration'] = registration;
+    data['profilePicture'] = profilePicture;
+    data['citizenship'] = citizenship;
     return data;
   }
 }

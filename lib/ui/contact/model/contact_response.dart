@@ -14,11 +14,11 @@ class ContactResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['photo'] = this.photo;
-    data['name'] = this.name;
-    data['position'] = this.position;
-    data['contact'] = this.contact;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['photo'] = photo;
+    data['name'] = name;
+    data['position'] = position;
+    data['contact'] = contact;
     return data;
   }
 }

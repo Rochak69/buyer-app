@@ -1,4 +1,5 @@
 import 'package:buyer_shop/res/colors.dart';
+import 'package:buyer_shop/ui/fisher_farm_details/fisher_farm_details.dart';
 import 'package:buyer_shop/ui/forgot_password/forgot_password.dart';
 import 'package:buyer_shop/ui/login/bloc/login_bloc.dart';
 import 'package:buyer_shop/ui/login/bloc/login_state.dart';
@@ -75,7 +76,7 @@ class SettingsPage extends StatelessWidget {
                           fontSize: 16.sp),
                     );
                   }
-                  return Text(
+                  return const Text(
                     'Lucas Scott',
                     style: TextStyle(
                         color: Colors.black,
@@ -90,17 +91,46 @@ class SettingsPage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Forgot(),
+                        builder: (context) =>
+                            const FishFarmDetails(isEdit: true),
                       ));
                 },
                 child: Card(
                   elevation: 2,
                   child: SizedBox(
                     height: 50.h,
-                    child: Row(
+                    child: const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
+                          Text(
+                            '     Edit Profile',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          //   Image.asset('assets/right_button.png'),
+                        ]),
+                  ),
+                ),
+              ),
+              UiHelper.verticalSpacing(20),
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const Forgot(),
+                      ));
+                },
+                child: Card(
+                  elevation: 2,
+                  child: SizedBox(
+                    height: 50.h,
+                    child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
                             '     Reset Password',
                             style: TextStyle(
                               fontSize: 14,
@@ -124,10 +154,10 @@ class SettingsPage extends StatelessWidget {
                   elevation: 2,
                   child: SizedBox(
                     height: 50.h,
-                    child: Row(
+                    child: const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
+                          Text(
                             '     Support',
                             style: TextStyle(
                               fontSize: 14,
@@ -155,10 +185,10 @@ class SettingsPage extends StatelessWidget {
                   elevation: 2,
                   child: SizedBox(
                     height: 50.h,
-                    child: Row(
+                    child: const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
+                          Text(
                             '     Logout',
                             style: TextStyle(
                               fontSize: 14,

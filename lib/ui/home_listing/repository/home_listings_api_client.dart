@@ -3,7 +3,7 @@ import 'package:buyer_shop/common/status.dart';
 import 'package:buyer_shop/providers/api_client.dart';
 import 'package:buyer_shop/res/colors.dart';
 import 'package:buyer_shop/ui/home_listing/model/home_listings_response.dart';
-import 'package:buyer_shop/ui/login/model/user_details_Response.dart';
+import 'package:buyer_shop/ui/login/model/user_details_response.dart';
 import 'package:buyer_shop/ui/utils/endpoints.dart';
 import 'package:buyer_shop/ui/utils/preferences.dart';
 import 'package:buyer_shop/ui/utils/utils.dart';
@@ -124,11 +124,11 @@ class FishResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['discription'] = this.discription;
-    data['createdAt'] = this.createdAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['discription'] = discription;
+    data['createdAt'] = createdAt;
     return data;
   }
 }

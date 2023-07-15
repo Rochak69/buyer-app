@@ -3,18 +3,18 @@ import 'dart:io';
 import 'package:buyer_shop/ui/Contact/bloc/contact_event.dart';
 import 'package:buyer_shop/ui/contact/bloc/contact_bloc.dart';
 import 'package:buyer_shop/ui/contact/contact_screen.dart';
+import 'package:buyer_shop/ui/home_listing/bloc/home_listings_bloc.dart';
+import 'package:buyer_shop/ui/home_listing/bloc/home_listings_state.dart';
 import 'package:buyer_shop/ui/home_listing/home_listing.dart';
 import 'package:buyer_shop/ui/my_language/bloc/my_language_bloc.dart';
 import 'package:buyer_shop/ui/my_language/bloc/my_language_state.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:buyer_shop/common/validator.dart';
 import 'package:buyer_shop/res/colors.dart';
 import 'package:buyer_shop/ui/common_widget/FishTextField.dart';
 import 'package:buyer_shop/ui/common_widget/app_dropdown.dart';
 import 'package:buyer_shop/ui/fisher_farm_details/bloc/fish_farmer_detail_bloc.dart';
 import 'package:buyer_shop/ui/fisher_farm_details/bloc/fish_farmer_detail_event.dart';
 import 'package:buyer_shop/ui/fisher_farm_details/bloc/fish_farmer_detail_state.dart';
-import 'package:buyer_shop/ui/login/login.dart';
 import 'package:buyer_shop/ui/utils/uihelper.dart';
 import 'package:buyer_shop/ui/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +35,7 @@ class IdentificationDocuments extends StatefulWidget {
   final String? buisnessName;
   final String? buisnessNumber;
   final String? number;
+  final bool isEdit;
 
   const IdentificationDocuments(
       {super.key,
@@ -49,7 +50,8 @@ class IdentificationDocuments extends StatefulWidget {
       this.buisnessEmail,
       this.buisnessName,
       this.buisnessNumber,
-      this.number});
+      this.number,
+      required this.isEdit});
 
   @override
   State<IdentificationDocuments> createState() =>
@@ -58,6 +60,10 @@ class IdentificationDocuments extends StatefulWidget {
 
 class _IdentificationDocumentsState extends State<IdentificationDocuments> {
   String selectedUnit = 'm';
+  bool hideProfile = false;
+  bool hideCitizen = false;
+  bool hidePalika = false;
+  bool hideOthers = false;
   String? profilePicturePath;
   String? selectedDistrictId;
   String? citizenshipPicturePath;
@@ -73,6 +79,22 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
         .add(GetDistrict(provinceId: null));
     super.initState();
     BlocProvider.of<ContactBloc>(context).add(GetContact());
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      BlocProvider.of<FishFarmerDetailBloc>(context).add(GetProvince());
+      if (widget.isEdit) {
+        HomeListingsSuccess data =
+            context.read<HomeListingsBloc>().state as HomeListingsSuccess;
+        citizeName.text = data.userDetails.data?.citizenshipName ?? '';
+        citizenNumber.text = data.userDetails.data?.citizenshipNumber ?? '';
+        selectedDistrictId = data.userDetails.data?.provinceId;
+        hideCitizen = data.userDetails.data?.document?.citizenship != null;
+        hideProfile = data.userDetails.data?.document?.profilePicture != null;
+        hidePalika = data.userDetails.data?.document?.registration != null;
+        hideOthers = data.userDetails.data?.document?.idenfication != null;
+
+        setState(() {});
+      }
+    });
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -82,11 +104,22 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
     return BlocConsumer<FishFarmerDetailBloc, FishFarmerDetailState>(
       listener: (context, state) {
         if (state.theStates == TheStates.success && state.isPosted) {
+          if (widget.isEdit) {
+            displayToastMessage('Update Successful');
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (context) => const HomeListing()),
+              (route) => false,
+            );
+            return;
+          }
+
           displayToastMessage('Buyer created successfully');
 
-          Navigator.push(
+          Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => const ContactScreen()),
+            (route) => false,
           );
         } else if (state.theStates == TheStates.failed) {
           displayToastMessage(state.errorMessage,
@@ -159,7 +192,7 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
                             fontSize: 12.sp),
-                        children: []),
+                        children: const []),
                   ),
                   UiHelper.verticalSpacing(8.h),
                   FishTextField(textEditingController: citizeName, label: ''),
@@ -172,7 +205,7 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
                             fontSize: 12.sp),
-                        children: []),
+                        children: const []),
                   ),
                   UiHelper.verticalSpacing(8.h),
                   FishTextField(
@@ -186,7 +219,7 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                             color: Colors.black,
                             fontWeight: FontWeight.w700,
                             fontSize: 12.sp),
-                        children: []),
+                        children: const []),
                   ),
                   UiHelper.verticalSpacing(8.h),
                   BlocBuilder<MyLanguageBloc, MyLanguageState>(
@@ -210,210 +243,253 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                     },
                   ),
                   UiHelper.verticalSpacing(12.h),
-                  RichText(
-                    text: TextSpan(
-                        text: translation(context).upload_document,
-                        //'Please upload your picture',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 13.sp),
-                        children: [
-                          TextSpan(
-                              text: ' *',
-                              style:
-                                  TextStyle(color: Colors.red, fontSize: 16.sp))
-                        ]),
-                  ),
-                  UiHelper.verticalSpacing(8.h),
-                  FishTextField(
-                      isReadOnly: true,
-                      label: path.basename(profilePicturePath ?? ''),
-                      prefixIcon: ElevatedButton(
-                        onPressed: () async {
-                          FilePickerResult? result =
-                              await FilePicker.platform.pickFiles();
-
-                          if (result != null) {
-                            File file = File(result.files.single.path ?? '');
-                            if (file.path.isEmpty) {
-                              displayToastMessage('Invalid file path',
-                                  backgroundColor: AppColors.textRedColor);
-                              return;
-                            }
-                            profilePicturePath = file.path;
-                            setState(() {});
-                          } else {
-                            // User canceled the picker
-                          }
-                        },
-                        style: ButtonStyle(
-                          elevation: MaterialStateProperty.all<double>(
-                              0), // Set elevation to 0
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  10), // Change border radius to desired value
+                  hideProfile
+                      ? const SizedBox.shrink()
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                  text: translation(context).upload_document,
+                                  //'Please upload your picture',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 13.sp),
+                                  children: [
+                                    TextSpan(
+                                        text: ' *',
+                                        style: TextStyle(
+                                            color: Colors.red, fontSize: 16.sp))
+                                  ]),
                             ),
-                          ),
-                        ),
-                        child: const Text('Choose'),
-                      )),
-                  UiHelper.verticalSpacing(12.h),
-                  RichText(
-                    text: TextSpan(
-                        text: translation(context).citizenship_upload,
-                        //'Please upload your citizenship\'s picture',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 13.sp),
-                        children: []),
-                  ),
-                  UiHelper.verticalSpacing(8.h),
-                  FishTextField(
-                      isReadOnly: true,
-                      label: path.basename(citizenshipPicturePath ?? ''),
-                      prefixIcon: ElevatedButton(
-                        onPressed: () async {
-                          FilePickerResult? result =
-                              await FilePicker.platform.pickFiles();
+                            UiHelper.verticalSpacing(8.h),
+                            FishTextField(
+                                isReadOnly: true,
+                                label: path.basename(profilePicturePath ?? ''),
+                                prefixIcon: ElevatedButton(
+                                  onPressed: () async {
+                                    FilePickerResult? result =
+                                        await FilePicker.platform.pickFiles();
 
-                          if (result != null) {
-                            File file = File(result.files.single.path ?? '');
-                            if (file.path.isEmpty) {
-                              displayToastMessage('Invalid file path',
-                                  backgroundColor: AppColors.textRedColor);
-                              return;
-                            }
-                            citizenshipPicturePath = file.path;
-                            setState(() {});
-                          } else {
-                            // User canceled the picker
-                          }
-                        },
-                        style: ButtonStyle(
-                          elevation: MaterialStateProperty.all<double>(
-                              0), // Set elevation to 0
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  10), // Change border radius to desired value
-                            ),
-                          ),
+                                    if (result != null) {
+                                      File file =
+                                          File(result.files.single.path ?? '');
+                                      if (file.path.isEmpty) {
+                                        displayToastMessage('Invalid file path',
+                                            backgroundColor:
+                                                AppColors.textRedColor);
+                                        return;
+                                      }
+                                      profilePicturePath = file.path;
+                                      setState(() {});
+                                    } else {
+                                      // User canceled the picker
+                                    }
+                                  },
+                                  style: ButtonStyle(
+                                    elevation:
+                                        MaterialStateProperty.all<double>(
+                                            0), // Set elevation to 0
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            10), // Change border radius to desired value
+                                      ),
+                                    ),
+                                  ),
+                                  child: const Text('Choose'),
+                                )),
+                            UiHelper.verticalSpacing(12.h),
+                          ],
                         ),
-                        child: const Text('Choose'),
-                      )),
-                  UiHelper.verticalSpacing(12.h),
-                  Text(
-                    translation(context).no_citizenship,
-                    style: TextStyle(
-                        color: AppColors.textColor,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 17.sp),
-                  ),
-                  UiHelper.verticalSpacing(8.h),
-                  RichText(
-                    text: TextSpan(
-                        text: translation(context).ask_necessary_document,
-                        // 'Please upload your picture',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12.sp),
-                        children: []),
-                  ),
-                  UiHelper.verticalSpacing(8.h),
-                  FishTextField(
-                      isReadOnly: true,
-                      label: path.basename(palikaPicturePath ?? ''),
-                      prefixIcon: ElevatedButton(
-                        onPressed: () async {
-                          FilePickerResult? result =
-                              await FilePicker.platform.pickFiles();
+                  hideCitizen
+                      ? const SizedBox.shrink()
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                  text: translation(context).citizenship_upload,
+                                  //'Please upload your citizenship\'s picture',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 13.sp),
+                                  children: const []),
+                            ),
+                            UiHelper.verticalSpacing(8.h),
+                            FishTextField(
+                                isReadOnly: true,
+                                label:
+                                    path.basename(citizenshipPicturePath ?? ''),
+                                prefixIcon: ElevatedButton(
+                                  onPressed: () async {
+                                    FilePickerResult? result =
+                                        await FilePicker.platform.pickFiles();
 
-                          if (result != null) {
-                            File file = File(result.files.single.path ?? '');
-                            if (file.path.isEmpty) {
-                              displayToastMessage('Invalid file path',
-                                  backgroundColor: AppColors.textRedColor);
-                              return;
-                            }
-                            palikaPicturePath = file.path;
-                            setState(() {});
-                          } else {
-                            // User canceled the picker
-                          }
-                        },
-                        style: ButtonStyle(
-                          elevation: MaterialStateProperty.all<double>(
-                              0), // Set elevation to 0
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  10), // Change border radius to desired value
-                            ),
-                          ),
+                                    if (result != null) {
+                                      File file =
+                                          File(result.files.single.path ?? '');
+                                      if (file.path.isEmpty) {
+                                        displayToastMessage('Invalid file path',
+                                            backgroundColor:
+                                                AppColors.textRedColor);
+                                        return;
+                                      }
+                                      citizenshipPicturePath = file.path;
+                                      setState(() {});
+                                    } else {
+                                      // User canceled the picker
+                                    }
+                                  },
+                                  style: ButtonStyle(
+                                    elevation:
+                                        MaterialStateProperty.all<double>(
+                                            0), // Set elevation to 0
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            10), // Change border radius to desired value
+                                      ),
+                                    ),
+                                  ),
+                                  child: const Text('Choose'),
+                                )),
+                            UiHelper.verticalSpacing(12.h),
+                          ],
                         ),
-                        child: const Text('Choose'),
-                      )),
-                  UiHelper.verticalSpacing(12.h),
-                  Text(
-                    translation(context).commpany_details,
-                    style: TextStyle(
-                        color: AppColors.textColor,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 17.sp),
-                  ),
-                  RichText(
-                    text: TextSpan(
-                        text: translation(context).conpany_form_statement,
-                        // 'Please upload your picture',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 12.sp),
-                        children: []),
-                  ),
-                  UiHelper.verticalSpacing(8.h),
-                  FishTextField(
-                      isReadOnly: true,
-                      label: path.basename(othersPath ?? ''),
-                      prefixIcon: ElevatedButton(
-                        onPressed: () async {
-                          FilePickerResult? result =
-                              await FilePicker.platform.pickFiles();
+                  hidePalika
+                      ? const SizedBox.shrink()
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              translation(context).no_citizenship,
+                              style: TextStyle(
+                                  color: AppColors.textColor,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 17.sp),
+                            ),
+                            UiHelper.verticalSpacing(8.h),
+                            RichText(
+                              text: TextSpan(
+                                  text: translation(context)
+                                      .ask_necessary_document,
+                                  // 'Please upload your picture',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 12.sp),
+                                  children: const []),
+                            ),
+                            UiHelper.verticalSpacing(8.h),
+                            FishTextField(
+                                isReadOnly: true,
+                                label: path.basename(palikaPicturePath ?? ''),
+                                prefixIcon: ElevatedButton(
+                                  onPressed: () async {
+                                    FilePickerResult? result =
+                                        await FilePicker.platform.pickFiles();
 
-                          if (result != null) {
-                            File file = File(result.files.single.path ?? '');
-                            if (file.path.isEmpty) {
-                              displayToastMessage('Invalid file path',
-                                  backgroundColor: AppColors.textRedColor);
-                              return;
-                            }
-                            othersPath = file.path;
-                            setState(() {});
-                          } else {
-                            // User canceled the picker
-                          }
-                        },
-                        style: ButtonStyle(
-                          elevation: MaterialStateProperty.all<double>(
-                              0), // Set elevation to 0
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  10), // Change border radius to desired value
-                            ),
-                          ),
+                                    if (result != null) {
+                                      File file =
+                                          File(result.files.single.path ?? '');
+                                      if (file.path.isEmpty) {
+                                        displayToastMessage('Invalid file path',
+                                            backgroundColor:
+                                                AppColors.textRedColor);
+                                        return;
+                                      }
+                                      palikaPicturePath = file.path;
+                                      setState(() {});
+                                    } else {
+                                      // User canceled the picker
+                                    }
+                                  },
+                                  style: ButtonStyle(
+                                    elevation:
+                                        MaterialStateProperty.all<double>(
+                                            0), // Set elevation to 0
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            10), // Change border radius to desired value
+                                      ),
+                                    ),
+                                  ),
+                                  child: const Text('Choose'),
+                                )),
+                            UiHelper.verticalSpacing(12.h),
+                          ],
                         ),
-                        child: const Text('Choose'),
-                      )),
-                  UiHelper.verticalSpacing(20.h),
+                  hideOthers
+                      ? const SizedBox.shrink()
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              translation(context).commpany_details,
+                              style: TextStyle(
+                                  color: AppColors.textColor,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 17.sp),
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                  text: translation(context)
+                                      .conpany_form_statement,
+                                  // 'Please upload your picture',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 12.sp),
+                                  children: const []),
+                            ),
+                            UiHelper.verticalSpacing(8.h),
+                            FishTextField(
+                                isReadOnly: true,
+                                label: path.basename(othersPath ?? ''),
+                                prefixIcon: ElevatedButton(
+                                  onPressed: () async {
+                                    FilePickerResult? result =
+                                        await FilePicker.platform.pickFiles();
+
+                                    if (result != null) {
+                                      File file =
+                                          File(result.files.single.path ?? '');
+                                      if (file.path.isEmpty) {
+                                        displayToastMessage('Invalid file path',
+                                            backgroundColor:
+                                                AppColors.textRedColor);
+                                        return;
+                                      }
+                                      othersPath = file.path;
+                                      setState(() {});
+                                    } else {
+                                      // User canceled the picker
+                                    }
+                                  },
+                                  style: ButtonStyle(
+                                    elevation:
+                                        MaterialStateProperty.all<double>(
+                                            0), // Set elevation to 0
+                                    shape: MaterialStateProperty.all<
+                                        RoundedRectangleBorder>(
+                                      RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            10), // Change border radius to desired value
+                                      ),
+                                    ),
+                                  ),
+                                  child: const Text('Choose'),
+                                )),
+                            UiHelper.verticalSpacing(20.h),
+                          ],
+                        ),
                   SizedBox(
                     width: 330.w,
                     height: 48.h,
@@ -427,6 +503,7 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                         showLoaderDialog(context);
                         BlocProvider.of<FishFarmerDetailBloc>(context).add(
                             PostBuyerDetailsEvent(
+                                isEdit: widget.isEdit,
                                 buisnessEmail: widget.buisnessEmail,
                                 buisnessName: widget.buisnessName,
                                 buisnessNumber: widget.buisnessNumber,

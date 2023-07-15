@@ -14,7 +14,6 @@ import 'package:buyer_shop/ui/utils/preferences.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:path/path.dart';
 
 @injectable
 class ApiClient {
@@ -297,7 +296,7 @@ class ApiClient {
         _dio?.options.headers = {
           'Accept': 'application/json',
           'responseType': ResponseType.json,
-          'Authorization': 'Bearer $token',
+          'Authorization': token,
         };
       }
 

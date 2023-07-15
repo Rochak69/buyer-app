@@ -7,8 +7,6 @@ import 'package:buyer_shop/ui/home_listing/home_listing.dart';
 import 'package:buyer_shop/ui/login/bloc/login_bloc.dart';
 import 'package:buyer_shop/ui/login/bloc/login_event.dart';
 import 'package:buyer_shop/ui/login/bloc/login_state.dart';
-import 'package:buyer_shop/ui/my_language/bloc/my_language_bloc.dart';
-import 'package:buyer_shop/ui/my_language/bloc/my_language_event.dart';
 import 'package:buyer_shop/ui/register/register.dart';
 import 'package:buyer_shop/ui/utils/uihelper.dart';
 import 'package:buyer_shop/ui/utils/utils.dart';
@@ -51,12 +49,14 @@ class _LoginPageState extends State<LoginPage> {
       listener: (context, state) {
         if (state is LoginSuccess) {
           bool isApproved = state.result.data?.buyerStatus?.approved ?? false;
-          if (!isApproved) {
-            Navigator.pop(context);
-            displayToastMessage('Your request has not been approved yet',
-                backgroundColor: AppColors.textRedColor);
-            return;
-          } else if (state.result.data?.isBuyer ?? false) {
+
+          if (state.result.data?.isBuyer ?? false) {
+            if (!isApproved) {
+              Navigator.pop(context);
+              displayToastMessage('Your request has not been approved yet',
+                  backgroundColor: AppColors.textRedColor);
+              return;
+            }
             Navigator.pushReplacement(context, MaterialPageRoute(
               builder: (context) {
                 return const HomeListing();
@@ -65,7 +65,9 @@ class _LoginPageState extends State<LoginPage> {
           } else {
             Navigator.pushReplacement(context, MaterialPageRoute(
               builder: (context) {
-                return const FishFarmDetails();
+                return const FishFarmDetails(
+                  isEdit: false,
+                );
               },
             ));
           }

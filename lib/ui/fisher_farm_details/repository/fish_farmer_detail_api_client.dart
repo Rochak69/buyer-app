@@ -19,6 +19,7 @@ class FishFarmerDetailApiClient {
   }
 
   Future<ApiResponse?> postdetails({
+    required bool isEdit,
     required String userId,
     required String? identification,
     required String? profilePic,
@@ -73,8 +74,9 @@ class FishFarmerDetailApiClient {
       "bussinessPhone": bussinessPhone
     });
 
-    var apiResponse =
-        await _apiClient?.httpPost(Endpoints.buyerRequest, formData);
+    var apiResponse = isEdit
+        ? await _apiClient?.httpPut('/api/me/update', formData)
+        : await _apiClient?.httpPost(Endpoints.buyerRequest, formData);
 
     ///converting to response
     var response = ApiResponse(

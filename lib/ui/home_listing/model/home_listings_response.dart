@@ -9,6 +9,7 @@ class HomeListingsResponse {
   String? yieldDate;
   bool? isDisabled;
   bool? expired;
+  String? expireDate;
   String? fishTypeId;
 
   HomeListingsResponse(
@@ -18,6 +19,7 @@ class HomeListingsResponse {
       this.avgFishWeight,
       this.expired,
       this.totalWeight,
+      this.expireDate,
       this.yieldDate,
       this.isDisabled,
       this.fishTypeId});
@@ -30,6 +32,7 @@ class HomeListingsResponse {
     totalWeight = json['totalWeight'];
     yieldDate = json['yieldDate'];
     fishTypeId = json['fishTypeId'];
+    expireDate = json['expireDate'];
     expired = json['expired'];
     fishType =
         json['FishType'] != null ? FishType.fromJson(json['FishType']) : null;
@@ -46,6 +49,7 @@ class HomeListingsResponse {
     data['disabled'] = isDisabled;
     data['fishTypeId'] = fishTypeId;
     data['expired'] = expired;
+    data['expireDate'] = expireDate;
     if (fishType != null) {
       data['FishType'] = fishType!.toJson();
     }

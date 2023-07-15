@@ -19,6 +19,7 @@ class CardListing extends StatefulWidget {
   final num totalWeight;
   final String location;
   final String date;
+  final String expireDate;
   final bool expired;
   final bool isDisabled;
   final String farmerSuppyId;
@@ -34,6 +35,7 @@ class CardListing extends StatefulWidget {
     required this.farmerSuppyId,
     required this.isDisabled,
     required this.expired,
+    required this.expireDate,
   }) : super(key: key);
 
   @override
@@ -123,7 +125,7 @@ class _CardListingState extends State<CardListing> {
                           color: Colors.black),
                     ),
                     Text(
-                      widget.totalWeight.toString() + ' के.जी',
+                      '${widget.totalWeight} के.जी',
                       style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w800,
@@ -135,6 +137,26 @@ class _CardListingState extends State<CardListing> {
                   children: [
                     Text(
                       'माछा मारको मिति: ',
+                      // translation(context).buy_date,
+                      //   'Yeild Date : ',
+                      style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black),
+                    ),
+                    Text(
+                      formarDate(widget.date),
+                      style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w700,
+                          color: AppColors.AppCardColor),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'ExpireDate : ',
                       // translation(context).buy_date,
                       //   'Yeild Date : ',
                       style: TextStyle(
@@ -278,7 +300,7 @@ class _CardListingState extends State<CardListing> {
                           color: Colors.black),
                     ),
                     Text(
-                      widget.totalWeight.toString() + ' के.जी',
+                      '${widget.totalWeight} के.जी',
                       style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w800,

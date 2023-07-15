@@ -46,7 +46,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
           displayToastMessage('Succesfully Registerd');
           Navigator.push(context, MaterialPageRoute(
             builder: (context) {
-              return const FishFarmDetails();
+              return const FishFarmDetails(
+                isEdit: false,
+              );
             },
           ));
         } else if (state is RegisterFailed) {

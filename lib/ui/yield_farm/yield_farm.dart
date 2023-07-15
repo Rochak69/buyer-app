@@ -136,7 +136,7 @@ class _YieldFormState extends State<YieldForm> {
                                     .toList() ??
                                 []);
                       }
-                      return AppDropDown(onChanged: (p0) {}, items: []);
+                      return AppDropDown(onChanged: (p0) {}, items: const []);
                     },
                   ),
                   UiHelper.verticalSpacing(15),
@@ -283,7 +283,7 @@ class _YieldFormState extends State<YieldForm> {
       initialDate: NepaliDateTime.now(),
       firstDate: NepaliDateTime(2000),
       lastDate: NepaliDateTime(2090),
-      locale: Locale('ne'),
+      locale: const Locale('ne'),
       initialDatePickerMode: DatePickerMode.day,
     );
 

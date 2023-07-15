@@ -1,56 +1,48 @@
 class OrderHistoryResponse {
-  String? id;
-  String? farmerSupplyId;
-  String? buyerId;
-  num? requestWeight;
-  bool? isApproved;
-  String? phoneNumber;
+  double? avgFishWeight;
   String? createdAt;
-  bool? completed;
-  bool? cancelled;
-  FarmerSupply? farmerSupply;
+  int? requestedWeight;
+  String? yieldDate;
+  String? fishType;
+  String? farmerName;
+  String? phoneNumber;
+  String? municipality;
+  String? ward;
 
   OrderHistoryResponse(
-      {this.id,
-      this.farmerSupplyId,
-      this.buyerId,
-      this.requestWeight,
-      this.isApproved,
-      this.phoneNumber,
+      {this.avgFishWeight,
       this.createdAt,
-      this.completed,
-      this.cancelled,
-      this.farmerSupply});
+      this.requestedWeight,
+      this.yieldDate,
+      this.fishType,
+      this.farmerName,
+      this.phoneNumber,
+      this.municipality,
+      this.ward});
 
   OrderHistoryResponse.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    farmerSupplyId = json['farmerSupplyId'];
-    buyerId = json['buyerId'];
-    requestWeight = json['requestWeight'];
-    isApproved = json['isApproved'];
-    phoneNumber = json['phoneNumber'];
+    avgFishWeight = json['avgFishWeight'];
     createdAt = json['createdAt'];
-    completed = json['completed'];
-    cancelled = json['cancelled'];
-    farmerSupply = json['farmerSupply'] != null
-        ? FarmerSupply.fromJson(json['farmerSupply'])
-        : null;
+    requestedWeight = json['requestedWeight'];
+    yieldDate = json['yieldDate'];
+    fishType = json['FishType'];
+    farmerName = json['farmerName'];
+    phoneNumber = json['phoneNumber'];
+    municipality = json['municipality'];
+    ward = json['Ward'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['farmerSupplyId'] = farmerSupplyId;
-    data['buyerId'] = buyerId;
-    data['requestWeight'] = requestWeight;
-    data['isApproved'] = isApproved;
-    data['phoneNumber'] = phoneNumber;
+    data['avgFishWeight'] = avgFishWeight;
     data['createdAt'] = createdAt;
-    data['completed'] = completed;
-    data['cancelled'] = cancelled;
-    if (farmerSupply != null) {
-      data['farmerSupply'] = farmerSupply!.toJson();
-    }
+    data['requestedWeight'] = requestedWeight;
+    data['yieldDate'] = yieldDate;
+    data['FishType'] = fishType;
+    data['farmerName'] = farmerName;
+    data['phoneNumber'] = phoneNumber;
+    data['municipality'] = municipality;
+    data['Ward'] = ward;
     return data;
   }
 }

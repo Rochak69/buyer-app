@@ -26,26 +26,26 @@ class LoginResponse {
     isFarmer = json['isFarmer'];
     isBuyer = json['isBuyer'];
     farmerStatus = json['farmerStatus'] != null
-        ? new FarmerStatus.fromJson(json['farmerStatus'])
+        ? FarmerStatus.fromJson(json['farmerStatus'])
         : null;
     buyerStatus = json['buyerStatus'] != null
-        ? new FarmerStatus.fromJson(json['buyerStatus'])
+        ? FarmerStatus.fromJson(json['buyerStatus'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['session_token'] = this.sessionToken;
-    data['id'] = this.id;
-    data['userName'] = this.userName;
-    data['phoneNumber'] = this.phoneNumber;
-    data['isFarmer'] = this.isFarmer;
-    data['isBuyer'] = this.isBuyer;
-    if (this.farmerStatus != null) {
-      data['farmerStatus'] = this.farmerStatus!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['session_token'] = sessionToken;
+    data['id'] = id;
+    data['userName'] = userName;
+    data['phoneNumber'] = phoneNumber;
+    data['isFarmer'] = isFarmer;
+    data['isBuyer'] = isBuyer;
+    if (farmerStatus != null) {
+      data['farmerStatus'] = farmerStatus!.toJson();
     }
-    if (this.buyerStatus != null) {
-      data['buyerStatus'] = this.buyerStatus!.toJson();
+    if (buyerStatus != null) {
+      data['buyerStatus'] = buyerStatus!.toJson();
     }
     return data;
   }
@@ -63,9 +63,9 @@ class FarmerStatus {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['active'] = this.active;
-    data['approved'] = this.approved;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['active'] = active;
+    data['approved'] = approved;
     return data;
   }
 }

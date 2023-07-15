@@ -6,6 +6,8 @@ import 'package:buyer_shop/ui/fisher_farm_details/bloc/fish_farmer_detail_bloc.d
 import 'package:buyer_shop/ui/fisher_farm_details/bloc/fish_farmer_detail_event.dart';
 import 'package:buyer_shop/ui/fisher_farm_details/bloc/fish_farmer_detail_state.dart';
 import 'package:buyer_shop/ui/fisher_farm_details/identication_documents.dart';
+import 'package:buyer_shop/ui/home_listing/bloc/home_listings_bloc.dart';
+import 'package:buyer_shop/ui/home_listing/bloc/home_listings_state.dart';
 import 'package:buyer_shop/ui/my_language/bloc/my_language_bloc.dart';
 import 'package:buyer_shop/ui/my_language/bloc/my_language_state.dart';
 import 'package:buyer_shop/ui/utils/preferences.dart';
@@ -16,7 +18,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FishFarmDetails extends StatefulWidget {
-  const FishFarmDetails({super.key});
+  final bool isEdit;
+  const FishFarmDetails({super.key, required this.isEdit});
 
   @override
   State<FishFarmDetails> createState() => _FishFarmDetailsState();
@@ -42,8 +45,31 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       BlocProvider.of<FishFarmerDetailBloc>(context).add(GetProvince());
+      if (widget.isEdit) {
+        HomeListingsSuccess data =
+            context.read<HomeListingsBloc>().state as HomeListingsSuccess;
+        buyerNameController.text = data.userDetails.data?.fullName ?? '';
+        phoneNumberController.text = data.userDetails.data?.mobileNumber ?? '';
+        selectedPradesh = data.userDetails.data?.provinceId;
+        BlocProvider.of<FishFarmerDetailBloc>(context)
+            .add(GetDistrict(provinceId: selectedPradesh));
+        selectedDistrict = data.userDetails.data?.districtId;
+        BlocProvider.of<FishFarmerDetailBloc>(context)
+            .add(GetMunicipality(districtId: selectedDistrict ?? ''));
+        selectedNagarpalika = data.userDetails.data?.municipalityId;
+        BlocProvider.of<FishFarmerDetailBloc>(context)
+            .add(GetWoda(municipalityId: selectedNagarpalika ?? ''));
+        selectedWoda = data.userDetails.data?.wardId;
+        toleNameController.text = data.userDetails.data?.streetName ?? '';
+        facebookPageController.text = data.userDetails.data?.facebookPage ?? '';
+        buisnessNumberController.text =
+            data.userDetails.data?.bussinessPhone ?? '';
+        websiteController.text = data.userDetails.data?.website ?? '';
+        setState(() {});
+      }
     });
   }
 
@@ -156,6 +182,9 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
                                     [],
                                 onChanged: (value) {
                                   selectedPradesh = value;
+                                  selectedDistrict = null;
+                                  selectedNagarpalika = null;
+                                  selectedWoda = null;
                                   setState(() {});
 
                                   BlocProvider.of<FishFarmerDetailBloc>(context)
@@ -200,6 +229,8 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
                                     [],
                                 onChanged: (value) {
                                   selectedDistrict = value;
+                                  selectedNagarpalika = null;
+                                  selectedWoda = null;
                                   setState(() {});
                                   BlocProvider.of<FishFarmerDetailBloc>(context)
                                       .add(GetMunicipality(
@@ -243,6 +274,7 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
                                     [],
                                 onChanged: (value) {
                                   selectedNagarpalika = value;
+                                  selectedWoda = null;
                                   setState(() {});
                                   BlocProvider.of<FishFarmerDetailBloc>(context)
                                       .add(GetWoda(
@@ -426,6 +458,7 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
 
                                               // )
                                               IdentificationDocuments(
+                                            isEdit: widget.isEdit,
                                             buisnessEmail:
                                                 buisnessEmailController.text,
                                             buisnessName:

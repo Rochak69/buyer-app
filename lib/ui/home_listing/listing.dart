@@ -94,6 +94,8 @@ class _ListingsState extends State<Listings> {
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return CardListing(
+                            expireDate:
+                                state.result.data?[index].expireDate ?? 'null',
                             avgWeight:
                                 state.result.data?[index].avgFishWeight ?? 0,
                             date: state.result.data?[index].yieldDate

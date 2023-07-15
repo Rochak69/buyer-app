@@ -4,7 +4,6 @@ import 'package:buyer_shop/ui/order_history/bloc/order_history_event.dart';
 import 'package:buyer_shop/ui/order_history/bloc/order_history_state.dart';
 import 'package:buyer_shop/ui/utils/uihelper.dart';
 import 'package:buyer_shop/ui/utils/utils.dart';
-import 'package:buyer_shop/ui/your_listing/your_listing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -95,7 +94,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                     color: AppColors.textColor),
               ),
               Text(
-                ' : ${state.orders.data?[index].farmerSupply?.fishType?.name}',
+                ' : ${state.orders.data?[index].fishType}',
                 style: TextStyle(
                     fontSize: 16.sp,
                     fontWeight: FontWeight.w700,
@@ -121,7 +120,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                             color: Colors.black),
                       ),
                       Text(
-                        ' : ${state.orders.data?[index].farmerSupply?.avgFishWeight} के.जी',
+                        ' : ${state.orders.data?[index].avgFishWeight} के.जी',
                         style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w700,
@@ -140,7 +139,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                             color: Colors.black),
                       ),
                       Text(
-                        ' : ${state.orders.data?[index].farmerSupply?.totalWeight}',
+                        ' : ${state.orders.data?[index].requestedWeight}',
                         style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w800,
@@ -148,22 +147,8 @@ class _OrderHistoryState extends State<OrderHistory> {
                       ),
                     ],
                   ),
-                  Row(
-                    children: [
-                      Text(
-                        'माछा बेच्ने व्यक्तिको नाम: ',
-
-                        //  translation(context).yield_date,
-                        //   'Yeild Date : ',
-                        style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.black),
-                      ),
-                    ],
-                  ),
                   Text(
-                    'माछा बेच्ने व्यक्ति व्यक्तिको ठेगाना: ',
+                    'माछा बेच्ने व्यक्तिको नाम: ${state.orders.data?[index].farmerName}',
 
                     //  translation(context).yield_date,
                     //   'Yeild Date : ',
@@ -173,7 +158,17 @@ class _OrderHistoryState extends State<OrderHistory> {
                         color: Colors.black),
                   ),
                   Text(
-                    'सम्पर्क नम्बर:  ',
+                    'माछा बेच्ने व्यक्ति व्यक्तिको ठेगाना: ${state.orders.data?[index].municipality} ',
+
+                    //  translation(context).yield_date,
+                    //   'Yeild Date : ',
+                    style: TextStyle(
+                        fontSize: 12.sp,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.black),
+                  ),
+                  Text(
+                    'सम्पर्क नम्बर:  ${state.orders.data?[index].phoneNumber}',
 
                     //  translation(context).yield_date,
                     //   'Yeild Date : ',
@@ -203,73 +198,73 @@ class _OrderHistoryState extends State<OrderHistory> {
                   // ),
                 ],
               ),
-              Column(
-                children: [
-                  InkWell(
-                    onTap: () {
-                      if (state.orders.data?[index].completed ?? false) {
-                        return;
-                      } else if (state.orders.data?[index].cancelled ?? false) {
-                        return;
-                      } else {
-                        _showSureDialog(context, state, index, true);
-                      }
-                    },
-                    child: Container(
-                      width: 91.w,
-                      height: 40.h,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.r),
-                        border: Border.all(
-                            width: 1.5.w,
-                            color: AppColors
-                                .textColor), // Specify the border color
-                      ),
-                      child: Center(
-                        child: Text(
-                          translation(context).completed,
-                          //   'Completed',
-                          style: TextStyle(
-                              color: AppColors.textColor,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 12.sp),
-                        ),
-                      ),
-                    ),
-                  ),
-                  UiHelper.verticalSpacing(5.h),
-                  InkWell(
-                    onTap: () {
-                      if (state.orders.data?[index].cancelled ?? false) {
-                        return;
-                      } else if (state.orders.data?[index].completed ?? false) {
-                        return;
-                      } else {
-                        _showSureDialog(context, state, index, false);
-                      }
-                    },
-                    child: Container(
-                      width: 91.w,
-                      height: 40.h,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12.r),
-                        border: Border.all(
-                            color: Colors.red,
-                            width: 1.5.w), // Specify the border color
-                      ),
-                      child: Center(
-                        child: Text(translation(context).cancelled,
-                            //'Cancelled',
-                            style: TextStyle(
-                              color: AppColors.textRedContainerColor,
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w600,
-                            )),
-                      ),
-                    ),
-                  ),
-                ],
-              )
+              // Column(
+              //   children: [
+              //     InkWell(
+              //       onTap: () {
+              //         if (state.orders.data?[index].completed ?? false) {
+              //           return;
+              //         } else if (state.orders.data?[index].cancelled ?? false) {
+              //           return;
+              //         } else {
+              //           _showSureDialog(context, state, index, true);
+              //         }
+              //       },
+              //       child: Container(
+              //         width: 91.w,
+              //         height: 40.h,
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(12.r),
+              //           border: Border.all(
+              //               width: 1.5.w,
+              //               color: AppColors
+              //                   .textColor), // Specify the border color
+              //         ),
+              //         child: Center(
+              //           child: Text(
+              //             translation(context).completed,
+              //             //   'Completed',
+              //             style: TextStyle(
+              //                 color: AppColors.textColor,
+              //                 fontWeight: FontWeight.w700,
+              //                 fontSize: 12.sp),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //     UiHelper.verticalSpacing(5.h),
+              //     InkWell(
+              //       onTap: () {
+              //         if (state.orders.data?[index].cancelled ?? false) {
+              //           return;
+              //         } else if (state.orders.data?[index].completed ?? false) {
+              //           return;
+              //         } else {
+              //           _showSureDialog(context, state, index, false);
+              //         }
+              //       },
+              //       child: Container(
+              //         width: 91.w,
+              //         height: 40.h,
+              //         decoration: BoxDecoration(
+              //           borderRadius: BorderRadius.circular(12.r),
+              //           border: Border.all(
+              //               color: Colors.red,
+              //               width: 1.5.w), // Specify the border color
+              //         ),
+              //         child: Center(
+              //           child: Text(translation(context).cancelled,
+              //               //'Cancelled',
+              //               style: TextStyle(
+              //                 color: AppColors.textRedContainerColor,
+              //                 fontSize: 12.sp,
+              //                 fontWeight: FontWeight.w600,
+              //               )),
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // )
             ],
           ),
         ],
@@ -277,223 +272,223 @@ class _OrderHistoryState extends State<OrderHistory> {
     );
   }
 
-  Future<dynamic> _showSureDialog(
-      context, OrderHistorysSuccess state, int index, bool isComplete) {
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            actionsAlignment: MainAxisAlignment.center,
-            actionsPadding: EdgeInsets.symmetric(vertical: 12.h),
-            title: Center(
-              child: Text(
-                isComplete
-                    ? translation(context).mark_as_completed
-                    : translation(context).marks_as_cancelled,
-                //       'Mark as Completed',
-                style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w900),
-              ),
-            ),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  children: [
-                    Text(
-                      translation(context).fish_type,
-                      //    'Fish Type : ',
-                      style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.textColor),
-                    ),
-                    Text(
-                      ' : ${state.orders.data?[index].farmerSupply?.fishType?.name}',
-                      style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black),
-                    ),
-                  ],
-                ),
-                UiHelper.verticalSpacing(4.h),
-                Row(
-                  children: [
-                    Text(
-                      translation(context).fish_weight,
-                      //'Fish weight : ',
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black),
-                    ),
-                    Text(
-                      ' : ${state.orders.data?[index].farmerSupply?.avgFishWeight}',
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.AppCardColor),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      translation(context).quantity,
-                      //   'Qunatity : ',
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black),
-                    ),
-                    Text(
-                      ' : ${state.orders.data?[index].farmerSupply?.totalWeight}',
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w800,
-                          color: AppColors.AppCardColor),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'फोन नम्बर',
-                      //   'Qunatity : ',
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black),
-                    ),
-                    Text(
-                      ' : ${state.orders.data?[index].phoneNumber}',
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w800,
-                          color: AppColors.AppCardColor),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      translation(context).yield_date,
-                      //   'Yeild Date : ',
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black),
-                    ),
-                    Text(
-                      ' : ${formarDate(state.orders.data?[index].farmerSupply?.yieldDate)}',
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.AppCardColor),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      translation(context).listing_expired,
-                      //   'Yeild Date : ',
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.black),
-                    ),
-                    Text(
-                      '7 days left',
-                      style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.AppCardColor),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            actions: [
-              InkWell(
-                onTap: () {
-                  if (isComplete) {
-                    if (state.orders.data?[index].completed ?? false) {
-                      Navigator.pop(context);
+  // Future<dynamic> _showSureDialog(
+  //     context, OrderHistorysSuccess state, int index, bool isComplete) {
+  //   return showDialog(
+  //       context: context,
+  //       builder: (BuildContext context) {
+  //         return AlertDialog(
+  //           actionsAlignment: MainAxisAlignment.center,
+  //           actionsPadding: EdgeInsets.symmetric(vertical: 12.h),
+  //           title: Center(
+  //             child: Text(
+  //               isComplete
+  //                   ? translation(context).mark_as_completed
+  //                   : translation(context).marks_as_cancelled,
+  //               //       'Mark as Completed',
+  //               style: const TextStyle(
+  //                   color: Colors.black,
+  //                   fontSize: 16,
+  //                   fontWeight: FontWeight.w900),
+  //             ),
+  //           ),
+  //           content: Column(
+  //             mainAxisSize: MainAxisSize.min,
+  //             children: [
+  //               Row(
+  //                 children: [
+  //                   Text(
+  //                     translation(context).fish_type,
+  //                     //    'Fish Type : ',
+  //                     style: TextStyle(
+  //                         fontSize: 14.sp,
+  //                         fontWeight: FontWeight.w700,
+  //                         color: AppColors.textColor),
+  //                   ),
+  //                   Text(
+  //                     ' : ${state.orders.data?[index].farmerSupply?.fishType?.name}',
+  //                     style: TextStyle(
+  //                         fontSize: 14.sp,
+  //                         fontWeight: FontWeight.w700,
+  //                         color: Colors.black),
+  //                   ),
+  //                 ],
+  //               ),
+  //               UiHelper.verticalSpacing(4.h),
+  //               Row(
+  //                 children: [
+  //                   Text(
+  //                     translation(context).fish_weight,
+  //                     //'Fish weight : ',
+  //                     style: TextStyle(
+  //                         fontSize: 12.sp,
+  //                         fontWeight: FontWeight.w700,
+  //                         color: Colors.black),
+  //                   ),
+  //                   Text(
+  //                     ' : ${state.orders.data?[index].farmerSupply?.avgFishWeight}',
+  //                     style: TextStyle(
+  //                         fontSize: 12.sp,
+  //                         fontWeight: FontWeight.w700,
+  //                         color: AppColors.AppCardColor),
+  //                   ),
+  //                 ],
+  //               ),
+  //               Row(
+  //                 children: [
+  //                   Text(
+  //                     translation(context).quantity,
+  //                     //   'Qunatity : ',
+  //                     style: TextStyle(
+  //                         fontSize: 12.sp,
+  //                         fontWeight: FontWeight.w700,
+  //                         color: Colors.black),
+  //                   ),
+  //                   Text(
+  //                     ' : ${state.orders.data?[index].farmerSupply?.totalWeight}',
+  //                     style: TextStyle(
+  //                         fontSize: 12.sp,
+  //                         fontWeight: FontWeight.w800,
+  //                         color: AppColors.AppCardColor),
+  //                   ),
+  //                 ],
+  //               ),
+  //               Row(
+  //                 children: [
+  //                   Text(
+  //                     'फोन नम्बर',
+  //                     //   'Qunatity : ',
+  //                     style: TextStyle(
+  //                         fontSize: 12.sp,
+  //                         fontWeight: FontWeight.w700,
+  //                         color: Colors.black),
+  //                   ),
+  //                   Text(
+  //                     ' : ${state.orders.data?[index].phoneNumber}',
+  //                     style: TextStyle(
+  //                         fontSize: 12.sp,
+  //                         fontWeight: FontWeight.w800,
+  //                         color: AppColors.AppCardColor),
+  //                   ),
+  //                 ],
+  //               ),
+  //               Row(
+  //                 children: [
+  //                   Text(
+  //                     translation(context).yield_date,
+  //                     //   'Yeild Date : ',
+  //                     style: TextStyle(
+  //                         fontSize: 12.sp,
+  //                         fontWeight: FontWeight.w700,
+  //                         color: Colors.black),
+  //                   ),
+  //                   Text(
+  //                     ' : ${formarDate(state.orders.data?[index].farmerSupply?.yieldDate)}',
+  //                     style: TextStyle(
+  //                         fontSize: 12.sp,
+  //                         fontWeight: FontWeight.w700,
+  //                         color: AppColors.AppCardColor),
+  //                   ),
+  //                 ],
+  //               ),
+  //               Row(
+  //                 children: [
+  //                   Text(
+  //                     translation(context).listing_expired,
+  //                     //   'Yeild Date : ',
+  //                     style: TextStyle(
+  //                         fontSize: 12.sp,
+  //                         fontWeight: FontWeight.w700,
+  //                         color: Colors.black),
+  //                   ),
+  //                   Text(
+  //                     '7 days left',
+  //                     style: TextStyle(
+  //                         fontSize: 12.sp,
+  //                         fontWeight: FontWeight.w700,
+  //                         color: AppColors.AppCardColor),
+  //                   ),
+  //                 ],
+  //               ),
+  //             ],
+  //           ),
+  //           actions: [
+  //             InkWell(
+  //               onTap: () {
+  //                 if (isComplete) {
+  //                   if (state.orders.data?[index].completed ?? false) {
+  //                     Navigator.pop(context);
 
-                      displayToastMessage('Already Completed');
-                      return;
-                    }
-                    BlocProvider.of<OrderHistoryBloc>(context)
-                        .add(CompleteOfferEvent(state.orders.data?[index].id ??
-                            ''
-                                ''));
-                    Navigator.pop(context);
-                  } else {
-                    if (state.orders.data?[index].cancelled ?? false) {
-                      Navigator.pop(context);
-                      displayToastMessage('Already Canceled');
-                      return;
-                    }
-                    BlocProvider.of<OrderHistoryBloc>(context).add(RejectOffer(
-                        state.orders.data?[index].farmerSupply?.fishTypeId ??
-                            ''));
-                    Navigator.pop(context);
-                  }
-                },
-                child: Container(
-                  width: 91.w,
-                  height: 40.h,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12.r),
-                    border: Border.all(
-                        color: AppColors.textColor), // Specify the border color
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'Yes',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: AppColors.textColor,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              UiHelper.horizontalSpacing(15.w),
-              InkWell(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Container(
-                  width: 91.w,
-                  height: 40.h,
-                  decoration: BoxDecoration(
-                    color: AppColors.textRedColor,
-                    borderRadius: BorderRadius.circular(12.r),
-                    border: Border.all(
-                      color: AppColors.textRedColor,
-                    ), // Specify the border color
-                  ),
-                  child: const Center(
-                    child: Text(
-                      'No',
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white),
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          );
-        });
-  }
+  //                     displayToastMessage('Already Completed');
+  //                     return;
+  //                   }
+  //                   BlocProvider.of<OrderHistoryBloc>(context)
+  //                       .add(CompleteOfferEvent(state.orders.data?[index].id ??
+  //                           ''
+  //                               ''));
+  //                   Navigator.pop(context);
+  //                 } else {
+  //                   if (state.orders.data?[index].cancelled ?? false) {
+  //                     Navigator.pop(context);
+  //                     displayToastMessage('Already Canceled');
+  //                     return;
+  //                   }
+  //                   BlocProvider.of<OrderHistoryBloc>(context).add(RejectOffer(
+  //                       state.orders.data?[index].farmerSupply?.fishTypeId ??
+  //                           ''));
+  //                   Navigator.pop(context);
+  //                 }
+  //               },
+  //               child: Container(
+  //                 width: 91.w,
+  //                 height: 40.h,
+  //                 decoration: BoxDecoration(
+  //                   borderRadius: BorderRadius.circular(12.r),
+  //                   border: Border.all(
+  //                       color: AppColors.textColor), // Specify the border color
+  //                 ),
+  //                 child: const Center(
+  //                   child: Text(
+  //                     'Yes',
+  //                     style: TextStyle(
+  //                       fontSize: 12,
+  //                       color: AppColors.textColor,
+  //                       fontWeight: FontWeight.w600,
+  //                     ),
+  //                   ),
+  //                 ),
+  //               ),
+  //             ),
+  //             UiHelper.horizontalSpacing(15.w),
+  //             InkWell(
+  //               onTap: () {
+  //                 Navigator.pop(context);
+  //               },
+  //               child: Container(
+  //                 width: 91.w,
+  //                 height: 40.h,
+  //                 decoration: BoxDecoration(
+  //                   color: AppColors.textRedColor,
+  //                   borderRadius: BorderRadius.circular(12.r),
+  //                   border: Border.all(
+  //                     color: AppColors.textRedColor,
+  //                   ), // Specify the border color
+  //                 ),
+  //                 child: const Center(
+  //                   child: Text(
+  //                     'No',
+  //                     style: TextStyle(
+  //                         fontSize: 12,
+  //                         fontWeight: FontWeight.w600,
+  //                         color: Colors.white),
+  //                   ),
+  //                 ),
+  //               ),
+  //             ),
+  //           ],
+  //         );
+  //       });
+  // }
 
   Future<void> _refresh() async {
     BlocProvider.of<OrderHistoryBloc>(context).add(GetOrderHistory());

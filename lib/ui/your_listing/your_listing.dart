@@ -1,5 +1,4 @@
 import 'package:buyer_shop/res/colors.dart';
-import 'package:buyer_shop/ui/home_listing/home_listing.dart';
 import 'package:buyer_shop/ui/pending_request_per_listing/pending_request_per_listing.dart';
 import 'package:buyer_shop/ui/utils/uihelper.dart';
 import 'package:buyer_shop/ui/utils/utils.dart';
@@ -64,7 +63,7 @@ class _YourListingsState extends State<YourListings> {
                         child: Text(
                           translation(context).request_page_top_text,
                           //   'Details for fish listed for selling by you',
-                          style: TextStyle(color: AppColors.AppCardColor),
+                          style: const TextStyle(color: AppColors.AppCardColor),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -112,12 +111,12 @@ class _YourListingsState extends State<YourListings> {
                       child: Text(
                         translation(context).request_page_top_text,
                         //   'Details for fish listed for selling by you',
-                        style: TextStyle(color: AppColors.AppCardColor),
+                        style: const TextStyle(color: AppColors.AppCardColor),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
                     UiHelper.verticalSpacing(180.h),
-                    Center(
+                    const Center(
                       child: Text(
                         'Oops!',
                         style: TextStyle(
@@ -127,7 +126,7 @@ class _YourListingsState extends State<YourListings> {
                       ),
                     ),
                     UiHelper.verticalSpacing(15.h),
-                    Center(
+                    const Center(
                       child: Text(
                         'No request found',
                         style: TextStyle(
@@ -145,7 +144,7 @@ class _YourListingsState extends State<YourListings> {
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: AppColors.textColor),
-                            child: Text('Refresh'),
+                            child: const Text('Refresh'),
                             onPressed: () {
                               BlocProvider.of<YourListingBloc>(context)
                                   .add(GetMyListings());
@@ -456,7 +455,7 @@ class _YourListingsState extends State<YourListings> {
                           color: Colors.black),
                     ),
                     Text(
-                      totalWeight.toString() + ' के.जी',
+                      '$totalWeight के.जी',
                       style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w800,

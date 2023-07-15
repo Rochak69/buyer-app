@@ -4,9 +4,7 @@ import 'package:buyer_shop/res/colors.dart';
 import 'package:buyer_shop/ui/contact/bloc/contact_bloc.dart';
 import 'package:buyer_shop/ui/fisher_farm_details/bloc/fish_farmer_detail_bloc.dart';
 import 'package:buyer_shop/ui/home_listing/bloc/home_listings_bloc.dart';
-import 'package:buyer_shop/ui/home_listing/home_listing.dart';
 import 'package:buyer_shop/ui/login/bloc/login_bloc.dart';
-import 'package:buyer_shop/ui/login/login.dart';
 import 'package:buyer_shop/ui/my_language/bloc/my_language_bloc.dart';
 import 'package:buyer_shop/ui/my_language/bloc/my_language_state.dart';
 import 'package:buyer_shop/ui/order_history/bloc/order_history_bloc.dart';
@@ -111,7 +109,7 @@ class MyApp extends StatelessWidget {
                         locale:
                             // state is EnglishState
                             // ? const Locale('en')
-                            Locale('ne'),
+                            const Locale('ne'),
                         home: const SplashScreen(),
                         localizationsDelegates:
                             AppLocalizations.localizationsDelegates,

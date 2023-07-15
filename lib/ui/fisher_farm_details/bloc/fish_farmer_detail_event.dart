@@ -23,6 +23,7 @@ class PostBuyerDetailsEvent extends FishFarmerDetailEvent {
   String? tole;
   String? email;
   String? facebook;
+  bool isEdit;
 
   String? buisnessEmail;
   String? buisnessName;
@@ -49,6 +50,7 @@ class PostBuyerDetailsEvent extends FishFarmerDetailEvent {
     this.tole,
     this.email,
     this.facebook,
+    required this.isEdit,
     this.buisnessEmail,
     this.buisnessName,
     this.buisnessNumber,

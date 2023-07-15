@@ -1,13 +1,10 @@
 import 'dart:async';
 
-import 'package:buyer_shop/res/colors.dart';
 import 'package:buyer_shop/ui/home_listing/home_listing.dart';
 import 'package:buyer_shop/ui/login/login.dart';
 import 'package:buyer_shop/ui/utils/preferences.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
