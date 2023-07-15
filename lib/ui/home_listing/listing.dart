@@ -60,13 +60,14 @@ class _ListingsState extends State<Listings> {
                         MaterialPageRoute(
                             builder: (context) => const SettingsPage()));
                   },
-                  child: BlocBuilder<LoginBloc, LoginState>(
+                  child: BlocBuilder<HomeListingsBloc, HomeListingsState>(
                     builder: (context, state) {
-                      if (state is LoginSuccess &&
-                          state.details.data?.document?.profilePicture !=
+                      if (state is HomeListingsSuccess &&
+                          state.userDetails.data?.document?.profilePicture !=
                               null) {
                         String profilePic =
-                            state.details.data?.document?.profilePicture ?? '';
+                            state.userDetails.data?.document?.profilePicture ??
+                                '';
                         return CircleAvatar(
                           radius: 20.r,
                           backgroundImage:

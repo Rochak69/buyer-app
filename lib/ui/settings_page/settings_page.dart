@@ -1,6 +1,8 @@
 import 'package:buyer_shop/res/colors.dart';
 import 'package:buyer_shop/ui/fisher_farm_details/fisher_farm_details.dart';
 import 'package:buyer_shop/ui/forgot_password/forgot_password.dart';
+import 'package:buyer_shop/ui/home_listing/bloc/home_listings_bloc.dart';
+import 'package:buyer_shop/ui/home_listing/bloc/home_listings_state.dart';
 import 'package:buyer_shop/ui/login/bloc/login_bloc.dart';
 import 'package:buyer_shop/ui/login/bloc/login_state.dart';
 import 'package:buyer_shop/ui/login/login.dart';
@@ -48,12 +50,13 @@ class SettingsPage extends StatelessWidget {
           child: Column(
             children: [
               UiHelper.verticalSpacing(63.h),
-              BlocBuilder<LoginBloc, LoginState>(
+              BlocBuilder<HomeListingsBloc, HomeListingsState>(
                 builder: (context, state) {
-                  if (state is LoginSuccess &&
-                      state.details.data?.document?.profilePicture != null) {
+                  if (state is HomeListingsSuccess &&
+                      state.userDetails.data?.document?.profilePicture !=
+                          null) {
                     String profilePic =
-                        state.details.data?.document?.profilePicture ?? '';
+                        state.userDetails.data?.document?.profilePicture ?? '';
                     return CircleAvatar(
                       radius: 50.r,
                       backgroundImage:
@@ -65,11 +68,11 @@ class SettingsPage extends StatelessWidget {
                 },
               ),
               UiHelper.verticalSpacing(16),
-              BlocBuilder<LoginBloc, LoginState>(
+              BlocBuilder<HomeListingsBloc, HomeListingsState>(
                 builder: (context, state) {
-                  if (state is LoginSuccess) {
+                  if (state is HomeListingsSuccess) {
                     return Text(
-                      state.result.data?.userName ?? '',
+                      state.userDetails.data?.fullName ?? '',
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w900,
@@ -77,7 +80,7 @@ class SettingsPage extends StatelessWidget {
                     );
                   }
                   return const Text(
-                    'Lucas Scott',
+                    '',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w900,

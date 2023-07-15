@@ -22,7 +22,7 @@ class Endpoints {
   static const String getAllFarmerSupply = '/farmerSupply';
   static const String getUserDetails = '/me?type=buyer';
   static const String getAllBuyerRequest = '/buyer/request';
-  static const String myOrders = '/me/myoder?type=buyer';
+  static const String myOrders = '/me/myoder?type=farmer';
   static String completeOrder(String id) => '/me/myoder/confirm/$id?type=buyer';
   static String rejectOrder(String id) => '/me/myoder/reject/$id?type=buyer';
   String getSpecificFarmerSupply(String supplyId) {

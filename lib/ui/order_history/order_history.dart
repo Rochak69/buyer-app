@@ -148,7 +148,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                     ],
                   ),
                   Text(
-                    'माछा बेच्ने व्यक्तिको नाम: ${state.orders.data?[index].farmerName}',
+                    'माछा बेच्ने व्यक्तिको नाम: ${state.orders.data?[index].buyerName}',
 
                     //  translation(context).yield_date,
                     //   'Yeild Date : ',
