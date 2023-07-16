@@ -93,22 +93,50 @@ class _ListingsState extends State<Listings> {
                   UiHelper.verticalSpacing(12.h),
                   Align(
                     alignment: Alignment.centerLeft,
-                    child: SizedBox(
-                      height: 40.h,
-                      child: AppDropDown<String>(
-                          value: selectedFish,
-                          onChanged: (p0) {
-                            selectedFish = p0;
-                            setState(() {});
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          height: 40.h,
+                          child: AppDropDown<String>(
+                              value: selectedFish,
+                              onChanged: (p0) {
+                                selectedFish = p0;
+                                setState(() {});
 
-                            BlocProvider.of<HomeListingsBloc>(context)
-                                .add(GetHomeListings(fishId: selectedFish));
-                          },
-                          items: state.fishes.data
-                                  ?.map((e) => DropdownMenuItem(
-                                      value: e.id, child: Text(e.name ?? '')))
-                                  .toList() ??
-                              []),
+                                BlocProvider.of<HomeListingsBloc>(context)
+                                    .add(GetHomeListings(fishId: selectedFish));
+                              },
+                              items: state.fishes.data
+                                      ?.map((e) => DropdownMenuItem(
+                                          value: e.id,
+                                          child: Text(e.name ?? '')))
+                                      .toList() ??
+                                  []),
+                        ),
+                        UiHelper.horizontalSpacing(10.w),
+                        ElevatedButton(
+                            onPressed: () {
+                              selectedFish = null;
+                              setState(() {});
+                              BlocProvider.of<HomeListingsBloc>(context)
+                                  .add(GetHomeListings());
+                            },
+                            style: ButtonStyle(
+                              elevation: MaterialStateProperty.all<double>(
+                                  0), // Set elevation to 0
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(
+                                      10), // Change border radius to desired value
+                                ),
+                              ),
+                            ),
+                            child: Text(
+                              'Clear Filters',
+                              style: TextStyle(fontSize: 10.sp),
+                            ))
+                      ],
                     ),
                   ),
                   Expanded(
@@ -155,6 +183,8 @@ class _ListingsState extends State<Listings> {
   }
 
   Future<void> refresh() async {
+    selectedFish = null;
+    setState(() {});
     BlocProvider.of<HomeListingsBloc>(context).add(GetHomeListings());
   }
 }
