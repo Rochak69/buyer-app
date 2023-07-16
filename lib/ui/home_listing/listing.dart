@@ -1,5 +1,6 @@
 import 'package:buyer_shop/res/colors.dart';
 import 'package:buyer_shop/ui/common_widget/CardListing.dart';
+import 'package:buyer_shop/ui/common_widget/app_dropdown.dart';
 import 'package:buyer_shop/ui/home_listing/bloc/home_listings_bloc.dart';
 import 'package:buyer_shop/ui/home_listing/bloc/home_listings_event.dart';
 import 'package:buyer_shop/ui/home_listing/bloc/home_listings_state.dart';
@@ -20,6 +21,7 @@ class Listings extends StatefulWidget {
 }
 
 class _ListingsState extends State<Listings> {
+  String? selectedFish;
   @override
   void initState() {
     super.initState();
@@ -89,6 +91,26 @@ class _ListingsState extends State<Listings> {
                 padding: EdgeInsets.symmetric(horizontal: 15.0.w),
                 child: Column(mainAxisSize: MainAxisSize.min, children: [
                   UiHelper.verticalSpacing(12.h),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: SizedBox(
+                      height: 40.h,
+                      child: AppDropDown<String>(
+                          value: selectedFish,
+                          onChanged: (p0) {
+                            selectedFish = p0;
+                            setState(() {});
+
+                            BlocProvider.of<HomeListingsBloc>(context)
+                                .add(GetHomeListings(fishId: selectedFish));
+                          },
+                          items: state.fishes.data
+                                  ?.map((e) => DropdownMenuItem(
+                                      value: e.id, child: Text(e.name ?? '')))
+                                  .toList() ??
+                              []),
+                    ),
+                  ),
                   Expanded(
                     child: ListView.separated(
                         padding: EdgeInsets.only(top: 14.h),

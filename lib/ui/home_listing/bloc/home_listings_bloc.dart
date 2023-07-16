@@ -31,7 +31,7 @@ class HomeListingsBloc extends Bloc<HomeListingsEvent, HomeListingsState> {
       Preferences preferences = Preferences();
       await preferences.saveString(Preference.buyerId, userDetails.data?.id);
 
-      final result = await apiClient.getHomeListings();
+      final result = await apiClient.getHomeListings(fishId: event.fishId);
       final response = result as ApiResponseForList<HomeListingsResponse>;
       final fish =
           await apiClient.getFish() as ApiResponseForList<FishResponse>;

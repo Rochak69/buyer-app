@@ -1,6 +1,10 @@
 abstract class HomeListingsEvent {}
 
-class GetHomeListings extends HomeListingsEvent {}
+class GetHomeListings extends HomeListingsEvent {
+  final String? fishId;
+
+  GetHomeListings({this.fishId});
+}
 
 class SendOffer extends HomeListingsEvent {
   String userDemandId;

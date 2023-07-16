@@ -20,6 +20,8 @@ class Endpoints {
   static String rejectFarmerRequest(String id) => '/farmerRequest/$id';
   static const String createBuyerDemand = '/buyerDemand';
   static const String getAllFarmerSupply = '/farmerSupply';
+  static String getFilteredFarmerSupply(String fishId) =>
+      '/farmerSupply?fishType=$fishId';
   static const String getUserDetails = '/me?type=buyer';
   static const String getAllBuyerRequest = '/buyer/request';
   static const String myOrders = '/me/myoder?type=buyer';

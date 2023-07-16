@@ -17,7 +17,7 @@ class HomeListingApiClient {
     _apiClient = apiClient;
   }
 
-  Future<ApiResponseForList?> getHomeListings() async {
+  Future<ApiResponseForList?> getHomeListings({String? fishId}) async {
     Preferences preferences = Preferences();
     String? token = await preferences.getString(Preference.accessToken);
     if (token == null) {
@@ -28,8 +28,10 @@ class HomeListingApiClient {
 
     ///or pass object directly to the http post
 
-    var apiResponse =
-        await _apiClient?.httpGetUrl(Endpoints.getAllFarmerSupply, token);
+    var apiResponse = fishId == null
+        ? await _apiClient?.httpGetUrl(Endpoints.getAllFarmerSupply, token)
+        : await _apiClient?.httpGetUrl(
+            Endpoints.getFilteredFarmerSupply(fishId), token);
 
     ///converting to response
     var response = ApiResponseForList(
