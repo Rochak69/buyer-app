@@ -44,13 +44,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
       listener: (context, state) {
         if (state is RegisterSuccess) {
           displayToastMessage('Succesfully Registerd');
-          Navigator.push(context, MaterialPageRoute(
-            builder: (context) {
-              return const FishFarmDetails(
-                isEdit: false,
-              );
-            },
-          ));
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return const FishFarmDetails(
+                  isEdit: false,
+                );
+              },
+            ),
+            (route) => false,
+          );
         } else if (state is RegisterFailed) {
           Navigator.pop(context);
           displayToastMessage(state.errorMessage);
