@@ -109,8 +109,8 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
                           ),
                           UiHelper.verticalSpacing(10.h),
                           FishTextField(
-                            validator: (value) =>
-                                Validators.validateEmpty(value),
+                            // validator: (value) =>
+                            //     Validators.validateEmpty(value),
                             textEditingController: buyerNameController,
                             label: translation(context).buyer_name,
                             //'Buyer\'s Name',
@@ -125,12 +125,7 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
                                     color: Colors.black,
                                     fontWeight: FontWeight.w700,
                                     fontSize: 12.sp),
-                                children: [
-                                  TextSpan(
-                                      text: ' *',
-                                      style: TextStyle(
-                                          color: Colors.red, fontSize: 16.sp))
-                                ]),
+                                children: []),
                           ),
                           UiHelper.verticalSpacing(10.h),
                           FishTextField(

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:buyer_shop/ui/Contact/bloc/contact_event.dart';
+import 'package:buyer_shop/ui/approval_pending/approval_pending.dart';
 import 'package:buyer_shop/ui/contact/bloc/contact_bloc.dart';
 import 'package:buyer_shop/ui/contact/contact_screen.dart';
 import 'package:buyer_shop/ui/home_listing/bloc/home_listings_bloc.dart';
@@ -121,7 +122,7 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
 
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => const ContactScreen()),
+            MaterialPageRoute(builder: (context) => const ApprovalPending()),
             (route) => false,
           );
         } else if (state.theStates == TheStates.failed) {
