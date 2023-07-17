@@ -8,6 +8,7 @@ import 'package:buyer_shop/ui/login/bloc/login_bloc.dart';
 import 'package:buyer_shop/ui/login/bloc/login_event.dart';
 import 'package:buyer_shop/ui/login/bloc/login_state.dart';
 import 'package:buyer_shop/ui/register/register.dart';
+import 'package:buyer_shop/ui/utils/preferences.dart';
 import 'package:buyer_shop/ui/utils/uihelper.dart';
 import 'package:buyer_shop/ui/utils/utils.dart';
 import 'package:flutter/gestures.dart';
@@ -28,6 +29,7 @@ class _LoginPageState extends State<LoginPage> {
   final formkey = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _password = TextEditingController();
+  bool shouldRemember = false;
   @override
   void initState() {
     _requestNotificationPermission();
@@ -90,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                   key: formkey,
                   child: Column(
                     children: [
-                      UiHelper.verticalSpacing(130.h),
+                      UiHelper.verticalSpacing(120.h),
                       Image.asset('assets/logo.png'),
                       UiHelper.verticalSpacing(19.h),
                       _buildUpperText(),
@@ -136,6 +138,25 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       UiHelper.verticalSpacing(10.h),
+                      Row(
+                        children: [
+                          Checkbox(
+                            value: shouldRemember,
+                            onChanged: (value) async {
+                              Preferences preferences = Preferences();
+                              shouldRemember = value ?? false;
+                              setState(() {});
+                              await preferences.saveBool(
+                                  Preference.remember, value ?? false);
+                            },
+                          ),
+                          Text(
+                            'Remember me',
+                            style: TextStyle(
+                                fontSize: 10.sp, color: AppColors.textColor),
+                          )
+                        ],
+                      ),
                       Container(
                         padding: EdgeInsets.only(left: 2.w),
                         alignment: Alignment.bottomLeft,
