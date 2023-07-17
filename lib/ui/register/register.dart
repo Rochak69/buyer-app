@@ -95,20 +95,20 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   UiHelper.verticalSpacing(15.h),
                   _buildUpperText(),
                   UiHelper.verticalSpacing(15.h),
-                  Text(
-                    'Full name',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 12.sp),
-                  ),
-                  UiHelper.verticalSpacing(10.h),
-                  FishTextField(
-                    validator: (value) => Validators.validateEmpty(value),
-                    textEditingController: _name,
-                    label: 'Full name',
-                    contentPadding: EdgeInsets.only(left: 15.w),
-                  ),
+                  // Text(
+                  //   'Full name',
+                  //   style: TextStyle(
+                  //       color: Colors.black,
+                  //       fontWeight: FontWeight.w700,
+                  //       fontSize: 12.sp),
+                  // ),
+                  // UiHelper.verticalSpacing(10.h),
+                  // FishTextField(
+                  //   validator: (value) => Validators.validateEmpty(value),
+                  //   textEditingController: _name,
+                  //   label: 'Full name',
+                  //   contentPadding: EdgeInsets.only(left: 15.w),
+                  // ),
                   UiHelper.verticalSpacing(10.h),
                   Text(
                     'Phone number',
@@ -188,10 +188,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             return;
                           }
                           showLoaderDialog(context);
-                          BlocProvider.of<RegisterBloc>(context).add(
-                              RegisterEventWithPhone(
+                          BlocProvider.of<RegisterBloc>(context)
+                              .add(RegisterEventWithPhone(
                                   password: _password.text,
-                                  userName: _name.text,
+                                  userName: "fff",
+                                  //   userName: _name.text,
                                   phoneNumber: _number.text));
                         },
 
