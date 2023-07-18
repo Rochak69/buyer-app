@@ -15,6 +15,7 @@ class CardListing extends StatefulWidget {
   final Color? backgroundColor;
   final Color? textColor;
   final String fishName;
+  final String fishId;
   final num avgWeight;
   final num totalWeight;
   final String location;
@@ -36,6 +37,7 @@ class CardListing extends StatefulWidget {
     required this.isDisabled,
     required this.expired,
     required this.expireDate,
+    required this.fishId,
   }) : super(key: key);
 
   @override
@@ -70,6 +72,25 @@ class _CardListingState extends State<CardListing> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+            children: [
+              Text(
+                'Fish Id: ',
+                // 'Fish Type : ',
+                style: TextStyle(
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.textColor),
+              ),
+              Text(
+                widget.fishId,
+                style: TextStyle(
+                    fontSize: 10.sp,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black),
+              ),
+            ],
+          ),
           Wrap(
             children: [
               Text(

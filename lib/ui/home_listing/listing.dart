@@ -145,23 +145,27 @@ class _ListingsState extends State<Listings> {
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return CardListing(
-                            expireDate:
-                                state.result.data?[index].expireDate ?? 'null',
-                            avgWeight:
-                                state.result.data?[index].avgFishWeight ?? 0,
-                            date: state.result.data?[index].yieldDate
-                                    .toString() ??
-                                '',
-                            fishName:
-                                state.result.data?[index].fishType?.name ?? '',
-                            totalWeight:
-                                state.result.data?[index].totalWeight ?? 0,
-                            location: 'Kathmandu',
-                            farmerSuppyId: state.result.data?[index].id ?? '',
-                            isDisabled:
-                                state.result.data?[index].isDisabled ?? false,
-                            expired: state.result.data?[index].expired ?? false,
-                          );
+                              expireDate:
+                                  state.result.data?[index].expireDate ??
+                                      'null',
+                              avgWeight:
+                                  state.result.data?[index].avgFishWeight ?? 0,
+                              date: state.result.data?[index].yieldDate
+                                      .toString() ??
+                                  '',
+                              fishName:
+                                  state.result.data?[index].fishType?.name ??
+                                      '',
+                              totalWeight:
+                                  state.result.data?[index].totalWeight ?? 0,
+                              location: 'Kathmandu',
+                              farmerSuppyId: state.result.data?[index].id ?? '',
+                              isDisabled:
+                                  state.result.data?[index].isDisabled ?? false,
+                              expired:
+                                  state.result.data?[index].expired ?? false,
+                              fishId:
+                                  state.result.data?[index].fishTypeId ?? '');
                         },
                         separatorBuilder: (context, index) =>
                             UiHelper.verticalSpacing(23.h),
