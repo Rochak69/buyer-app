@@ -165,7 +165,7 @@ class _CardListingState extends State<CardListing> {
                           color: Colors.black),
                     ),
                     Text(
-                      formarDate(widget.date),
+                      widget.expireDate,
                       style: TextStyle(
                           fontSize: 12.sp,
                           fontWeight: FontWeight.w700,

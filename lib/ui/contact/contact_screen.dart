@@ -8,6 +8,7 @@ import 'package:buyer_shop/ui/utils/uihelper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ContactScreen extends StatelessWidget {
   const ContactScreen({super.key});
@@ -32,60 +33,11 @@ class ContactScreen extends StatelessWidget {
                 fontSize: 18.sp),
           ),
         ),
-        body: BlocBuilder<ContactBloc, ContactState>(
-          builder: (context, state) {
-            if (state is ContactSuccess) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  UiHelper.verticalSpacing(30.h),
-                  state.contact?.photo == null
-                      ? UiHelper.verticalSpacing(50.h)
-                      : SizedBox(
-                          height: 200.h,
-                          child: Image.network(
-                              fit: BoxFit.fill,
-                              Endpoints.baseFile + state.contact!.photo!)),
-                  UiHelper.verticalSpacing(10.h),
-                  Text(
-                    state.contact?.name ?? '',
-                    style:
-                        TextStyle(fontSize: 18.sp, color: AppColors.textColor),
-                  ),
-                  UiHelper.verticalSpacing(10.h),
-                  Text(
-                    state.contact?.position ?? '',
-                    style:
-                        TextStyle(fontSize: 18.sp, color: AppColors.textColor),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Contact number : ',
-                        style: TextStyle(
-                            fontSize: 18.sp, color: AppColors.textColor),
-                      ),
-                      Text(
-                        state.contact?.contact ?? '',
-                        style: TextStyle(
-                            color: AppColors.textRedColor,
-                            fontSize: 20.sp,
-                            fontWeight: FontWeight.w700),
-                      )
-                    ],
-                  ),
-                  UiHelper.verticalSpacing(50.h),
-                  _buildBottomText(context),
-                ],
-              );
-            }
-            return Column(
-              children: [
-                UiHelper.verticalSpacing(30.h),
-              ],
-            );
-          },
+        body: Column(
+          children: [
+            UiHelper.verticalSpacing(30.h),
+            _buildBottomText(context),
+          ],
         ),
       ),
     );
@@ -131,7 +83,7 @@ class ContactScreen extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
@@ -142,44 +94,95 @@ class ContactScreen extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            Text(
-              '०७१४२०४३४, ०७१४२०४३५, ',
-              //      'Directorate of Livestock and Fisheries',
-              style: TextStyle(
-                color: AppColors.textColor,
-                fontWeight: FontWeight.w600,
-              ),
+            Row(
+              children: [
+                InkWell(
+                  onTap: () async {
+                    final Uri launchUri = Uri(
+                      scheme: 'tel',
+                      path: '071420434',
+                    );
+                    await launchUrl(launchUri);
+                  },
+                  child: Text(
+                    '०७१४२०४३४, ',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: AppColors.textColor,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+                InkWell(
+                  onTap: () async {
+                    final Uri launchUri = Uri(
+                      scheme: 'tel',
+                      path: '071420435',
+                    );
+                    await launchUrl(launchUri);
+                  },
+                  child: Text(
+                    '०७१४२०४३५, ',
+                    //      'Directorate of Livestock and Fisheries',
+                    style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: AppColors.textColor,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
-        const Text(
-          ' ०७१४२०४३६ ',
-          //      'Directorate of Livestock and Fisheries',
-          style: TextStyle(
-            color: AppColors.textColor,
-            fontWeight: FontWeight.w600,
+        InkWell(
+          onTap: () async {
+            final Uri launchUri = Uri(
+              scheme: 'tel',
+              path: '071420436',
+            );
+            await launchUrl(launchUri);
+          },
+          child: Text(
+            ' ०७१४२०४३६ ',
+            //      'Directorate of Livestock and Fisheries',
+            style: TextStyle(
+              decoration: TextDecoration.underline,
+              color: AppColors.textColor,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
-        const Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'इमेल: ',
-              //      'Directorate of Livestock and Fisheries',
-              style: TextStyle(
-                color: AppColors.textRedColor,
-                fontWeight: FontWeight.w600,
+        InkWell(
+          onTap: () async {
+            final Uri launchUri = Uri(
+              scheme: 'mailto',
+              path: 'dolfdp5@gmail.com',
+            );
+            await launchUrl(launchUri);
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'इमेल:    ',
+                //      'Directorate of Livestock and Fisheries',
+                style: TextStyle(
+                  color: AppColors.textRedColor,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            Text(
-              '   dolfdp5@gmail.com ',
-              //      'Directorate of Livestock and Fisheries',
-              style: TextStyle(
-                color: AppColors.textColor,
-                fontWeight: FontWeight.w600,
+              Text(
+                'dolfdp5@gmail.com ',
+                //      'Directorate of Livestock and Fisheries',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  color: AppColors.textColor,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         UiHelper.verticalSpacing(30.h),
         SizedBox(
