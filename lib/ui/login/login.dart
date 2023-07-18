@@ -102,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
                           right: 75.w,
                         ),
                         child: Text(
-                          'मत्स्य पालक Mobile App',
+                          'मत्स्य व्यापार  Mobile App',
                           style: TextStyle(
                             fontSize: 25.sp,
                             color: Colors.black,
