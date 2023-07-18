@@ -192,7 +192,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                   Row(
                     children: [
                       Text(
-                        'Ward : ',
+                        'वडा : ',
 
                         //  translation(context).yield_date,
                         //   'Yeild Date : ',
@@ -215,7 +215,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                       : Row(
                           children: [
                             Text(
-                              'Street name : ',
+                              'टोलको नाम : ',
 
                               //  translation(context).yield_date,
                               //   'Yeild Date : ',

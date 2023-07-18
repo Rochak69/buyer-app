@@ -35,7 +35,9 @@ class ContactScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            UiHelper.verticalSpacing(30.h),
+            UiHelper.verticalSpacing(40.h),
+            Image.asset('assets/logo.png'),
+            UiHelper.verticalSpacing(40.h),
             _buildBottomText(context),
           ],
         ),
@@ -184,7 +186,7 @@ class ContactScreen extends StatelessWidget {
             ],
           ),
         ),
-        UiHelper.verticalSpacing(30.h),
+        UiHelper.verticalSpacing(60.h),
         SizedBox(
           width: 340.w,
           height: 48.h,
