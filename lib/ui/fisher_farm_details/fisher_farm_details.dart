@@ -36,7 +36,6 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
   final buisnessEmailController = TextEditingController();
   final buisnessNameController = TextEditingController();
   final buisnessNumberController = TextEditingController();
-  final numberController = TextEditingController();
   String? selectedPradesh;
   String? selectedDistrict;
   String? selectedNagarpalika;
@@ -68,6 +67,8 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
         buisnessNumberController.text =
             data.userDetails.data?.bussinessPhone ?? '';
         websiteController.text = data.userDetails.data?.website ?? '';
+        buisnessNameController.text =
+            data.userDetails.data?.bussinessName ?? '';
 
         setState(() {});
       }
@@ -455,13 +456,14 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
                                               // )
                                               IdentificationDocuments(
                                             isEdit: widget.isEdit,
+                                            toleName: toleNameController.text,
+                                            website: websiteController.text,
                                             buisnessEmail:
                                                 buisnessEmailController.text,
                                             buisnessName:
                                                 buisnessNameController.text,
                                             buisnessNumber:
                                                 buisnessNumberController.text,
-                                            number: numberController.text,
                                             comapnyName:
                                                 buisnessNameController.text,
                                             userId: userId,

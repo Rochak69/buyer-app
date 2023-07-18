@@ -38,6 +38,8 @@ class FishFarmerDetailApiClient {
     String? pradesh,
     String? district,
     String? municiplaity,
+    String? website,
+    String? streetName,
     String? gaupalika,
     int? woda,
   }) async {
@@ -53,6 +55,8 @@ class FishFarmerDetailApiClient {
       "provinceId": pradesh,
       "mobileNumber": phone,
       "districtId": district,
+      "website": website,
+      "streetName": streetName,
       "wardId": woda.toString(),
       "citizenshipIssueDistrictId": citizenshipIssueDistrictId,
       "citizenshipNumber": citizenshipNumber,

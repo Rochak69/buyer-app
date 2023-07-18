@@ -34,6 +34,8 @@ class IdentificationDocuments extends StatefulWidget {
   final String woda;
   final String pradesh;
   final String? buisnessEmail;
+  final String? toleName;
+  final String? website;
   final String? buisnessName;
   final String? buisnessNumber;
   final String? number;
@@ -48,6 +50,8 @@ class IdentificationDocuments extends StatefulWidget {
       required this.woda,
       required this.pradesh,
       required this.phoneNumber,
+      this.website,
+      this.toleName,
       required this.comapnyName,
       this.buisnessEmail,
       this.buisnessName,
@@ -507,11 +511,12 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                         showLoaderDialog(context);
                         BlocProvider.of<FishFarmerDetailBloc>(context).add(
                             PostBuyerDetailsEvent(
+                                website: widget.website,
+                                tole: widget.toleName,
                                 isEdit: widget.isEdit,
                                 buisnessEmail: widget.buisnessEmail,
                                 buisnessName: widget.buisnessName,
                                 buisnessNumber: widget.buisnessNumber,
-                                number: widget.number,
                                 citizenshipIssueDistrict:
                                     selectedDistrictId ?? '1',
                                 organizationName: widget.comapnyName,

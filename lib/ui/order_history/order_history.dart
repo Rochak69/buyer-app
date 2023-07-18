@@ -210,6 +210,29 @@ class _OrderHistoryState extends State<OrderHistory> {
                       ),
                     ],
                   ),
+                  state.orders.data?[index].streetName == null
+                      ? SizedBox.shrink()
+                      : Row(
+                          children: [
+                            Text(
+                              'Street name : ',
+
+                              //  translation(context).yield_date,
+                              //   'Yeild Date : ',
+                              style: TextStyle(
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black),
+                            ),
+                            Text(
+                              '${state.orders.data?[index].streetName}',
+                              style: TextStyle(
+                                  fontSize: 10.sp,
+                                  fontWeight: FontWeight.w700,
+                                  color: AppColors.AppCardColor),
+                            ),
+                          ],
+                        ),
                   InkWell(
                     onTap: () async {
                       final Uri launchUri = Uri(
