@@ -68,6 +68,7 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
         buisnessNumberController.text =
             data.userDetails.data?.bussinessPhone ?? '';
         websiteController.text = data.userDetails.data?.website ?? '';
+
         setState(() {});
       }
     });

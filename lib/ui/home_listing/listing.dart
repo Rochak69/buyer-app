@@ -145,6 +145,7 @@ class _ListingsState extends State<Listings> {
                         shrinkWrap: true,
                         itemBuilder: (context, index) {
                           return CardListing(
+                              id: state.result.data?[index].id ?? '',
                               expireDate:
                                   state.result.data?[index].expireDate ??
                                       'null',
