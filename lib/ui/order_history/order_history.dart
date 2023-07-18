@@ -189,6 +189,27 @@ class _OrderHistoryState extends State<OrderHistory> {
                       ),
                     ],
                   ),
+                  Row(
+                    children: [
+                      Text(
+                        'Ward : ',
+
+                        //  translation(context).yield_date,
+                        //   'Yeild Date : ',
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black),
+                      ),
+                      Text(
+                        '${state.orders.data?[index].ward}',
+                        style: TextStyle(
+                            fontSize: 10.sp,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.AppCardColor),
+                      ),
+                    ],
+                  ),
                   InkWell(
                     onTap: () async {
                       final Uri launchUri = Uri(

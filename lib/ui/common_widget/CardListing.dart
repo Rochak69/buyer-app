@@ -211,7 +211,7 @@ class _CardListingState extends State<CardListing> {
                       }
                     },
                     child: Text(
-                      'Send Offer',
+                      '  Buy Fish  ',
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         color: widget.isDisabled
