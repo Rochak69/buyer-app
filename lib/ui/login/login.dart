@@ -99,6 +99,19 @@ class _LoginPageState extends State<LoginPage> {
                       UiHelper.verticalSpacing(90.h),
                       Container(
                         padding: EdgeInsets.only(
+                          right: 75.w,
+                        ),
+                        child: Text(
+                          'मत्स्य व्यापार  Mobile App',
+                          style: TextStyle(
+                            fontSize: 25.sp,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(
                           left: 5.w,
                           right: 231.w,
                         ),
