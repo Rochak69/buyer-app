@@ -11,6 +11,7 @@ class OrderHistoryResponse {
   String? streetName;
   String? facebookPage;
   String? website;
+  String? id;
 
   OrderHistoryResponse(
       {this.avgFishWeight,
@@ -20,6 +21,7 @@ class OrderHistoryResponse {
       this.fishType,
       this.farmerName,
       this.streetName,
+      this.id,
       this.facebookPage,
       this.website,
       this.phoneNumber,
@@ -34,6 +36,7 @@ class OrderHistoryResponse {
     fishType = json['FishType'];
     farmerName = json['farmerName'];
     phoneNumber = json['phoneNumber'];
+    id = json['id'];
     streetName = json['streetName'];
     website = json['website'];
     facebookPage = json['facebookId'];

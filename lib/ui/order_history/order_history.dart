@@ -94,7 +94,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                     color: Colors.black),
               ),
               Text(
-                generateRandomCombination().toUpperCase(),
+                '${state.orders.data?[index].id?.substring(32)}',
                 style: TextStyle(
                     fontSize: 12.sp,
                     fontWeight: FontWeight.w700,
