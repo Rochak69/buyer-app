@@ -4,8 +4,6 @@ import 'package:buyer_shop/ui/common_widget/app_dropdown.dart';
 import 'package:buyer_shop/ui/home_listing/bloc/home_listings_bloc.dart';
 import 'package:buyer_shop/ui/home_listing/bloc/home_listings_event.dart';
 import 'package:buyer_shop/ui/home_listing/bloc/home_listings_state.dart';
-import 'package:buyer_shop/ui/login/bloc/login_bloc.dart';
-import 'package:buyer_shop/ui/login/bloc/login_state.dart';
 import 'package:buyer_shop/ui/settings_page/settings_page.dart';
 import 'package:buyer_shop/ui/utils/endpoints.dart';
 import 'package:buyer_shop/ui/utils/uihelper.dart';

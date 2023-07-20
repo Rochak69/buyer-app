@@ -92,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                   key: formkey,
                   child: Column(
                     children: [
-                      UiHelper.verticalSpacing(120.h),
+                      UiHelper.verticalSpacing(60.h),
                       Image.asset('assets/logo.png'),
                       UiHelper.verticalSpacing(19.h),
                       _buildUpperText(),

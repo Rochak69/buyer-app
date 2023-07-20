@@ -21,7 +21,7 @@ class HomeListing extends StatefulWidget {
 }
 
 class _HomeListingState extends State<HomeListing>
-    with SingleTickerProviderStateMixin {
+  with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _animation;
   int _selectedIndex = 0;
