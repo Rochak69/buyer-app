@@ -15,7 +15,9 @@ class Validators {
     if (weight == null) {
       return 'Field must contain only numbers';
     }
-
+    if (weight <= 0) {
+      return 'Weight must be greater than 0';
+    }
     return null;
   }
 }
