@@ -301,84 +301,84 @@ class _YourListingsState extends State<YourListings> {
                 ],
               ),
               UiHelper.verticalSpacing(3.h),
-              state.result.data?[index].farmerRequest?.isEmpty ?? true
-                  ? Text(
-                      'You have not recieved any offers yet',
-                      style: TextStyle(
-                          fontSize: 10.sp, color: AppColors.AppCardColor),
-                    )
-                  : const SizedBox.shrink(),
+              // state.result.data?[index].farmerRequest?.isEmpty ?? true
+              //     ? Text(
+              //         'You have not recieved any offers yet',
+              //         style: TextStyle(
+              //             fontSize: 10.sp, color: AppColors.AppCardColor),
+              //       )
+              //     : const SizedBox.shrink(),
             ]),
-            Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 4.w),
-                  decoration: BoxDecoration(
-                    border:
-                        Border.all(color: AppColors.textColor, width: 1.5.r),
-                    borderRadius: BorderRadius.all(Radius.circular(12.r)),
-                  ),
-                  child: TextButton(
-                    onPressed: () {
-                      List<FarmerRequest> list =
-                          state.result.data?[index].farmerRequest ?? [];
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BuyerRequestsScreen(
-                                avgWeight: state
-                                        .result.data?[index].avgFishWeight
-                                        .toString() ??
-                                    '',
-                                totalWeight: state
-                                        .result.data?[index].totalWeight
-                                        .toString() ??
-                                    '',
-                                yeildDate:
-                                    state.result.data?[index].yieldDate ?? '',
-                                fishType:
-                                    state.result.data?[index].fishType?.name ??
-                                        '',
-                                farmerRequests:
-                                    state.result.data?[index].farmerRequest ??
-                                        []),
-                          ));
-                    },
-                    child: const Text(
-                      'View Offers',
-                      style: TextStyle(
-                          color: AppColors.textColor,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: -12.h,
-                  right: -12.w,
-                  child: Container(
-                    height: 24.h,
-                    width: 31.w,
-                    decoration: BoxDecoration(
-                      color: AppColors.textColor,
-                      borderRadius: BorderRadius.circular(30.r),
-                    ),
-                    child: Center(
-                      child: Text(
-                        state.result.data?[index].farmerRequest?.length
-                                .toString() ??
-                            '0',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            // Stack(
+            //   clipBehavior: Clip.none,
+            //   children: [
+            //     Container(
+            //       padding: EdgeInsets.symmetric(horizontal: 4.w),
+            //       decoration: BoxDecoration(
+            //         border:
+            //             Border.all(color: AppColors.textColor, width: 1.5.r),
+            //         borderRadius: BorderRadius.all(Radius.circular(12.r)),
+            //       ),
+            //       child: TextButton(
+            //         onPressed: () {
+            //           List<FarmerRequest> list =
+            //               state.result.data?[index].farmerRequest ?? [];
+            //           Navigator.push(
+            //               context,
+            //               MaterialPageRoute(
+            //                 builder: (context) => BuyerRequestsScreen(
+            //                     avgWeight: state
+            //                             .result.data?[index].avgFishWeight
+            //                             .toString() ??
+            //                         '',
+            //                     totalWeight: state
+            //                             .result.data?[index].totalWeight
+            //                             .toString() ??
+            //                         '',
+            //                     yeildDate:
+            //                         state.result.data?[index].yieldDate ?? '',
+            //                     fishType:
+            //                         state.result.data?[index].fishType?.name ??
+            //                             '',
+            //                     farmerRequests:
+            //                         state.result.data?[index].farmerRequest ??
+            //                             []),
+            //               ));
+            //         },
+            //         child: const Text(
+            //           'View Offers',
+            //           style: TextStyle(
+            //               color: AppColors.textColor,
+            //               fontWeight: FontWeight.w600),
+            //         ),
+            //       ),
+            //     ),
+            //     Positioned(
+            //       top: -12.h,
+            //       right: -12.w,
+            //       child: Container(
+            //         height: 24.h,
+            //         width: 31.w,
+            //         decoration: BoxDecoration(
+            //           color: AppColors.textColor,
+            //           borderRadius: BorderRadius.circular(30.r),
+            //         ),
+            //         child: Center(
+            //           child: Text(
+            //             state.result.data?[index].farmerRequest?.length
+            //                     .toString() ??
+            //                 '0',
+            //             style: TextStyle(
+            //               color: Colors.white,
+            //               fontSize: 12.sp,
+            //               fontWeight: FontWeight.bold,
+            //             ),
+            //           ),
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ]),
         ],
       ),
