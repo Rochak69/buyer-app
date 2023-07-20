@@ -44,12 +44,12 @@ class SettingsPage extends StatelessWidget {
               fontSize: 18.sp),
         ),
       ),
-      body: Center(
+      body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 8.0.h, horizontal: 24.w),
           child: Column(
             children: [
-              UiHelper.verticalSpacing(63.h),
+              UiHelper.verticalSpacing(23.h),
               BlocBuilder<HomeListingsBloc, HomeListingsState>(
                 builder: (context, state) {
                   if (state is HomeListingsSuccess &&
@@ -67,7 +67,7 @@ class SettingsPage extends StatelessWidget {
                   }
                 },
               ),
-              UiHelper.verticalSpacing(16),
+              UiHelper.verticalSpacing(10.h),
               BlocBuilder<HomeListingsBloc, HomeListingsState>(
                 builder: (context, state) {
                   if (state is HomeListingsSuccess) {
