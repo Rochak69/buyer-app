@@ -9,6 +9,8 @@ class OrderHistoryResponse {
   String? municipality;
   String? ward;
   String? streetName;
+  String? facebookPage;
+  String? website;
 
   OrderHistoryResponse(
       {this.avgFishWeight,
@@ -18,6 +20,8 @@ class OrderHistoryResponse {
       this.fishType,
       this.farmerName,
       this.streetName,
+      this.facebookPage,
+      this.website,
       this.phoneNumber,
       this.municipality,
       this.ward});
@@ -31,6 +35,8 @@ class OrderHistoryResponse {
     farmerName = json['farmerName'];
     phoneNumber = json['phoneNumber'];
     streetName = json['streetName'];
+    website = json['website'];
+    facebookPage = json['facebookId'];
     municipality = json['municipality'];
     ward = json['Ward'];
   }

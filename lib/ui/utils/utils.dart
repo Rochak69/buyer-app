@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -102,4 +104,23 @@ Color convertColorToHex(String color) {
 
 AppLocalizations translation(BuildContext context) {
   return AppLocalizations.of(context);
+}
+
+String generateRandomCombination() {
+  const letters = 'abcdefghijklmnopqrstuvwxyz';
+  const digits = '0123456789';
+  final random = Random();
+  String combination = '';
+
+  for (int i = 0; i < 4; i++) {
+    // Randomly choose a letter or digit
+    bool useLetter = random.nextBool();
+    if (useLetter) {
+      combination += letters[random.nextInt(letters.length)];
+    } else {
+      combination += digits[random.nextInt(digits.length)];
+    }
+  }
+
+  return combination;
 }

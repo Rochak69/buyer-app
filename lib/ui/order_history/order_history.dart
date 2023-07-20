@@ -83,6 +83,25 @@ class _OrderHistoryState extends State<OrderHistory> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+            children: [
+              Text(
+                'ID: ',
+                //    'Fish weight : ',
+                style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black),
+              ),
+              Text(
+                generateRandomCombination().toUpperCase(),
+                style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.AppCardColor),
+              ),
+            ],
+          ),
           Wrap(
             children: [
               Text(
@@ -262,6 +281,50 @@ class _OrderHistoryState extends State<OrderHistory> {
                         ),
                       ],
                     ),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'फेसबुक आईडी: ',
+
+                        //  translation(context).buy_date,
+                        //'Yeild Date : ',
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black),
+                      ),
+                      Text(
+                        state.orders.data?[index].facebookPage ?? '',
+                        //     '${state.orders.data?[index].ward?.nepaliNumber}',
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.AppCardColor),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'वेबसाइट: ',
+
+                        //  translation(context).buy_date,
+                        //'Yeild Date : ',
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black),
+                      ),
+                      Text(
+                        state.orders.data?[index].website ?? '',
+                        //     '${state.orders.data?[index].ward?.nepaliNumber}',
+                        style: TextStyle(
+                            fontSize: 12.sp,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.AppCardColor),
+                      ),
+                    ],
                   ),
                   // Row(
                   //   children: [
