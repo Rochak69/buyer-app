@@ -3,15 +3,12 @@ import 'package:buyer_shop/ui/fisher_farm_details/fisher_farm_details.dart';
 import 'package:buyer_shop/ui/forgot_password/forgot_password.dart';
 import 'package:buyer_shop/ui/home_listing/bloc/home_listings_bloc.dart';
 import 'package:buyer_shop/ui/home_listing/bloc/home_listings_state.dart';
-import 'package:buyer_shop/ui/home_listing/listing.dart';
-import 'package:buyer_shop/ui/login/bloc/login_bloc.dart';
-import 'package:buyer_shop/ui/login/bloc/login_state.dart';
 import 'package:buyer_shop/ui/login/login.dart';
-import 'package:buyer_shop/ui/pending_request_per_listing/pending_request_per_listing.dart';
 import 'package:buyer_shop/ui/utils/endpoints.dart';
 import 'package:buyer_shop/ui/utils/preferences.dart';
 import 'package:buyer_shop/ui/utils/uihelper.dart';
 import 'package:buyer_shop/ui/yield_farm/yield_farm.dart';
+import 'package:buyer_shop/ui/your_listing/your_listing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -154,7 +151,7 @@ class SettingsPage extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) =>  (),
+                        builder: (context) => YourListings(),
                       ));
                 },
                 child: Card(
