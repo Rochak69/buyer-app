@@ -84,8 +84,10 @@ class _YourListingsState extends State<YourListings> {
               ),
             );
           } else if (state is YourListingInitial) {
-            return const Center(
-              child: CircularProgressIndicator(),
+            return const Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(),
+              ),
             );
           } else {
             return Scaffold(
