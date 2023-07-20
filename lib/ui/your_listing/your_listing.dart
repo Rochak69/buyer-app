@@ -174,6 +174,25 @@ class _YourListingsState extends State<YourListings> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+            children: [
+              Text(
+                "ID: ",
+                // 'Fish weight : ',
+                style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black),
+              ),
+              Text(
+                '${state.result.data?[index].id?.substring(32).toUpperCase()}',
+                style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.AppCardColor),
+              ),
+            ],
+          ),
           Wrap(
             alignment: WrapAlignment.start,
             children: [
