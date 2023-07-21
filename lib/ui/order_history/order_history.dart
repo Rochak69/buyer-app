@@ -272,12 +272,13 @@ class _OrderHistoryState extends State<OrderHistory> {
                               fontWeight: FontWeight.w700,
                               color: Colors.black),
                         ),
+                        Icon(Icons.phone),
                         Text(
                           '${state.orders.data?[index].phoneNumber}',
                           style: TextStyle(
                               fontSize: 12.sp,
                               fontWeight: FontWeight.w700,
-                              color: AppColors.AppCardColor),
+                              color: Colors.green),
                         ),
                       ],
                     ),

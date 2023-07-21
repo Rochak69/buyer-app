@@ -1,5 +1,6 @@
 import 'package:buyer_shop/common/validator.dart';
 import 'package:buyer_shop/res/colors.dart';
+import 'package:buyer_shop/ui/approval_pending/approval_pending.dart';
 import 'package:buyer_shop/ui/common_widget/FishTextField.dart';
 import 'package:buyer_shop/ui/fisher_farm_details/fisher_farm_details.dart';
 import 'package:buyer_shop/ui/forgot_password/forgot_password.dart';
@@ -54,7 +55,12 @@ class _LoginPageState extends State<LoginPage> {
 
           if (state.result.data?.isBuyer ?? false) {
             if (!isApproved) {
-              Navigator.pop(context);
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const ApprovalPending()),
+                (route) => false,
+              );
               displayToastMessage('Your request has not been approved yet',
                   backgroundColor: AppColors.textRedColor);
               return;

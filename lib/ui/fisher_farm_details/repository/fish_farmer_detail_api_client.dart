@@ -33,6 +33,7 @@ class FishFarmerDetailApiClient {
     required String citizenshipName,
     required String bussinessName,
     required String bussinessEmail,
+    // required String facebookid,
     required String bussinessPhone,
     num? pondSize,
     String? pradesh,
@@ -65,6 +66,7 @@ class FishFarmerDetailApiClient {
       "municipalityId": municiplaity,
       "bussinessEmail": bussinessEmail,
       "bussinessPhone": bussinessPhone,
+      // "facebookPage": facebookid,
       "profilePicture":
           profilePic != null ? await MultipartFile.fromFile(profilePic) : null,
       "identificationImage": identification != null
