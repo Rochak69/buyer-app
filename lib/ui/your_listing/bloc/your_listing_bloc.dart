@@ -32,7 +32,7 @@ class YourListingBloc extends Bloc<YourListingEvent, YourListingState> {
         emit(YourListingFailed(
             errorMessage: e.details?[0].msg ?? 'Error getting data'));
       } catch (e) {
-        emit(YourListingFailed(errorMessage: e.toString()));
+        emit(YourListingFailed(errorMessage: 'Error'));
       }
     }
   }
@@ -49,8 +49,7 @@ class YourListingBloc extends Bloc<YourListingEvent, YourListingState> {
         displayToastMessage(e.details?[0].msg ?? 'Error getting data',
             backgroundColor: AppColors.textRedColor);
       } catch (e) {
-        displayToastMessage(e.toString(),
-            backgroundColor: AppColors.textRedColor);
+        displayToastMessage('Error', backgroundColor: AppColors.textRedColor);
       }
     }
   }

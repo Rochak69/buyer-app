@@ -64,7 +64,9 @@ class _YieldFormState extends State<YieldForm> {
       listener: (context, state) {
         Navigator.pop(context);
         if (state is YeildFormSuccess) {
+          Navigator.pop(context);
           displayToastMessage('Successfully created');
+
           BlocProvider.of<YourListingBloc>(context).add(GetMyListings());
         } else if (state is YeildFormFailed) {
           displayToastMessage(state.errorMessage);

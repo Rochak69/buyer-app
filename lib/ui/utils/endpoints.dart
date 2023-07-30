@@ -1,5 +1,5 @@
 class Endpoints {
-  static const String baseUrl = 'http://64.227.154.34:8080/api';
+  static const String baseUrl = 'http://103.140.132.5:8080/api';
   static const String loginUrl = '/user/login';
   static const String registerUrl = '/user/register';
   static const String otpUrl = '/user/get-otp';
@@ -8,7 +8,7 @@ class Endpoints {
   static const String buyerIssue = '/issues/buyer';
   static const String fishType = '/fishtype';
   static const String buyerRequest = '/buyer/request';
-  static const String baseFile = 'http://64.227.154.34:8080';
+  static const String baseFile = 'http://103.140.132.5:8080';
   static const String contact = '/appinfo';
 
   static const String createSupplyRequest = '/buyerRequest';
