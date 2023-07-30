@@ -43,7 +43,7 @@ class FishFarmerDetailBloc
           pradesh: event.pradesh,
           pondSize: event.pondSize,
           woda: event.woda,
-          // facebookid: event.facebook,
+          facebookId: event.facebook,
           citizenshipPhoto: event.citizenshipPhoto,
           organizationName: event.organizationName,
           profilePic: event.profilePicture,

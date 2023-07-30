@@ -478,6 +478,8 @@ class _FishFarmDetailsState extends State<FishFarmDetails> {
                                               IdentificationDocuments(
                                             isEdit: widget.isEdit,
                                             toleName: toleNameController.text,
+                                            facebook:
+                                                facebookPageController.text,
                                             website: websiteController.text,
                                             buisnessEmail:
                                                 buisnessEmailController.text,

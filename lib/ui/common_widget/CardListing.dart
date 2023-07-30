@@ -363,7 +363,7 @@ class _CardListingState extends State<CardListing> {
                           color: Colors.black),
                     ),
                     Text(
-                      '७ दिन बाँकी छ ',
+                      widget.expireDate,
                       //  formarDate(widget.date),
                       style: TextStyle(
                           fontSize: 12.sp,

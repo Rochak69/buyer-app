@@ -35,6 +35,7 @@ class IdentificationDocuments extends StatefulWidget {
   final String pradesh;
   final String? buisnessEmail;
   final String? toleName;
+  final String? facebook;
   final String? website;
   final String? buisnessName;
   final String? buisnessNumber;
@@ -45,6 +46,7 @@ class IdentificationDocuments extends StatefulWidget {
       {super.key,
       required this.userId,
       required this.buyerName,
+      this.facebook,
       required this.district,
       required this.nagarpalika,
       required this.woda,
@@ -523,6 +525,7 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
                                 profilePicture: profilePicturePath,
                                 identification: othersPath,
                                 citizenshipPhoto: citizenshipPicturePath,
+                                facebook: widget.facebook,
                                 registerPic: palikaPicturePath,
                                 citizenName: citizeName.text,
                                 citizenNumber: citizenNumber.text,
