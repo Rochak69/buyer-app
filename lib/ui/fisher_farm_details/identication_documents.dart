@@ -94,7 +94,7 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
             context.read<HomeListingsBloc>().state as HomeListingsSuccess;
         citizeName.text = data.userDetails.data?.citizenshipName ?? '';
         citizenNumber.text = data.userDetails.data?.citizenshipNumber ?? '';
-        selectedDistrictId = data.userDetails.data?.provinceId;
+        selectedDistrictId = data.userDetails.data?.districtId;
         hideCitizen = data.userDetails.data?.document?.citizenship != null;
         hideProfile = data.userDetails.data?.document?.profilePicture != null;
         hidePalika = data.userDetails.data?.document?.registration != null;
@@ -132,9 +132,9 @@ class _IdentificationDocumentsState extends State<IdentificationDocuments> {
             (route) => false,
           );
         } else if (state.theStates == TheStates.failed) {
+          Navigator.pop(context);
           displayToastMessage(state.errorMessage,
               backgroundColor: AppColors.textRedContainerColor);
-          Navigator.pop(context);
         }
       },
       builder: (context, state) {

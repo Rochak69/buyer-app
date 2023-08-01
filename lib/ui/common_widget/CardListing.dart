@@ -49,11 +49,10 @@ class CardListing extends StatefulWidget {
 }
 
 class _CardListingState extends State<CardListing> {
-  late TextEditingController offerWeight;
+  TextEditingController offerWeight = TextEditingController();
 
   @override
   void initState() {
-    offerWeight = TextEditingController(text: widget.totalWeight.toString());
     super.initState();
   }
 
